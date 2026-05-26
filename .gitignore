@@ -1,0 +1,20 @@
+.DS_Store
+*.retry
+*.log
+
+# Local secrets
+.env
+*.vault.yml
+ansible/group_vars/vault.yml
+.linode.env
+
+# Next.js
+.next/
+node_modules/
+out/
+
+# Vercel
+.vercel/
+
+# TypeScript
+*.tsbuildinfo

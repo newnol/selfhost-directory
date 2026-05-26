@@ -1,0 +1,35 @@
+import Link from "next/link";
+import type { Project } from "@/data/projects";
+import type { Locale } from "@/lib/i18n";
+import { ProjectIcon } from "@/components/project-icon";
+
+type ProjectCardProps = {
+  locale: Locale;
+  project: Project;
+};
+
+export function ProjectCard({ locale, project }: ProjectCardProps) {
+  return (
+    <article className="project-card">
+      <div className="project-card-top">
+        <div className="project-title-row">
+          <ProjectIcon project={project} />
+          <div>
+            <p className="eyebrow">{project.category}</p>
+            <h3>{project.name}</h3>
+          </div>
+        </div>
+        <span className="score">{project.score}</span>
+      </div>
+      <p>{project.summary[locale]}</p>
+      <div className="tag-row">
+        {project.tags.slice(0, 3).map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </div>
+      <Link className="text-link" href={`/${locale}/projects/${project.slug}`}>
+        {locale === "vi" ? "Xem chi tiết" : "View details"}
+      </Link>
+    </article>
+  );
+}

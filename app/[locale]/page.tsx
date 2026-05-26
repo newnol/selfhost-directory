@@ -1,0 +1,130 @@
+import Link from "next/link";
+import { ProjectCard } from "@/components/project-card";
+import { projects, useCases } from "@/data/projects";
+import { dictionary, isLocale, type Locale } from "@/lib/i18n";
+import { categoryProjectCounts, projectsByCategory } from "@/lib/projects";
+
+export default async function LocaleHome({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "vi";
+  const t = dictionary[locale];
+  const categories = categoryProjectCounts();
+
+  return (
+    <>
+      <section className="hero">
+        <div className="hero-copy">
+          <p className="eyebrow">{t.hero.eyebrow}</p>
+          <h1>{t.hero.title}</h1>
+          <p>{t.hero.copy}</p>
+          <div className="hero-actions">
+            <Link className="button primary" href="#projects">
+              {t.hero.primary}
+            </Link>
+            <Link className="button secondary" href={`/${locale}/submit-project`}>
+              {t.hero.secondary}
+            </Link>
+          </div>
+        </div>
+        <div className="hero-panel" aria-label="Directory snapshot">
+          <div>
+            <span>{projects.length}</span>
+            <p>{locale === "vi" ? "project đã curate" : "curated projects"}</p>
+          </div>
+          <div>
+            <span>2</span>
+            <p>{locale === "vi" ? "ngôn ngữ" : "languages"}</p>
+          </div>
+          <div>
+            <span>API</span>
+            <p>{locale === "vi" ? "submission serverless" : "serverless submissions"}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="projects">
+        <div className="section-heading">
+          <p className="eyebrow">Categories</p>
+          <h2>{locale === "vi" ? "Duyệt theo danh mục" : "Browse by category"}</h2>
+          <p>
+            {locale === "vi"
+              ? "Mỗi danh mục gom các project cùng nhu cầu để website dễ mở rộng khi số lượng project tăng lên."
+              : "Each category groups projects by job-to-be-done so the directory can scale cleanly."}
+          </p>
+        </div>
+        <div className="category-grid">
+          {categories.map((category) => (
+            <Link className="category-card" key={category.slug} href={`/${locale}/categories/${category.slug}`}>
+              <span>{category.count}</span>
+              <h3>{category.title[locale]}</h3>
+              <p>{category.description[locale]}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-heading">
+          <p className="eyebrow">Directory</p>
+          <h2>{t.sections.featured}</h2>
+        </div>
+        <div className="category-sections">
+          {categories
+            .filter((category) => category.count > 0)
+            .map((category) => (
+              <section className="category-section" key={category.slug}>
+                <div className="category-section-heading">
+                  <div>
+                    <p className="eyebrow">{category.count} projects</p>
+                    <h3>{category.title[locale]}</h3>
+                  </div>
+                  <Link className="text-link" href={`/${locale}/categories/${category.slug}`}>
+                    {locale === "vi" ? "Xem tất cả" : "View all"}
+                  </Link>
+                </div>
+                <div className="project-grid">
+                  {projectsByCategory(category.slug).map((project) => (
+                    <ProjectCard key={project.slug} locale={locale} project={project} />
+                  ))}
+                </div>
+              </section>
+            ))}
+        </div>
+      </section>
+
+      <section className="section" id="alternatives">
+        <div className="section-heading">
+          <p className="eyebrow">Use cases</p>
+          <h2>{t.sections.useCases}</h2>
+        </div>
+        <div className="use-case-grid">
+          {useCases.map((useCase) => (
+            <Link className="use-case" key={useCase.slug} href={`/${locale}/alternatives/${useCase.slug}`}>
+              <h3>{useCase.title[locale]}</h3>
+              <p>{useCase.description[locale]}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="submit-band">
+        <div>
+          <p className="eyebrow">Review queue</p>
+          <h2>{t.sections.submit}</h2>
+          <p>
+            {locale === "vi"
+              ? "Người dùng có thể gửi project mới, bạn review rồi quyết định có đưa lên directory hay không."
+              : "Users can submit new projects, then you review and decide what gets listed."}
+          </p>
+        </div>
+        <Link className="button primary" href={`/${locale}/submit-project`}>
+          {t.nav.submit}
+        </Link>
+      </section>
+    </>
+  );
+}
