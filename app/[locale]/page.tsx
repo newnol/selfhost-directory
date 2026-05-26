@@ -130,7 +130,7 @@ export default async function LocaleHome({
           deploy: p.deploy,
           summary: p.summary,
         }))}
-        placeholder={locale === "vi" ? "Tim kiem project theo ten hoac tag..." : "Search projects by name or tag..."}
+        placeholder={locale === "vi" ? "Tìm kiếm project theo tên hoặc tag..." : "Search projects by name or tag..."}
       />
 
       <section className="section" id="projects">
@@ -146,9 +146,10 @@ export default async function LocaleHome({
         <div className="category-grid">
           {categories.map((category) => (
             <Link className="category-card" key={category.slug} href={`/${locale}/categories/${category.slug}`}>
-              <span>{category.count}</span>
+              <span className="category-icon">{category.icon}</span>
               <h3>{category.title[locale]}</h3>
               <p>{category.description[locale]}</p>
+              <span className="category-count">{category.count} projects</span>
             </Link>
           ))}
         </div>

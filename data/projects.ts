@@ -35,6 +35,7 @@ export type Project = {
 
 export type Category = {
   slug: string;
+  icon: string;
   title: Record<Locale, string>;
   description: Record<Locale, string>;
 };
@@ -42,6 +43,7 @@ export type Category = {
 export const categories: Category[] = [
   {
     slug: "media",
+    icon: "\uD83C\uDFAC",
     title: { vi: "Media & cá nhân", en: "Media & personal" },
     description: {
       vi: "Ảnh, video, file cá nhân và các dịch vụ thay thế cloud consumer.",
@@ -50,6 +52,7 @@ export const categories: Category[] = [
   },
   {
     slug: "monitoring",
+    icon: "\uD83D\uDCCA",
     title: { vi: "Monitoring & vận hành", en: "Monitoring & operations" },
     description: {
       vi: "Theo dõi uptime, cảnh báo, status page và công cụ vận hành VPS.",
@@ -58,6 +61,7 @@ export const categories: Category[] = [
   },
   {
     slug: "security",
+    icon: "\uD83D\uDD12",
     title: { vi: "Bảo mật", en: "Security" },
     description: {
       vi: "Quản lý mật khẩu, secrets, danh tính và hardening hệ thống.",
@@ -66,6 +70,7 @@ export const categories: Category[] = [
   },
   {
     slug: "data-tools",
+    icon: "\uD83D\uDDC4\uFE0F",
     title: { vi: "Data & internal tools", en: "Data & internal tools" },
     description: {
       vi: "Database UI, no-code tools, automation và app nội bộ.",
@@ -74,6 +79,7 @@ export const categories: Category[] = [
   },
   {
     slug: "productivity",
+    icon: "\u2705",
     title: { vi: "Productivity & team", en: "Productivity & team" },
     description: {
       vi: "Quản lý dự án, tài liệu, wiki và workflow cho team nhỏ.",
@@ -82,6 +88,7 @@ export const categories: Category[] = [
   },
   {
     slug: "ai",
+    icon: "\uD83E\uDD16",
     title: { vi: "AI & LLM", en: "AI & LLM" },
     description: {
       vi: "Giao diện AI, LLM gateway, model local và công cụ AI tự host.",
@@ -720,24 +727,24 @@ echo "Open WebUI is running on http://SERVER_IP:3000"`
       demo: "https://demo.jellyfin.org/web/"
     },
     summary: {
-      vi: "Media server ma nguon mo, phat phim, nhac va anh ca nhan thay cho Plex.",
+      vi: "Media server mã nguồn mở, phát phim, nhạc và ảnh cá nhân thay cho Plex.",
       en: "A free and open-source media server for streaming movies, music, and photos as a Plex alternative."
     },
     notes: {
-      vi: "Ho tro hardware transcoding voi GPU. Nen mount thu muc media rieng va cau hinh thu vien truoc khi moi nguoi dung.",
+      vi: "Hỗ trợ hardware transcoding với GPU. Nên mount thư mục media riêng và cấu hình thư viện trước khi mời người dùng.",
       en: "Supports hardware transcoding with GPU. Mount media directories separately and configure libraries before inviting users."
     },
     deployGuide: {
       vi: {
-        overview: "Chay mot container Docker duy nhat, mount thu muc media va cau hinh transcoding neu can.",
+        overview: "Chạy một container Docker duy nhất, mount thư mục media và cấu hình transcoding nếu cần.",
         steps: [
-          "Tao thu muc luu tru media (phim, nhac, anh) tren host.",
-          "Chay container Jellyfin voi volume mount cho media va config.",
-          "Mo web UI, tao tai khoan admin va cau hinh thu vien media.",
-          "Bat hardware transcoding trong Settings neu co GPU.",
-          "Dat reverse proxy HTTPS neu truy cap tu internet."
+          "Tạo thư mục lưu trữ media (phim, nhạc, ảnh) trên host.",
+          "Chạy container Jellyfin với volume mount cho media và config.",
+          "Mở web UI, tạo tài khoản admin và cấu hình thư viện media.",
+          "Bật hardware transcoding trong Settings nếu có GPU.",
+          "Đặt reverse proxy HTTPS nếu truy cập từ internet."
         ],
-        backup: "Backup thu muc config chua database va metadata. Media files nen co backup rieng."
+        backup: "Backup thư mục config chứa database và metadata. Media files nên có backup riêng."
       },
       en: {
         overview: "Run a single Docker container, mount media directories, and configure transcoding if needed.",
@@ -810,24 +817,24 @@ echo "Jellyfin is running on http://SERVER_IP:8096"`
       demo: "https://try.nextcloud.com"
     },
     summary: {
-      vi: "Nen tang dong bo va chia se file tu host, thay the Google Drive va Dropbox voi nhieu plugin mo rong.",
+      vi: "Nền tảng đồng bộ và chia sẻ file tự host, thay thế Google Drive và Dropbox với nhiều plugin mở rộng.",
       en: "A self-hosted file sync and share platform, replacing Google Drive and Dropbox with extensive plugin support."
     },
     notes: {
-      vi: "Cau hinh PHP va database can dung. Su dung PostgreSQL cho production, nen dat cron job va Redis de tang hieu nang.",
+      vi: "Cấu hình PHP và database cần đúng. Sử dụng PostgreSQL cho production, nên đặt cron job và Redis để tăng hiệu năng.",
       en: "PHP and database configuration must be correct. Use PostgreSQL for production, set up cron jobs and Redis for better performance."
     },
     deployGuide: {
       vi: {
-        overview: "Chay bang Docker Compose voi PostgreSQL va Redis. Can cau hinh domain va trusted_domains dung.",
+        overview: "Chạy bằng Docker Compose với PostgreSQL và Redis. Cần cấu hình domain và trusted_domains đúng.",
         steps: [
-          "Tao thu muc du lieu va cau hinh cho Nextcloud.",
-          "Chay Docker Compose voi Nextcloud, PostgreSQL va Redis.",
-          "Truy cap web UI, tao tai khoan admin va cau hinh trusted_domains.",
-          "Cai dat cron job (system cron hoac webcron) de xu ly background tasks.",
-          "Dat reverse proxy HTTPS va cau hinh overwrite.cli.url."
+          "Tạo thư mục dữ liệu và cấu hình cho Nextcloud.",
+          "Chạy Docker Compose với Nextcloud, PostgreSQL và Redis.",
+          "Truy cập web UI, tạo tài khoản admin và cấu hình trusted_domains.",
+          "Cài đặt cron job (system cron hoặc webcron) để xử lý background tasks.",
+          "Đặt reverse proxy HTTPS và cấu hình overwrite.cli.url."
         ],
-        backup: "Backup thu muc data, database PostgreSQL va file config.php. Nen test restore dinh ky."
+        backup: "Backup thư mục data, database PostgreSQL và file config.php. Nên test restore định kỳ."
       },
       en: {
         overview: "Run with Docker Compose using PostgreSQL and Redis. Domain and trusted_domains must be configured correctly.",
@@ -944,24 +951,24 @@ echo "Nextcloud is running on http://SERVER_IP:8080"`
       demo: "https://play.grafana.org"
     },
     summary: {
-      vi: "Nen tang dashboard va observability hang dau, ket noi nhieu nguon du lieu de hien thi metrics, logs va traces.",
+      vi: "Nền tảng dashboard và observability hàng đầu, kết nối nhiều nguồn dữ liệu để hiển thị metrics, logs và traces.",
       en: "A leading dashboard and observability platform connecting multiple data sources for metrics, logs, and traces."
     },
     notes: {
-      vi: "Grafana chi la lop hien thi, can ket hop voi Prometheus, Loki hoac InfluxDB de co du lieu. Nen cau hinh authentication va gioi han quyen.",
+      vi: "Grafana chỉ là lớp hiển thị, cần kết hợp với Prometheus, Loki hoặc InfluxDB để có dữ liệu. Nên cấu hình authentication và giới hạn quyền.",
       en: "Grafana is only the visualization layer. Pair it with Prometheus, Loki, or InfluxDB for data. Configure authentication and permissions carefully."
     },
     deployGuide: {
       vi: {
-        overview: "Chay mot container Docker don gian. Ket noi data source sau khi cai dat.",
+        overview: "Chạy một container Docker đơn giản. Kết nối data source sau khi cài đặt.",
         steps: [
-          "Tao thu muc data cho Grafana de luu dashboards va config.",
-          "Chay container voi volume mount va port 3000.",
-          "Dang nhap voi admin/admin va doi mat khau ngay lap tuc.",
-          "Them data source (Prometheus, InfluxDB, hoac khac).",
-          "Import hoac tao dashboards de hien thi metrics."
+          "Tạo thư mục data cho Grafana để lưu dashboards và config.",
+          "Chạy container với volume mount và port 3000.",
+          "Đăng nhập với admin/admin và đổi mật khẩu ngay lập tức.",
+          "Thêm data source (Prometheus, InfluxDB, hoặc khác).",
+          "Import hoặc tạo dashboards để hiển thị metrics."
         ],
-        backup: "Backup thu muc data va database SQLite (hoac PostgreSQL neu dung). Export dashboards quan trong ra JSON."
+        backup: "Backup thư mục data và database SQLite (hoặc PostgreSQL nếu dùng). Export dashboards quan trọng ra JSON."
       },
       en: {
         overview: "Run a simple Docker container. Connect data sources after installation.",
@@ -1030,24 +1037,24 @@ echo "Grafana is running on http://SERVER_IP:3000"`
       demo: "https://app.netdata.cloud"
     },
     summary: {
-      vi: "Giam sat hieu nang server theo thoi gian thuc voi hang ngan metrics, cai dat nhanh va nhe.",
+      vi: "Giám sát hiệu năng server theo thời gian thực với hàng nghìn metrics, cài đặt nhanh và nhẹ.",
       en: "Real-time server performance monitoring with thousands of metrics, quick and lightweight to install."
     },
     notes: {
-      vi: "Tu dong phat hien dich vu va thu thap metrics. Khong can cau hinh nhieu, nhung nen gioi han truy cap dashboard neu public.",
+      vi: "Tự động phát hiện dịch vụ và thu thập metrics. Không cần cấu hình nhiều, nhưng nên giới hạn truy cập dashboard nếu public.",
       en: "Auto-discovers services and collects metrics. Minimal configuration needed, but restrict dashboard access if public."
     },
     deployGuide: {
       vi: {
-        overview: "Cai dat bang mot container Docker hoac script. Tu dong thu thap metrics cua host.",
+        overview: "Cài đặt bằng một container Docker hoặc script. Tự động thu thập metrics của host.",
         steps: [
-          "Chay container Netdata voi quyen truy cap /proc, /sys va Docker socket.",
-          "Mo dashboard tai port 19999 de xem metrics real-time.",
-          "Cau hinh alarm notifications qua email, Slack hoac webhook.",
-          "Tuy chinh retention va storage neu can luu metrics lau hon.",
-          "Gioi han truy cap bang firewall hoac basic auth neu khong dung Netdata Cloud."
+          "Chạy container Netdata với quyền truy cập /proc, /sys và Docker socket.",
+          "Mở dashboard tại port 19999 để xem metrics real-time.",
+          "Cấu hình alarm notifications qua email, Slack hoặc webhook.",
+          "Tuỳ chỉnh retention và storage nếu cần lưu metrics lâu hơn.",
+          "Giới hạn truy cập bằng firewall hoặc basic auth nếu không dùng Netdata Cloud."
         ],
-        backup: "Netdata luu metrics local. Backup thu muc config va custom dashboards. Metrics co the tai thu thap."
+        backup: "Netdata lưu metrics local. Backup thư mục config và custom dashboards. Metrics có thể tái thu thập."
       },
       en: {
         overview: "Install with a single Docker container or script. Automatically collects host metrics.",
@@ -1133,24 +1140,24 @@ echo "Netdata is running on http://SERVER_IP:19999"`
       docs: "https://docs.goauthentik.io"
     },
     summary: {
-      vi: "Identity provider va SSO tu host, ho tro SAML, OAuth2, LDAP va nhieu giao thuc xac thuc.",
+      vi: "Identity provider và SSO tự host, hỗ trợ SAML, OAuth2, LDAP và nhiều giao thức xác thực.",
       en: "A self-hosted identity provider and SSO supporting SAML, OAuth2, LDAP, and many authentication protocols."
     },
     notes: {
-      vi: "Can PostgreSQL va Redis. Cau hinh phuc tap hon cac app don gian nhung rat manh cho quan ly danh tinh tap trung.",
+      vi: "Cần PostgreSQL và Redis. Cấu hình phức tạp hơn các app đơn giản nhưng rất mạnh cho quản lý danh tính tập trung.",
       en: "Requires PostgreSQL and Redis. More complex to configure than simple apps but powerful for centralized identity management."
     },
     deployGuide: {
       vi: {
-        overview: "Chay bang Docker Compose voi PostgreSQL va Redis. Can cau hinh domain va secret key dung.",
+        overview: "Chạy bằng Docker Compose với PostgreSQL và Redis. Cần cấu hình domain và secret key đúng.",
         steps: [
-          "Tao file .env voi secret key, domain va cau hinh email.",
-          "Chay Docker Compose voi Authentik server, worker, PostgreSQL va Redis.",
-          "Truy cap web UI tai port 9000, thiet lap mat khau admin.",
-          "Cau hinh providers (OAuth2, SAML, LDAP) cho tung ung dung.",
-          "Tao flows va policies de quan ly xac thuc va uy quyen."
+          "Tạo file .env với secret key, domain và cấu hình email.",
+          "Chạy Docker Compose với Authentik server, worker, PostgreSQL và Redis.",
+          "Truy cập web UI tại port 9000, thiết lập mật khẩu admin.",
+          "Cấu hình providers (OAuth2, SAML, LDAP) cho từng ứng dụng.",
+          "Tạo flows và policies để quản lý xác thực và uỷ quyền."
         ],
-        backup: "Backup database PostgreSQL va thu muc media. Redis chi luu cache nen khong bat buoc backup."
+        backup: "Backup database PostgreSQL và thư mục media. Redis chỉ lưu cache nên không bắt buộc backup."
       },
       en: {
         overview: "Run with Docker Compose using PostgreSQL and Redis. Domain and secret key must be configured correctly.",
@@ -1296,24 +1303,24 @@ echo "Authentik is running on http://SERVER_IP:9000"`
       docs: "https://github.com/wg-easy/wg-easy/wiki"
     },
     summary: {
-      vi: "Giao dien quan ly WireGuard VPN don gian, de tao va quan ly client qua web UI.",
+      vi: "Giao diện quản lý WireGuard VPN đơn giản, dễ tạo và quản lý client qua web UI.",
       en: "A simple WireGuard VPN management UI for easily creating and managing VPN clients through a web interface."
     },
     notes: {
-      vi: "Can quyen NET_ADMIN va SYS_MODULE. Cau hinh dung IP public va port UDP 51820 de client ket noi.",
+      vi: "Cần quyền NET_ADMIN và SYS_MODULE. Cấu hình đúng IP public và port UDP 51820 để client kết nối.",
       en: "Requires NET_ADMIN and SYS_MODULE capabilities. Configure the correct public IP and UDP port 51820 for client connections."
     },
     deployGuide: {
       vi: {
-        overview: "Chay mot container Docker voi quyen dac biet de quan ly WireGuard. Can mo port UDP.",
+        overview: "Chạy một container Docker với quyền đặc biệt để quản lý WireGuard. Cần mở port UDP.",
         steps: [
-          "Mo port UDP 51820 tren firewall va router.",
-          "Chay container voi cap_add NET_ADMIN va SYS_MODULE.",
-          "Cau hinh WG_HOST bang IP public hoac domain cua server.",
-          "Dat mat khau admin qua PASSWORD_HASH.",
-          "Tao client profiles va tai file config hoac scan QR code."
+          "Mở port UDP 51820 trên firewall và router.",
+          "Chạy container với cap_add NET_ADMIN và SYS_MODULE.",
+          "Cấu hình WG_HOST bằng IP public hoặc domain của server.",
+          "Đặt mật khẩu admin qua PASSWORD_HASH.",
+          "Tạo client profiles và tải file config hoặc scan QR code."
         ],
-        backup: "Backup thu muc config chua WireGuard keys va client profiles."
+        backup: "Backup thư mục config chứa WireGuard keys và client profiles."
       },
       en: {
         overview: "Run a single Docker container with special capabilities for WireGuard management. Open UDP port.",
@@ -1400,24 +1407,24 @@ echo "WG-Easy is running on http://SERVER_IP:51821"`
       demo: "https://demo.n8n.io"
     },
     summary: {
-      vi: "Nen tang tu dong hoa workflow tu host, ket noi hang tram dich vu thay cho Zapier va Make.",
+      vi: "Nền tảng tự động hoá workflow tự host, kết nối hàng trăm dịch vụ thay cho Zapier và Make.",
       en: "A self-hosted workflow automation platform connecting hundreds of services as an alternative to Zapier and Make."
     },
     notes: {
-      vi: "Su dung PostgreSQL cho production thay vi SQLite. Nen dat queue mode voi Redis neu co nhieu workflow chay dong thoi.",
+      vi: "Sử dụng PostgreSQL cho production thay vì SQLite. Nên đặt queue mode với Redis nếu có nhiều workflow chạy đồng thời.",
       en: "Use PostgreSQL for production instead of SQLite. Enable queue mode with Redis for many concurrent workflows."
     },
     deployGuide: {
       vi: {
-        overview: "Chay bang Docker Compose voi PostgreSQL. Co the them Redis cho queue mode.",
+        overview: "Chạy bằng Docker Compose với PostgreSQL. Có thể thêm Redis cho queue mode.",
         steps: [
-          "Tao thu muc du lieu va file docker-compose.",
-          "Cau hinh PostgreSQL lam database chinh.",
-          "Chay container n8n voi volume cho workflows va credentials.",
-          "Tao tai khoan admin va bat dau tao workflows.",
-          "Dat webhook URL dung neu su dung webhook triggers."
+          "Tạo thư mục dữ liệu và file docker-compose.",
+          "Cấu hình PostgreSQL làm database chính.",
+          "Chạy container n8n với volume cho workflows và credentials.",
+          "Tạo tài khoản admin và bắt đầu tạo workflows.",
+          "Đặt webhook URL đúng nếu sử dụng webhook triggers."
         ],
-        backup: "Backup database PostgreSQL va thu muc .n8n chua credentials da ma hoa."
+        backup: "Backup database PostgreSQL và thư mục .n8n chứa credentials đã mã hoá."
       },
       en: {
         overview: "Run with Docker Compose using PostgreSQL. Optionally add Redis for queue mode.",
@@ -1524,24 +1531,24 @@ echo "n8n is running on http://SERVER_IP:5678"`
       demo: "https://www.metabase.com/demo"
     },
     summary: {
-      vi: "Cong cu business intelligence tu host, tao bieu do va dashboard tu database ma khong can viet code.",
+      vi: "Công cụ business intelligence tự host, tạo biểu đồ và dashboard từ database mà không cần viết code.",
       en: "A self-hosted business intelligence tool for creating charts and dashboards from databases without writing code."
     },
     notes: {
-      vi: "Mac dinh dung H2 embedded database. Nen chuyen sang PostgreSQL cho production de dam bao on dinh.",
+      vi: "Mặc định dùng H2 embedded database. Nên chuyển sang PostgreSQL cho production để đảm bảo ổn định.",
       en: "Defaults to H2 embedded database. Switch to PostgreSQL for production stability."
     },
     deployGuide: {
       vi: {
-        overview: "Chay mot container Docker don gian. Nen dung PostgreSQL lam metabase database cho production.",
+        overview: "Chạy một container Docker đơn giản. Nên dùng PostgreSQL làm metabase database cho production.",
         steps: [
-          "Tao thu muc du lieu cho Metabase.",
-          "Chay container voi bien moi truong cau hinh database backend.",
-          "Truy cap web UI tai port 3000 va hoan thanh setup wizard.",
-          "Ket noi data sources (PostgreSQL, MySQL, etc.) de truy van.",
-          "Tao questions va dashboards, phan quyen cho team."
+          "Tạo thư mục dữ liệu cho Metabase.",
+          "Chạy container với biến môi trường cấu hình database backend.",
+          "Truy cập web UI tại port 3000 và hoàn thành setup wizard.",
+          "Kết nối data sources (PostgreSQL, MySQL, etc.) để truy vấn.",
+          "Tạo questions và dashboards, phân quyền cho team."
         ],
-        backup: "Backup Metabase application database (PostgreSQL). Dashboards va questions deu nam trong database nay."
+        backup: "Backup Metabase application database (PostgreSQL). Dashboards và questions đều nằm trong database này."
       },
       en: {
         overview: "Run a simple Docker container. Use PostgreSQL as the Metabase application database for production.",
@@ -1641,24 +1648,24 @@ echo "Metabase is running on http://SERVER_IP:3000"`
       docs: "https://docs.getoutline.com"
     },
     summary: {
-      vi: "Wiki va tai lieu cho team, giao dien dep va nhanh, thay the Notion voi du lieu tu host.",
+      vi: "Wiki và tài liệu cho team, giao diện đẹp và nhanh, thay thế Notion với dữ liệu tự host.",
       en: "A fast and beautiful team wiki and documentation tool, a self-hosted Notion alternative."
     },
     notes: {
-      vi: "Can cau hinh SSO (OIDC hoac SAML) de dang nhap. Nen dung S3-compatible storage cho file uploads.",
+      vi: "Cần cấu hình SSO (OIDC hoặc SAML) để đăng nhập. Nên dùng S3-compatible storage cho file uploads.",
       en: "Requires SSO configuration (OIDC or SAML) for login. Use S3-compatible storage for file uploads."
     },
     deployGuide: {
       vi: {
-        overview: "Chay bang Docker Compose voi PostgreSQL, Redis va S3 storage. Bat buoc cau hinh SSO.",
+        overview: "Chạy bằng Docker Compose với PostgreSQL, Redis và S3 storage. Bắt buộc cấu hình SSO.",
         steps: [
-          "Cau hinh SSO provider (Authentik, Keycloak, Google, etc.).",
-          "Tao file .env voi database, Redis, S3 va SSO settings.",
-          "Chay Docker Compose voi Outline, PostgreSQL va Redis.",
-          "Truy cap web UI va dang nhap qua SSO provider.",
-          "Tao collections va moi team members."
+          "Cấu hình SSO provider (Authentik, Keycloak, Google, etc.).",
+          "Tạo file .env với database, Redis, S3 và SSO settings.",
+          "Chạy Docker Compose với Outline, PostgreSQL và Redis.",
+          "Truy cập web UI và đăng nhập qua SSO provider.",
+          "Tạo collections và mời team members."
         ],
-        backup: "Backup database PostgreSQL va S3 storage chua uploaded files."
+        backup: "Backup database PostgreSQL và S3 storage chứa uploaded files."
       },
       en: {
         overview: "Run with Docker Compose using PostgreSQL, Redis, and S3 storage. SSO configuration is required.",
@@ -1781,24 +1788,24 @@ echo "Outline is running on http://SERVER_IP:3000"`
       demo: "https://try.vikunja.io"
     },
     summary: {
-      vi: "Ung dung quan ly cong viec tu host, ho tro kanban, list va calendar, thay the Todoist.",
+      vi: "Ứng dụng quản lý công việc tự host, hỗ trợ kanban, list và calendar, thay thế Todoist.",
       en: "A self-hosted task management app with kanban, list, and calendar views as a Todoist alternative."
     },
     notes: {
-      vi: "Nhe va nhanh, phu hop cho ca nhan hoac team nho. Co the dung SQLite cho don gian hoac PostgreSQL cho production.",
+      vi: "Nhẹ và nhanh, phù hợp cho cá nhân hoặc team nhỏ. Có thể dùng SQLite cho đơn giản hoặc PostgreSQL cho production.",
       en: "Lightweight and fast, suitable for individuals or small teams. Use SQLite for simplicity or PostgreSQL for production."
     },
     deployGuide: {
       vi: {
-        overview: "Chay mot container Docker duy nhat, frontend va API gom trong mot binary.",
+        overview: "Chạy một container Docker duy nhất, frontend và API gộp trong một binary.",
         steps: [
-          "Tao thu muc du lieu cho Vikunja.",
-          "Chay container voi volume mount cho database va files.",
-          "Truy cap web UI va tao tai khoan dau tien.",
-          "Cau hinh mailer neu muon gui email thong bao.",
-          "Tao projects, tasks va moi cong tac vien."
+          "Tạo thư mục dữ liệu cho Vikunja.",
+          "Chạy container với volume mount cho database và files.",
+          "Truy cập web UI và tạo tài khoản đầu tiên.",
+          "Cấu hình mailer nếu muốn gửi email thông báo.",
+          "Tạo projects, tasks và mời cộng tác viên."
         ],
-        backup: "Backup file database (SQLite hoac PostgreSQL) va thu muc files chua attachments."
+        backup: "Backup file database (SQLite hoặc PostgreSQL) và thư mục files chứa attachments."
       },
       en: {
         overview: "Run a single Docker container with frontend and API bundled in one binary.",
@@ -1868,24 +1875,24 @@ echo "Vikunja is running on http://SERVER_IP:3456"`
       docs: "https://ollama.com/library"
     },
     summary: {
-      vi: "Chay cac mo hinh LLM tren may local hoac server rieng, ho tro nhieu model nhu Llama, Mistral, Gemma.",
+      vi: "Chạy các mô hình LLM trên máy local hoặc server riêng, hỗ trợ nhiều model như Llama, Mistral, Gemma.",
       en: "Run LLM models locally on your own machine or server, supporting models like Llama, Mistral, and Gemma."
     },
     notes: {
-      vi: "Tai nguyen phu thuoc vao kich thuoc model. Model 7B can toi thieu 8 GB RAM. GPU giup tang toc dang ke.",
+      vi: "Tài nguyên phụ thuộc vào kích thước model. Model 7B cần tối thiểu 8 GB RAM. GPU giúp tăng tốc đáng kể.",
       en: "Resource requirements depend on model size. 7B models need at least 8 GB RAM. GPU significantly improves speed."
     },
     deployGuide: {
       vi: {
-        overview: "Chay mot container Docker don gian. Tai model sau khi khoi dong.",
+        overview: "Chạy một container Docker đơn giản. Tải model sau khi khởi động.",
         steps: [
-          "Chay container Ollama voi volume luu tru models.",
-          "Tai model dau tien bang lenh `ollama pull llama3.2`.",
-          "Test bang `ollama run llama3.2` hoac goi API tai port 11434.",
-          "Ket hop voi Open WebUI de co giao dien chat.",
-          "Cau hinh GPU passthrough neu co NVIDIA GPU."
+          "Chạy container Ollama với volume lưu trữ models.",
+          "Tải model đầu tiên bằng lệnh `ollama pull llama3.2`.",
+          "Test bằng `ollama run llama3.2` hoặc gọi API tại port 11434.",
+          "Kết hợp với Open WebUI để có giao diện chat.",
+          "Cấu hình GPU passthrough nếu có NVIDIA GPU."
         ],
-        backup: "Models co the tai lai. Backup thu muc cau hinh neu co custom Modelfiles."
+        backup: "Models có thể tải lại. Backup thư mục cấu hình nếu có custom Modelfiles."
       },
       en: {
         overview: "Run a simple Docker container. Pull models after startup.",
@@ -1951,24 +1958,24 @@ echo "Pull a model with: docker exec ollama ollama pull llama3.2"`
       demo: "https://cloud.langfuse.com"
     },
     summary: {
-      vi: "Cong cu observability cho LLM, theo doi traces, chi phi va chat luong cua ung dung AI.",
+      vi: "Công cụ observability cho LLM, theo dõi traces, chi phí và chất lượng của ứng dụng AI.",
       en: "An LLM observability tool for tracing, cost tracking, and quality monitoring of AI applications."
     },
     notes: {
-      vi: "Nen chay cung PostgreSQL rieng. Tich hop bang SDK vao ung dung AI de gui traces.",
+      vi: "Nên chạy cùng PostgreSQL riêng. Tích hợp bằng SDK vào ứng dụng AI để gửi traces.",
       en: "Run with a dedicated PostgreSQL instance. Integrate via SDK into AI applications to send traces."
     },
     deployGuide: {
       vi: {
-        overview: "Chay bang Docker Compose voi PostgreSQL. Tich hop SDK vao ung dung de bat dau thu thap traces.",
+        overview: "Chạy bằng Docker Compose với PostgreSQL. Tích hợp SDK vào ứng dụng để bắt đầu thu thập traces.",
         steps: [
-          "Tao file docker-compose voi Langfuse va PostgreSQL.",
-          "Cau hinh bien moi truong: database, secret key va domain.",
-          "Chay Docker Compose va truy cap web UI.",
-          "Tao project va lay API keys.",
-          "Tich hop Langfuse SDK vao ung dung AI de gui traces."
+          "Tạo file docker-compose với Langfuse và PostgreSQL.",
+          "Cấu hình biến môi trường: database, secret key và domain.",
+          "Chạy Docker Compose và truy cập web UI.",
+          "Tạo project và lấy API keys.",
+          "Tích hợp Langfuse SDK vào ứng dụng AI để gửi traces."
         ],
-        backup: "Backup database PostgreSQL chua toan bo traces va project settings."
+        backup: "Backup database PostgreSQL chứa toàn bộ traces và project settings."
       },
       en: {
         overview: "Run with Docker Compose using PostgreSQL. Integrate the SDK into applications to collect traces.",

@@ -73,7 +73,7 @@ export default async function ProjectPage({
     <article className="detail-page">
       <div className="detail-hero">
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <Link href={`/${locale}`}>{locale === "vi" ? "Trang chu" : "Home"}</Link>
+          <Link href={`/${locale}`}>{locale === "vi" ? "Trang chủ" : "Home"}</Link>
           <span className="breadcrumb-separator">/</span>
           <Link href={`/${locale}/categories/${project.categorySlug}`}>{project.category}</Link>
           <span className="breadcrumb-separator">/</span>

@@ -337,6 +337,31 @@ h3 {
   font-weight: 820;
 }
 
+.category-card .category-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  background: var(--surface-strong);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.category-card .category-count {
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin-top: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface-strong);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
 .project-card-top {
   display: flex;
   align-items: flex-start;
