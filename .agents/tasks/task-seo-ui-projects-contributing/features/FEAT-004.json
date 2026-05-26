@@ -2,7 +2,7 @@
   "id": "FEAT-004",
   "type": "feat",
   "description": "Add more self-hosted projects to data/projects.ts covering all existing categories and expanding the directory from 6 to at least 18 projects. Also add corresponding use cases.",
-  "status": "in_progress",
+  "status": "completed",
   "steps": [
     "Add to the 'media' category: Jellyfin (media server, alternative to Plex), Nextcloud (file sync/share, alternative to Google Drive/Dropbox), Photoprism (AI-powered photo management).",
     "Add to the 'monitoring' category: Grafana (dashboards and observability), Netdata (real-time monitoring), Prometheus (metrics collection and alerting).",
@@ -27,5 +27,5 @@
     "Run pnpm lint and confirm no type errors"
   ],
   "blocked_reason": null,
-  "findings": ""
+  "findings": "Added 12 new projects (jellyfin, nextcloud, grafana, netdata, authentik, wg-easy, n8n, metabase, outline, vikunja, ollama, langfuse) bringing total to 18. Each category has 3+ projects. Expanded useCases from 4 to 9 entries. Build generates 76 static pages (up from 40). pnpm lint and pnpm build both pass cleanly."
 }

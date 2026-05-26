@@ -1,0 +1,32 @@
+{
+  "project_type": "Next.js 16 static site with App Router, bilingual (Vietnamese/English) self-hosted open source directory",
+  "language": "TypeScript/React 19",
+  "build_system": "pnpm with Next.js CLI",
+  "test_framework": "None (only TypeScript type-checking via tsc --noEmit)",
+  "build_command": "pnpm install && pnpm build",
+  "test_command": "pnpm lint",
+  "verification_instructions": "1. Run pnpm install to restore dependencies. 2. Run pnpm lint (tsc --noEmit) to verify types. 3. Run pnpm build to verify the static build succeeds.",
+  "snapshot_or_generated_files": null,
+  "setup_instructions": "pnpm install",
+  "environment_constraints": "OPEN_INTERNET - full network access available. No Docker needed (Vercel deployment). No test framework beyond TypeScript checking.",
+  "contribution_requirements": "No CONTRIBUTING.md exists yet - creating one is part of this task.",
+  "key_patterns": "- All project data lives in data/projects.ts as a typed array. - Bilingual content uses Record<Locale, string> pattern. - Pages use Next.js App Router with [locale] dynamic segment. - Categories, projects, and use cases all use slug-based routing. - Components are in components/ directory, plain CSS in app/globals.css. - Static params generated via generateStaticParams() for SSG. - Site uses CSS custom properties for theming. - No external UI library (all custom CSS).",
+  "relevant_files": [
+    "data/projects.ts",
+    "app/layout.tsx",
+    "app/[locale]/layout.tsx",
+    "app/[locale]/page.tsx",
+    "app/[locale]/projects/[slug]/page.tsx",
+    "app/[locale]/categories/[slug]/page.tsx",
+    "app/[locale]/alternatives/[slug]/page.tsx",
+    "app/globals.css",
+    "components/site-shell.tsx",
+    "components/project-card.tsx",
+    "lib/i18n.ts",
+    "lib/projects.ts",
+    "next.config.ts",
+    "package.json",
+    "README.md"
+  ],
+  "directory_structure": "app/ - Next.js App Router pages and API routes. app/[locale]/ - locale-specific pages. components/ - reusable React components. data/ - project data (projects.ts). lib/ - utility functions (i18n.ts, projects.ts). Root has config files (next.config.ts, tsconfig.json, package.json)."
+}
