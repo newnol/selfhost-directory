@@ -62,9 +62,23 @@ export default async function ProjectPage({
 
   const t = dictionary[locale].project;
 
+  const scoreClass =
+    project.score >= 85
+      ? "score-green"
+      : project.score >= 70
+        ? "score-amber"
+        : "score-red";
+
   return (
     <article className="detail-page">
       <div className="detail-hero">
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <Link href={`/${locale}`}>{locale === "vi" ? "Trang chu" : "Home"}</Link>
+          <span className="breadcrumb-separator">/</span>
+          <Link href={`/${locale}/categories/${project.categorySlug}`}>{project.category}</Link>
+          <span className="breadcrumb-separator">/</span>
+          <span>{project.name}</span>
+        </nav>
         <ProjectIcon project={project} size="lg" />
         <Link className="eyebrow-link" href={`/${locale}/categories/${project.categorySlug}`}>
           {project.category}
@@ -126,7 +140,7 @@ export default async function ProjectPage({
           <dl>
             <div>
               <dt>{t.score}</dt>
-              <dd>{project.score}/100</dd>
+              <dd><span className={`score ${scoreClass}`}>{project.score}/100</span></dd>
             </div>
             <div>
               <dt>{t.license}</dt>

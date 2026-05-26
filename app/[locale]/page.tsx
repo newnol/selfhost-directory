@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ProjectCard } from "@/components/project-card";
+import { SearchFilter } from "@/components/search-filter";
 import { projects, useCases } from "@/data/projects";
 import { dictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 import { categoryProjectCounts, projectsByCategory } from "@/lib/projects";
@@ -115,6 +116,12 @@ export default async function LocaleHome({
           </div>
         </div>
       </section>
+
+      <SearchFilter
+        locale={locale}
+        projects={projects}
+        placeholder={locale === "vi" ? "Tim kiem project theo ten hoac tag..." : "Search projects by name or tag..."}
+      />
 
       <section className="section" id="projects">
         <div className="section-heading">
