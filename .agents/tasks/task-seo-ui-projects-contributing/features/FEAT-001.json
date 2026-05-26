@@ -1,0 +1,22 @@
+{
+  "id": "FEAT-001",
+  "type": "chore",
+  "description": "Install dependencies and verify baseline build passes before making any changes.",
+  "status": "completed",
+  "steps": [
+    "Run pnpm install in /projects/sandbox/selfhost-directory to restore node_modules.",
+    "Run pnpm lint (tsc --noEmit) to verify TypeScript compilation passes.",
+    "Run pnpm build to verify the Next.js static build completes successfully."
+  ],
+  "acceptance_criteria": [
+    "pnpm install completes without errors",
+    "pnpm lint (tsc --noEmit) exits with code 0",
+    "pnpm build completes successfully producing .next/ output"
+  ],
+  "verification": [
+    "Run pnpm lint and confirm exit code 0",
+    "Run pnpm build and confirm exit code 0"
+  ],
+  "blocked_reason": null,
+  "findings": "All steps passed cleanly. pnpm install completed (31 packages). pnpm lint (tsc --noEmit) exit 0. pnpm build (Next.js 16.2.6 Turbopack) generated 40 static pages successfully. sharp build scripts were ignored but this does not affect the build. Node environment is ready for subsequent features."
+}
