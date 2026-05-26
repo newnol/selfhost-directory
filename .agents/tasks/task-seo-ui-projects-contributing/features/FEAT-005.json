@@ -1,0 +1,31 @@
+{
+  "id": "FEAT-005",
+  "type": "docs",
+  "description": "Create a comprehensive CONTRIBUTING.md file that documents how to contribute to the project: adding new projects, translating content, code conventions, development setup, and PR workflow.",
+  "status": "completed",
+  "steps": [
+    "Create CONTRIBUTING.md at the project root with the following sections:",
+    "Section 1 - Introduction: Brief welcome, project purpose, link to README.",
+    "Section 2 - Development Setup: Prerequisites (Node.js 18+, pnpm), clone instructions, pnpm install, pnpm dev, open localhost:3000/vi or /en.",
+    "Section 3 - Adding a New Project: Step-by-step guide to add an entry to data/projects.ts. Document the Project type fields, where to find icon URLs (homarr-labs/dashboard-icons), how to write bilingual content, score guidelines, deploy snippet format.",
+    "Section 4 - Adding a Category: How to add to the categories array, slug naming convention, bilingual title/description.",
+    "Section 5 - Adding a Use Case (Alternative): How to add to useCases array, linking projectSlugs.",
+    "Section 6 - Translation Guidelines: How bilingual content works (Record<Locale, string>), writing natural Vietnamese vs English, maintaining parity between languages.",
+    "Section 7 - Code Conventions: TypeScript strict mode, no external UI libraries (plain CSS), component naming (kebab-case files, PascalCase exports), using @/ path aliases.",
+    "Section 8 - Pull Request Process: Branch naming, commit message format, run pnpm lint + pnpm build before submitting, describe changes clearly.",
+    "Section 9 - Project Submission via Web: Mention the /submit-project form as an alternative for non-developers.",
+    "Write the document bilingually or primarily in English with Vietnamese section headers/notes where helpful for the target audience."
+  ],
+  "acceptance_criteria": [
+    "CONTRIBUTING.md exists at project root",
+    "Document covers: dev setup, adding projects, adding categories, adding use cases, translation guidelines, code conventions, PR process",
+    "Document includes concrete examples (e.g., a minimal project entry template)",
+    "Document references actual file paths and commands used in the project"
+  ],
+  "verification": [
+    "Confirm CONTRIBUTING.md exists and is well-formatted markdown",
+    "Run pnpm build to ensure no regressions"
+  ],
+  "blocked_reason": null,
+  "findings": "CONTRIBUTING.md created successfully. Build passes with no regressions. Documentation-only change - no code impact."
+}

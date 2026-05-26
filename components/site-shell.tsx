@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ScrollToTop } from "@/components/scroll-to-top";
+import { categories } from "@/data/projects";
 import { dictionary, otherLocale, type Locale } from "@/lib/i18n";
 
 type SiteShellProps = {
@@ -35,9 +37,49 @@ export function SiteShell({ locale, children }: SiteShellProps) {
       </header>
       <main>{children}</main>
       <footer className="site-footer">
-        <span>selfhost.io.vn</span>
-        <span>Open source software, reviewed for practical self-hosting.</span>
+        <div className="footer-brand">
+          <strong>selfhost.io.vn</strong>
+          <p>
+            {locale === "vi"
+              ? "Thu muc cac du an open source tu host, so sanh va huong dan deploy cho VPS va team nho."
+              : "Open source software, reviewed for practical self-hosting."}
+          </p>
+        </div>
+        <div className="footer-links">
+          <div className="footer-links-group">
+            <h4>{locale === "vi" ? "Danh muc" : "Categories"}</h4>
+            <ul>
+              {categories.slice(0, 5).map((category) => (
+                <li key={category.slug}>
+                  <Link href={`/${locale}/categories/${category.slug}`}>
+                    {category.title[locale]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="footer-links-group">
+            <h4>{locale === "vi" ? "Lien ket" : "Links"}</h4>
+            <ul>
+              <li>
+                <Link href={`/${locale}#projects`}>{t.nav.projects}</Link>
+              </li>
+              <li>
+                <Link href={`/${locale}#alternatives`}>{t.nav.alternatives}</Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/submit-project`}>{t.nav.submit}</Link>
+              </li>
+              <li>
+                <a href="https://github.com/selfhost-io/selfhost-directory" target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </footer>
+      <ScrollToTop />
     </div>
   );
 }

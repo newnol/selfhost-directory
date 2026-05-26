@@ -1,0 +1,32 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Improve SEO across the entire site: add per-page metadata with Open Graph/Twitter cards, generate a sitemap.xml and robots.txt, add JSON-LD structured data, set canonical URLs, and configure locale alternates (hreflang).",
+  "status": "completed",
+  "steps": [
+    "Update app/layout.tsx: set dynamic lang attribute based on locale, add site-wide metadata defaults including metadataBase URL (https://selfhost.io.vn), Open Graph defaults, Twitter card config, and viewport settings.",
+    "Add generateMetadata() to app/[locale]/page.tsx that produces locale-specific title, description, Open Graph image, canonical URL, and alternate locale links.",
+    "Add generateMetadata() to app/[locale]/projects/[slug]/page.tsx that produces per-project title (e.g. 'Immich - Selfhost Directory'), description from project.summary[locale], Open Graph tags with project info, and canonical URL.",
+    "Add generateMetadata() to app/[locale]/categories/[slug]/page.tsx with category-specific title and description.",
+    "Add generateMetadata() to app/[locale]/alternatives/[slug]/page.tsx with use-case specific title and description.",
+    "Create app/sitemap.ts using Next.js MetadataRoute.Sitemap to generate sitemap.xml covering all locales, projects, categories, and alternatives pages with lastModified dates.",
+    "Create app/robots.ts using Next.js MetadataRoute.Robots to generate robots.txt allowing all crawlers and pointing to the sitemap URL.",
+    "Add JSON-LD structured data (WebSite schema + ItemList for directory) as a <script type='application/ld+json'> in the locale layout or home page.",
+    "Update next.config.ts to configure i18n-related redirects or rewrites if needed for SEO (e.g., trailing slash consistency)."
+  ],
+  "acceptance_criteria": [
+    "Each page type (home, project detail, category, alternatives) has unique <title> and <meta name='description'>",
+    "Open Graph meta tags (og:title, og:description, og:url, og:locale) are present on all pages",
+    "sitemap.xml is generated at /sitemap.xml with all locale/page combinations",
+    "robots.txt is generated at /robots.txt referencing the sitemap",
+    "JSON-LD structured data is present on the home page",
+    "Alternate hreflang links point to the other locale version of each page",
+    "pnpm build completes successfully"
+  ],
+  "verification": [
+    "Run pnpm build and confirm it succeeds",
+    "Run pnpm lint and confirm no type errors"
+  ],
+  "blocked_reason": null,
+  "findings": "All SEO features implemented and verified. pnpm lint (tsc --noEmit) passes. pnpm build generates 42 static pages successfully including /sitemap.xml and /robots.txt routes. The Viewport export was separated from Metadata as required by Next.js 16. JSON-LD uses dangerouslySetInnerHTML with a script tag which is the standard Next.js pattern."
+}

@@ -1,0 +1,31 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "description": "Add more self-hosted projects to data/projects.ts covering all existing categories and expanding the directory from 6 to at least 18 projects. Also add corresponding use cases.",
+  "status": "completed",
+  "steps": [
+    "Add to the 'media' category: Jellyfin (media server, alternative to Plex), Nextcloud (file sync/share, alternative to Google Drive/Dropbox), Photoprism (AI-powered photo management).",
+    "Add to the 'monitoring' category: Grafana (dashboards and observability), Netdata (real-time monitoring), Prometheus (metrics collection and alerting).",
+    "Add to the 'security' category: Authentik (identity provider/SSO), Crowdsec (collaborative security), Wireguard-easy (VPN management UI).",
+    "Add to the 'data-tools' category: n8n (workflow automation, alternative to Zapier), Metabase (business intelligence/analytics), Appwrite (backend-as-a-service).",
+    "Add to the 'productivity' category: Outline (team wiki/docs, alternative to Notion), Vikunja (task management, alternative to Todoist), Bookstack (documentation platform).",
+    "Add to the 'ai' category: Ollama (local LLM runner), LocalAI (OpenAI-compatible local API), Langfuse (LLM observability/tracing).",
+    "Each new project must follow the exact same Project type structure in data/projects.ts: slug, name, iconUrl (from cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/), categorySlug, category, tags, stack, license, deploy method, requirements, score (research-based), links (source, docs, demo if available), bilingual summary, notes, deployGuide (overview, steps array, backup), and deploySnippets (dockerCompose, setupScript).",
+    "Add new use cases to the useCases array: 'google-drive' (Nextcloud), 'plex' (Jellyfin), 'zapier' (n8n), 'notion' (Outline), 'chatgpt' (Open WebUI + Ollama), update existing use cases with new projectSlugs where relevant (e.g., add Photoprism to google-photos alternative).",
+    "Ensure all icon URLs are valid by using the homarr-labs/dashboard-icons repository pattern: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/{name}.svg"
+  ],
+  "acceptance_criteria": [
+    "data/projects.ts contains at least 18 projects total (12+ new ones added)",
+    "Each category has at least 3 projects",
+    "All new projects have complete bilingual (vi/en) content for summary, notes, and deployGuide",
+    "All new projects have valid dockerCompose and setupScript snippets",
+    "useCases array is expanded with new alternatives covering the new projects",
+    "pnpm build succeeds with all new data (no type errors, all generateStaticParams work)"
+  ],
+  "verification": [
+    "Run pnpm build and confirm it succeeds (all static pages generate correctly)",
+    "Run pnpm lint and confirm no type errors"
+  ],
+  "blocked_reason": null,
+  "findings": "Added 12 new projects (jellyfin, nextcloud, grafana, netdata, authentik, wg-easy, n8n, metabase, outline, vikunja, ollama, langfuse) bringing total to 18. Each category has 3+ projects. Expanded useCases from 4 to 9 entries. Build generates 76 static pages (up from 40). pnpm lint and pnpm build both pass cleanly."
+}

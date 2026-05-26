@@ -1,11 +1,11 @@
 import Link from "next/link";
-import type { Project } from "@/data/projects";
+import type { ProjectCardData } from "@/components/search-filter";
 import type { Locale } from "@/lib/i18n";
 import { ProjectIcon } from "@/components/project-icon";
 
 type ProjectCardProps = {
   locale: Locale;
-  project: Project;
+  project: ProjectCardData;
 };
 
 export function ProjectCard({ locale, project }: ProjectCardProps) {
@@ -27,9 +27,12 @@ export function ProjectCard({ locale, project }: ProjectCardProps) {
           <span key={tag}>{tag}</span>
         ))}
       </div>
-      <Link className="text-link" href={`/${locale}/projects/${project.slug}`}>
-        {locale === "vi" ? "Xem chi tiết" : "View details"}
-      </Link>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto" }}>
+        <Link className="text-link" href={`/${locale}/projects/${project.slug}`}>
+          {locale === "vi" ? "Xem chi tiết" : "View details"}
+        </Link>
+        <span className="deploy-badge">{project.deploy}</span>
+      </div>
     </article>
   );
 }

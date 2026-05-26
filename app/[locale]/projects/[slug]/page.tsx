@@ -1,9 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CopyCodeBlock } from "@/components/copy-code-block";
 import { ProjectIcon } from "@/components/project-icon";
 import { projects } from "@/data/projects";
-import { dictionary, isLocale, type Locale } from "@/lib/i18n";
+import { dictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 import { projectBySlug } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -11,6 +12,39 @@ export function generateStaticParams() {
     { locale: "vi", slug: project.slug },
     { locale: "en", slug: project.slug }
   ]);
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "vi";
+  const project = projectBySlug(slug);
+  if (!project) {
+    return {};
+  }
+  const title = `${project.name} - Selfhost Directory`;
+  const description = project.summary[locale];
+  const alternateLanguages: Record<string, string> = {};
+  for (const l of locales) {
+    alternateLanguages[l] = `https://selfhost.io.vn/${l}/projects/${slug}`;
+  }
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://selfhost.io.vn/${locale}/projects/${slug}`,
+      locale: locale === "vi" ? "vi_VN" : "en_US"
+    },
+    alternates: {
+      canonical: `https://selfhost.io.vn/${locale}/projects/${slug}`,
+      languages: alternateLanguages
+    }
+  };
 }
 
 export default async function ProjectPage({
@@ -28,9 +62,23 @@ export default async function ProjectPage({
 
   const t = dictionary[locale].project;
 
+  const scoreClass =
+    project.score >= 85
+      ? "score-green"
+      : project.score >= 70
+        ? "score-amber"
+        : "score-red";
+
   return (
     <article className="detail-page">
       <div className="detail-hero">
+        <nav className="breadcrumb" aria-label="Breadcrumb">
+          <Link href={`/${locale}`}>{locale === "vi" ? "Trang chủ" : "Home"}</Link>
+          <span className="breadcrumb-separator">/</span>
+          <Link href={`/${locale}/categories/${project.categorySlug}`}>{project.category}</Link>
+          <span className="breadcrumb-separator">/</span>
+          <span>{project.name}</span>
+        </nav>
         <ProjectIcon project={project} size="lg" />
         <Link className="eyebrow-link" href={`/${locale}/categories/${project.categorySlug}`}>
           {project.category}
@@ -92,7 +140,7 @@ export default async function ProjectPage({
           <dl>
             <div>
               <dt>{t.score}</dt>
-              <dd>{project.score}/100</dd>
+              <dd><span className={`score ${scoreClass}`}>{project.score}/100</span></dd>
             </div>
             <div>
               <dt>{t.license}</dt>
