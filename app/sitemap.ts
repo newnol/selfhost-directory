@@ -4,7 +4,7 @@ import { locales } from "@/lib/i18n";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://selfhost.io.vn";
-  const lastModified = new Date("2025-06-01");
+  const lastModified = new Date();
   const entries: MetadataRoute.Sitemap = [];
 
   // Home pages

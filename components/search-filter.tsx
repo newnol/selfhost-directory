@@ -1,13 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import type { Project } from "@/data/projects";
 import type { Locale } from "@/lib/i18n";
 import { ProjectCard } from "@/components/project-card";
 
+export type ProjectCardData = {
+  slug: string;
+  name: string;
+  iconUrl: string;
+  categorySlug: string;
+  category: string;
+  tags: string[];
+  score: number;
+  deploy: "Docker" | "Docker Compose" | "Helm" | "Binary";
+  summary: Record<Locale, string>;
+};
+
 type SearchFilterProps = {
   locale: Locale;
-  projects: Project[];
+  projects: ProjectCardData[];
   placeholder: string;
 };
 

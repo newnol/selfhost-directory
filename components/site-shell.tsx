@@ -71,7 +71,7 @@ export function SiteShell({ locale, children }: SiteShellProps) {
                 <Link href={`/${locale}/submit-project`}>{t.nav.submit}</Link>
               </li>
               <li>
-                <a href="https://github.com" target="_blank" rel="noreferrer">
+                <a href="https://github.com/selfhost-io/selfhost-directory" target="_blank" rel="noreferrer">
                   GitHub
                 </a>
               </li>

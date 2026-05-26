@@ -1,11 +1,11 @@
 import Link from "next/link";
-import type { Project } from "@/data/projects";
+import type { ProjectCardData } from "@/components/search-filter";
 import type { Locale } from "@/lib/i18n";
 import { ProjectIcon } from "@/components/project-icon";
 
 type ProjectCardProps = {
   locale: Locale;
-  project: Project;
+  project: ProjectCardData;
 };
 
 export function ProjectCard({ locale, project }: ProjectCardProps) {

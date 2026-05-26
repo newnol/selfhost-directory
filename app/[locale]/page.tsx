@@ -119,7 +119,17 @@ export default async function LocaleHome({
 
       <SearchFilter
         locale={locale}
-        projects={projects}
+        projects={projects.map((p) => ({
+          slug: p.slug,
+          name: p.name,
+          iconUrl: p.iconUrl,
+          categorySlug: p.categorySlug,
+          category: p.category,
+          tags: p.tags,
+          score: p.score,
+          deploy: p.deploy,
+          summary: p.summary,
+        }))}
         placeholder={locale === "vi" ? "Tim kiem project theo ten hoac tag..." : "Search projects by name or tag..."}
       />
 

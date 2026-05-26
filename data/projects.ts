@@ -152,7 +152,7 @@ services:
     environment:
       DB_HOSTNAME: database
       DB_USERNAME: postgres
-      DB_PASSWORD: immich_password
+      DB_PASSWORD: CHANGEME_db_password # CHANGE THIS
       DB_DATABASE_NAME: immich
       REDIS_HOSTNAME: redis
     ports:
@@ -171,7 +171,7 @@ services:
     image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0
     container_name: immich_postgres
     environment:
-      POSTGRES_PASSWORD: immich_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_USER: postgres
       POSTGRES_DB: immich
     volumes:
@@ -196,7 +196,7 @@ services:
     environment:
       DB_HOSTNAME: database
       DB_USERNAME: postgres
-      DB_PASSWORD: immich_password
+      DB_PASSWORD: CHANGEME_db_password # CHANGE THIS
       DB_DATABASE_NAME: immich
       REDIS_HOSTNAME: redis
     ports:
@@ -215,7 +215,7 @@ services:
     image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0
     container_name: immich_postgres
     environment:
-      POSTGRES_PASSWORD: immich_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_USER: postgres
       POSTGRES_DB: immich
     volumes:
@@ -451,7 +451,7 @@ echo "Vaultwarden is running on http://SERVER_IP:8080"`
     image: nocodb/nocodb:latest
     container_name: nocodb
     environment:
-      NC_DB: "pg://postgres:5432?u=nocodb&p=nocodb_password&d=nocodb"
+      NC_DB: "pg://postgres:5432?u=nocodb&p=CHANGEME_db_password&d=nocodb" # CHANGE THIS
     volumes:
       - ./data:/usr/app/data
     ports:
@@ -465,7 +465,7 @@ echo "Vaultwarden is running on http://SERVER_IP:8080"`
     container_name: nocodb_postgres
     environment:
       POSTGRES_USER: nocodb
-      POSTGRES_PASSWORD: nocodb_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: nocodb
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -483,7 +483,7 @@ services:
     image: nocodb/nocodb:latest
     container_name: nocodb
     environment:
-      NC_DB: "pg://postgres:5432?u=nocodb&p=nocodb_password&d=nocodb"
+      NC_DB: "pg://postgres:5432?u=nocodb&p=CHANGEME_db_password&d=nocodb" # CHANGE THIS
     volumes:
       - ./data:/usr/app/data
     ports:
@@ -497,7 +497,7 @@ services:
     container_name: nocodb_postgres
     environment:
       POSTGRES_USER: nocodb
-      POSTGRES_PASSWORD: nocodb_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: nocodb
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -570,7 +570,7 @@ echo "NocoDB is running on http://SERVER_IP:8080"`
     container_name: plane_postgres
     environment:
       POSTGRES_USER: plane
-      POSTGRES_PASSWORD: plane_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: plane
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -601,7 +601,7 @@ services:
     container_name: plane_postgres
     environment:
       POSTGRES_USER: plane
-      POSTGRES_PASSWORD: plane_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: plane
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -853,7 +853,7 @@ echo "Jellyfin is running on http://SERVER_IP:8096"`
       POSTGRES_HOST: postgres
       POSTGRES_DB: nextcloud
       POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: nextcloud_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       REDIS_HOST: redis
     ports:
       - "8080:80"
@@ -867,7 +867,7 @@ echo "Jellyfin is running on http://SERVER_IP:8096"`
     container_name: nextcloud_postgres
     environment:
       POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: nextcloud_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: nextcloud
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -896,7 +896,7 @@ services:
       POSTGRES_HOST: postgres
       POSTGRES_DB: nextcloud
       POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: nextcloud_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       REDIS_HOST: redis
     ports:
       - "8080:80"
@@ -910,7 +910,7 @@ services:
     container_name: nextcloud_postgres
     environment:
       POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: nextcloud_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: nextcloud
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -985,7 +985,7 @@ echo "Nextcloud is running on http://SERVER_IP:8080"`
     ports:
       - "3000:3000"
     environment:
-      GF_SECURITY_ADMIN_PASSWORD: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "CHANGEME_admin_password" # CHANGE THIS
     restart: unless-stopped`,
       setupScript: `#!/usr/bin/env bash
 set -euo pipefail
@@ -1004,7 +1004,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      GF_SECURITY_ADMIN_PASSWORD: "admin"
+      GF_SECURITY_ADMIN_PASSWORD: "CHANGEME_admin_password" # CHANGE THIS
     restart: unless-stopped
 COMPOSE
 
@@ -1175,7 +1175,7 @@ echo "Netdata is running on http://SERVER_IP:19999"`
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: authentik_password
+      AUTHENTIK_POSTGRESQL__PASSWORD: CHANGEME_db_password # CHANGE THIS
       AUTHENTIK_POSTGRESQL__NAME: authentik
     ports:
       - "9000:9000"
@@ -1193,7 +1193,7 @@ echo "Netdata is running on http://SERVER_IP:19999"`
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: authentik_password
+      AUTHENTIK_POSTGRESQL__PASSWORD: CHANGEME_db_password # CHANGE THIS
       AUTHENTIK_POSTGRESQL__NAME: authentik
     depends_on:
       - postgres
@@ -1205,7 +1205,7 @@ echo "Netdata is running on http://SERVER_IP:19999"`
     container_name: authentik_postgres
     environment:
       POSTGRES_USER: authentik
-      POSTGRES_PASSWORD: authentik_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: authentik
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1233,7 +1233,7 @@ services:
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: authentik_password
+      AUTHENTIK_POSTGRESQL__PASSWORD: CHANGEME_db_password # CHANGE THIS
       AUTHENTIK_POSTGRESQL__NAME: authentik
     ports:
       - "9000:9000"
@@ -1251,7 +1251,7 @@ services:
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: authentik_password
+      AUTHENTIK_POSTGRESQL__PASSWORD: CHANGEME_db_password # CHANGE THIS
       AUTHENTIK_POSTGRESQL__NAME: authentik
     depends_on:
       - postgres
@@ -1263,7 +1263,7 @@ services:
     container_name: authentik_postgres
     environment:
       POSTGRES_USER: authentik
-      POSTGRES_PASSWORD: authentik_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: authentik
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1441,7 +1441,7 @@ echo "WG-Easy is running on http://SERVER_IP:51821"`
       DB_POSTGRESDB_HOST: postgres
       DB_POSTGRESDB_DATABASE: n8n
       DB_POSTGRESDB_USER: n8n
-      DB_POSTGRESDB_PASSWORD: n8n_password
+      DB_POSTGRESDB_PASSWORD: CHANGEME_db_password # CHANGE THIS
       N8N_HOST: "n8n.example.com"
       WEBHOOK_URL: "https://n8n.example.com/"
     volumes:
@@ -1457,7 +1457,7 @@ echo "WG-Easy is running on http://SERVER_IP:51821"`
     container_name: n8n_postgres
     environment:
       POSTGRES_USER: n8n
-      POSTGRES_PASSWORD: n8n_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: n8n
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1479,7 +1479,7 @@ services:
       DB_POSTGRESDB_HOST: postgres
       DB_POSTGRESDB_DATABASE: n8n
       DB_POSTGRESDB_USER: n8n
-      DB_POSTGRESDB_PASSWORD: n8n_password
+      DB_POSTGRESDB_PASSWORD: CHANGEME_db_password # CHANGE THIS
       N8N_HOST: "n8n.example.com"
       WEBHOOK_URL: "https://n8n.example.com/"
     volumes:
@@ -1495,7 +1495,7 @@ services:
     container_name: n8n_postgres
     environment:
       POSTGRES_USER: n8n
-      POSTGRES_PASSWORD: n8n_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: n8n
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1566,7 +1566,7 @@ echo "n8n is running on http://SERVER_IP:5678"`
       MB_DB_PORT: "5432"
       MB_DB_DBNAME: metabase
       MB_DB_USER: metabase
-      MB_DB_PASS: metabase_password
+      MB_DB_PASS: CHANGEME_db_password # CHANGE THIS
     ports:
       - "3000:3000"
     depends_on:
@@ -1578,7 +1578,7 @@ echo "n8n is running on http://SERVER_IP:5678"`
     container_name: metabase_postgres
     environment:
       POSTGRES_USER: metabase
-      POSTGRES_PASSWORD: metabase_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: metabase
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1601,7 +1601,7 @@ services:
       MB_DB_PORT: "5432"
       MB_DB_DBNAME: metabase
       MB_DB_USER: metabase
-      MB_DB_PASS: metabase_password
+      MB_DB_PASS: CHANGEME_db_password # CHANGE THIS
     ports:
       - "3000:3000"
     depends_on:
@@ -1613,7 +1613,7 @@ services:
     container_name: metabase_postgres
     environment:
       POSTGRES_USER: metabase
-      POSTGRES_PASSWORD: metabase_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: metabase
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1678,7 +1678,7 @@ echo "Metabase is running on http://SERVER_IP:3000"`
     image: outlinewiki/outline:latest
     container_name: outline
     environment:
-      DATABASE_URL: "postgres://outline:outline_password@postgres:5432/outline"
+      DATABASE_URL: "postgres://outline:CHANGEME_db_password@postgres:5432/outline" # CHANGE THIS
       REDIS_URL: "redis://redis:6379"
       URL: "https://docs.example.com"
       SECRET_KEY: "change-me-generate-with-openssl-rand-hex-32"
@@ -1701,7 +1701,7 @@ echo "Metabase is running on http://SERVER_IP:3000"`
     container_name: outline_postgres
     environment:
       POSTGRES_USER: outline
-      POSTGRES_PASSWORD: outline_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: outline
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1724,7 +1724,7 @@ services:
     image: outlinewiki/outline:latest
     container_name: outline
     environment:
-      DATABASE_URL: "postgres://outline:outline_password@postgres:5432/outline"
+      DATABASE_URL: "postgres://outline:CHANGEME_db_password@postgres:5432/outline" # CHANGE THIS
       REDIS_URL: "redis://redis:6379"
       URL: "https://docs.example.com"
       SECRET_KEY: "change-me-generate-with-openssl-rand-hex-32"
@@ -1747,7 +1747,7 @@ services:
     container_name: outline_postgres
     environment:
       POSTGRES_USER: outline
-      POSTGRES_PASSWORD: outline_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: outline
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -1988,7 +1988,7 @@ echo "Pull a model with: docker exec ollama ollama pull llama3.2"`
     image: langfuse/langfuse:latest
     container_name: langfuse
     environment:
-      DATABASE_URL: "postgresql://langfuse:langfuse_password@postgres:5432/langfuse"
+      DATABASE_URL: "postgresql://langfuse:CHANGEME_db_password@postgres:5432/langfuse" # CHANGE THIS
       NEXTAUTH_URL: "http://SERVER_IP:3000"
       NEXTAUTH_SECRET: "change-me-generate-with-openssl-rand-base64-32"
       SALT: "change-me-generate-with-openssl-rand-base64-32"
@@ -2003,7 +2003,7 @@ echo "Pull a model with: docker exec ollama ollama pull llama3.2"`
     container_name: langfuse_postgres
     environment:
       POSTGRES_USER: langfuse
-      POSTGRES_PASSWORD: langfuse_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: langfuse
     volumes:
       - ./postgres:/var/lib/postgresql/data
@@ -2021,7 +2021,7 @@ services:
     image: langfuse/langfuse:latest
     container_name: langfuse
     environment:
-      DATABASE_URL: "postgresql://langfuse:langfuse_password@postgres:5432/langfuse"
+      DATABASE_URL: "postgresql://langfuse:CHANGEME_db_password@postgres:5432/langfuse" # CHANGE THIS
       NEXTAUTH_URL: "http://SERVER_IP:3000"
       NEXTAUTH_SECRET: "change-me-generate-with-openssl-rand-base64-32"
       SALT: "change-me-generate-with-openssl-rand-base64-32"
@@ -2036,7 +2036,7 @@ services:
     container_name: langfuse_postgres
     environment:
       POSTGRES_USER: langfuse
-      POSTGRES_PASSWORD: langfuse_password
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
       POSTGRES_DB: langfuse
     volumes:
       - ./postgres:/var/lib/postgresql/data
