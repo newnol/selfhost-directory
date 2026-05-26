@@ -10,8 +10,7 @@ export const metadata: Metadata = {
   description: "Discover, compare, and self-host open source projects.",
   openGraph: {
     type: "website",
-    siteName: "Selfhost Directory",
-    locale: "vi_VN"
+    siteName: "Selfhost Directory"
   },
   twitter: {
     card: "summary_large_image"
@@ -29,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html lang="vi">
       <body>{children}</body>
     </html>
   );

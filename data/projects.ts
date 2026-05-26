@@ -1171,7 +1171,7 @@ echo "Netdata is running on http://SERVER_IP:19999"`
     container_name: authentik_server
     command: server
     environment:
-      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string"
+      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string" # CHANGE THIS
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
@@ -1189,7 +1189,7 @@ echo "Netdata is running on http://SERVER_IP:19999"`
     container_name: authentik_worker
     command: worker
     environment:
-      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string"
+      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string" # CHANGE THIS
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
@@ -1229,7 +1229,7 @@ services:
     container_name: authentik_server
     command: server
     environment:
-      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string"
+      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string" # CHANGE THIS
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
@@ -1247,7 +1247,7 @@ services:
     container_name: authentik_worker
     command: worker
     environment:
-      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string"
+      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string" # CHANGE THIS
       AUTHENTIK_REDIS__HOST: redis
       AUTHENTIK_POSTGRESQL__HOST: postgres
       AUTHENTIK_POSTGRESQL__USER: authentik
@@ -1681,8 +1681,8 @@ echo "Metabase is running on http://SERVER_IP:3000"`
       DATABASE_URL: "postgres://outline:CHANGEME_db_password@postgres:5432/outline" # CHANGE THIS
       REDIS_URL: "redis://redis:6379"
       URL: "https://docs.example.com"
-      SECRET_KEY: "change-me-generate-with-openssl-rand-hex-32"
-      UTILS_SECRET: "change-me-generate-with-openssl-rand-hex-32"
+      SECRET_KEY: "change-me-generate-with-openssl-rand-hex-32" # CHANGE THIS
+      UTILS_SECRET: "change-me-generate-with-openssl-rand-hex-32" # CHANGE THIS
       OIDC_CLIENT_ID: "outline"
       OIDC_CLIENT_SECRET: "your-oidc-secret"
       OIDC_AUTH_URI: "https://auth.example.com/authorize"
@@ -1727,8 +1727,8 @@ services:
       DATABASE_URL: "postgres://outline:CHANGEME_db_password@postgres:5432/outline" # CHANGE THIS
       REDIS_URL: "redis://redis:6379"
       URL: "https://docs.example.com"
-      SECRET_KEY: "change-me-generate-with-openssl-rand-hex-32"
-      UTILS_SECRET: "change-me-generate-with-openssl-rand-hex-32"
+      SECRET_KEY: "change-me-generate-with-openssl-rand-hex-32" # CHANGE THIS
+      UTILS_SECRET: "change-me-generate-with-openssl-rand-hex-32" # CHANGE THIS
       OIDC_CLIENT_ID: "outline"
       OIDC_CLIENT_SECRET: "your-oidc-secret"
       OIDC_AUTH_URI: "https://auth.example.com/authorize"
@@ -1990,8 +1990,8 @@ echo "Pull a model with: docker exec ollama ollama pull llama3.2"`
     environment:
       DATABASE_URL: "postgresql://langfuse:CHANGEME_db_password@postgres:5432/langfuse" # CHANGE THIS
       NEXTAUTH_URL: "http://SERVER_IP:3000"
-      NEXTAUTH_SECRET: "change-me-generate-with-openssl-rand-base64-32"
-      SALT: "change-me-generate-with-openssl-rand-base64-32"
+      NEXTAUTH_SECRET: "change-me-generate-with-openssl-rand-base64-32" # CHANGE THIS
+      SALT: "change-me-generate-with-openssl-rand-base64-32" # CHANGE THIS
     ports:
       - "3000:3000"
     depends_on:
@@ -2023,8 +2023,8 @@ services:
     environment:
       DATABASE_URL: "postgresql://langfuse:CHANGEME_db_password@postgres:5432/langfuse" # CHANGE THIS
       NEXTAUTH_URL: "http://SERVER_IP:3000"
-      NEXTAUTH_SECRET: "change-me-generate-with-openssl-rand-base64-32"
-      SALT: "change-me-generate-with-openssl-rand-base64-32"
+      NEXTAUTH_SECRET: "change-me-generate-with-openssl-rand-base64-32" # CHANGE THIS
+      SALT: "change-me-generate-with-openssl-rand-base64-32" # CHANGE THIS
     ports:
       - "3000:3000"
     depends_on:
