@@ -23,17 +23,17 @@ Browse `/vi` or `/en`. Existing category, project, SaaS-alternative and submissi
 - Catalog: 18 project modules in [data/projects](data/projects), [categories](data/categories.ts), [use cases](data/use-cases.ts). `data/projects.ts` preserves public exports and validates the catalog at runtime. CI also validates it explicitly.
 - Project pages: hardware calculator (CPU cores, **available** RAM/disk in GiB, amd64/arm64). Results: below minimum, minimum, recommended, unknown or architecture mismatch. Meeting a threshold is not a guarantee. Unknown fields never mean compatible; no headroom, GPU, storage growth or combined-stack calculation is implied.
 - Compare: `/en/compare?projects=immich,jellyfin` (also `/vi/compare`), 2–3 distinct catalog slugs; selector supports repeated `projects` parameters.
-- Advisor: `/en/advisor`, `/vi/advisor`, `POST /api/advisor`. Structured catalog/use-case/deployment filters, deterministic slug ordering, at most three choices, with unknown caveats. No free-form chat, stack builder, scanner, troubleshooter, cost planner or executable Compose generation.
+- Advisor: `/en/advisor`, `/vi/advisor`, `POST /api/advisor`. Structured catalog/use-case/deployment filters, curated use-case ordering (catalog order without a use case), at most three choices, with localized editorial tradeoffs, per-resource checks and source provenance. No free-form chat, stack builder, scanner, troubleshooter, cost planner or executable Compose generation.
 
 ### Evidence policy
 
-Original requirements strings are **unverified editorial estimates**, not parsed into numeric evidence. All 18 current projects intentionally have unknown structured requirements/architecture pending source review. Optional `structuredRequirements` has `minimum`/`recommended` (`cpu`, `ramGiB`, `diskGiB`), `architectures`, and mandatory provenance (`estimate` with note, or `documented` with HTTPS source, checked date and scope note). Missing fields remain unknown. Documented means a cited documentation claim, not a tested deployment. Scores survive only as legacy data for backward compatibility; not shown or used for decisions.
+Original requirements strings are **unverified editorial estimates**, not parsed into numeric evidence. Five projects now have dated official-source reviews: Immich and Grafana have partial numeric thresholds, Vaultwarden has reported amd64/arm64 support, and Nextcloud/Uptime Kuma preserve scoped notes without inventing host totals. Remaining fields and projects stay unknown. See [requirements source review](docs/requirements-provenance.md) for exact evidence, unit conversions and exclusions. Optional `structuredRequirements` has `minimum`/`recommended` (`cpu`, `ramGiB`, `diskGiB`), `architectures`, and mandatory provenance (`estimate` with note, or `documented` with HTTPS source, checked date and scope note). Missing fields remain unknown. Documented means a cited documentation claim, not a tested deployment. Scores survive only as legacy data for backward compatibility; not shown or used for decisions.
 
 Existing Compose/bash examples are unverified and may be incomplete/outdated. Replace placeholder secrets, pin versions, review privileged access/ports, HTTPS and backups, and consult upstream docs. These are preserved examples, not generated or tested deployments.
 
 ## Optional Claude (server only, disabled by default)
 
-No API key is needed for deterministic fallback. Claude can **only reorder the already filtered max-three choices**: provider text, resource claims, links, commands and additional projects are never shown. User must opt in on the form. Server must set all of:
+This is a **reranking preview**, not a full AI advisor or generated explanation service. No API key is needed for deterministic fallback. Claude can **only reorder the already filtered max-three choices**: provider text, resource claims, links, commands and additional projects are never shown. User must opt in on the form. Server must set all of:
 
 ```text
 ADVISOR_CLAUDE_ENABLED=true
@@ -51,6 +51,8 @@ The acknowledgement explicitly accepts the limitations below; a key alone does n
 Set `SUBMISSIONS_WEBHOOK_URL` to forward `/api/submit-project` submissions to your review endpoint. Without it, submissions are accepted and written to server logs, not a durable production queue.
 
 ## Roadmap
+
+See [ROADMAP.md](ROADMAP.md) for release gates and explicitly deferred work.
 
 1. Review upstream documentation and add scoped, dated resource/architecture evidence one project at a time.
 2. Independently audit legacy deployment examples; do not mark verified without executing isolated tests.

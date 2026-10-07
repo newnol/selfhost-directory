@@ -73,6 +73,8 @@ test("Claude requires explicit opt-in and only validated permutations can affect
   );
   const result = await r.json();
   assert.equal(result.mode, "claude-ranked");
+  assert.equal(result.rankingPreview, true);
+  assert.equal(result.choices[0].explanationSource, "catalog-editorial");
   assert.deepEqual(
     result.choices.map((p: { slug: string }) => p.slug),
     ["uptime-kuma", "grafana", "netdata"],

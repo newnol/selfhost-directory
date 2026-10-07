@@ -39,6 +39,9 @@ export function advise(raw: unknown) {
       slug: p.slug,
       name: p.name,
       summary: p.summary[input.locale],
+      tradeoff: p.notes[input.locale],
+      reason: input.useCase ? useCases.find(u => u.slug === input.useCase)!.description[input.locale] : p.category,
+      explanationSource: "catalog-editorial" as const,
       docs: p.links.docs,
       compatibility: compatibility(p, input.host),
     }))
@@ -47,7 +50,8 @@ export function advise(raw: unknown) {
         p.compatibility.status !== "below-minimum" &&
         p.compatibility.status !== "architecture-mismatch",
     )
-    .sort((a, b) => (a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0))
+    // Curated use-case order, not an unsupported performance or popularity score.
+    .sort((a, b) => allowed ? allowed.indexOf(a.slug) - allowed.indexOf(b.slug) : 0)
     .slice(0, 3)
     .map((p) => ({
       ...p,
@@ -59,6 +63,7 @@ export function advise(raw: unknown) {
     }));
   return {
     mode: "deterministic" as "deterministic" | "claude-ranked",
+    rankingPreview: false,
     choices,
     caveat: t.fallback,
   };

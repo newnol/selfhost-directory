@@ -27,10 +27,25 @@ git diff --check: exit 0
 
 Smoke starts/stops the actual production Next server; both languages, every existing catalog/category/use-case page, advisor, submission page and compare query were fetched. Submission API was not modified or posted to. No GitHub remote writes.
 
+## Follow-up: source-backed partial planning (2026-10-07)
+
+Test-first RED/GREEN observed for partial checks (undefined checks before implementation), static threshold UI (missing data-resource rows), curated use-case order (alphabetical order failed), source-backed requirements (undefined provenance), reranking preview (missing API flag/consent label), and rendered advisor tradeoffs/checks/provenance (missing component). Source claims and exclusions are recorded in `docs/requirements-provenance.md` with a citation ledger. Nextcloud per-process memory was deliberately not turned into total host RAM.
+
+Real follow-up verification: `pnpm typecheck` passed; `pnpm validate:catalog` returned 18 projects / 6 categories / 9 use cases; `pnpm test` returned 18/18 passing; `pnpm build` compiled and generated 81/81 static pages; HTTP smoke passed 75 enumerated page requests plus an additional Immich evidence-page fetch and partial-evidence API assertions; invalid request 400. `git diff --check` passed. No live Claude call, deployment, push or license change.
+
+Exact local rerun:
+
+```sh
+export PATH="/home/newnol/.hermes/cache/scratch/node-v22.16.0-linux-x64/bin:$PATH"
+cd /home/newnol/.hermes/cache/scratch/selfhost-mvp-review
+pnpm typecheck && pnpm validate:catalog && pnpm test && pnpm build && pnpm exec tsx scripts/http-smoke.ts
+git diff --check
+```
+
 ## Limits / unverified
 
 - Claude transport tests are mocks (permutation validation, budgets, opt-in, failure and abort). No credentials supplied; no real Anthropic success claimed.
-- All current structured resource/architecture values remain unknown until source review. Numeric threshold test fixtures are explicitly not catalog evidence.
+- Superseded by the follow-up source review below: five projects now carry scoped provenance; numeric thresholds exist for Immich/Grafana and architecture evidence for Vaultwarden. Other values deliberately stay unknown.
 - Preserved Compose/bash samples have NOT been deployed; unverified warnings added. No executable generation.
 - Process-local request limit is not shared/durable on serverless. Paid integration disabled unless explicit acknowledgement and config; README documents required production mitigations.
 - UI render tests and HTTP smoke do not substitute for interactive browser/accessibility testing.

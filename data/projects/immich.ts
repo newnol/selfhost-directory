@@ -12,6 +12,26 @@ const project: Project = {
   license: "AGPL-3.0",
   deploy: "Docker Compose",
   requirements: "2 CPU, 4 GB RAM, SSD storage",
+  structuredRequirements: {
+    "minimum": {
+      "cpu": 2,
+      "ramGiB": 6
+    },
+    "recommended": {
+      "cpu": 4,
+      "ramGiB": 8
+    },
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "provenance": {
+      "kind": "documented",
+      "source": "https://docs.immich.app/install/requirements/",
+      "checkedAt": "2026-10-07",
+      "note": "Upstream: 2 cores / 6GB minimum, 4 cores / 8GB recommended. GB conservatively rounded up to whole GiB, not a measured workload. Standard stack with machine learning; 4GB only with ML disabled. v3 amd64 ML requires x86-64-v2 (not checked). Local SSD for Postgres, never a network share; library overhead 10–20%. Disk depends on library size and remains unknown."
+    }
+  },
   score: 92,
   links: {
     source: "https://github.com/immich-app/immich",

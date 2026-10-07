@@ -156,6 +156,7 @@ export function createAdvisorHandler(options: Options = {}) {
           return reply({
             ...result,
             mode: "claude-ranked",
+            rankingPreview: true,
             choices: output.slugs.map((id) =>
               result.choices.find((p) => p.slug === id)!,
             ),

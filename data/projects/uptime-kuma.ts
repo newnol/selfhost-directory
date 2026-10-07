@@ -12,6 +12,14 @@ const project: Project = {
   license: "MIT",
   deploy: "Docker",
   requirements: "1 CPU, 512 MB RAM",
+  structuredRequirements: {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://github.com/louislam/uptime-kuma",
+      "checkedAt": "2026-10-07",
+      "note": "Official README requires local directory/volume storage: NFS is not supported. Non-Docker instructions specify Node >=20.4. No numeric CPU, RAM or disk sizing, or Docker architecture matrix stated here; all hardware fields remain unknown."
+    }
+  },
   score: 95,
   links: {
     source: "https://github.com/louislam/uptime-kuma",

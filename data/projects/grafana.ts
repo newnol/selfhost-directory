@@ -12,6 +12,18 @@ const project: Project = {
   license: "AGPL-3.0",
   deploy: "Docker",
   requirements: "1 CPU, 1 GB RAM",
+  structuredRequirements: {
+    "minimum": {
+      "cpu": 1,
+      "ramGiB": 0.476837158203125
+    },
+    "provenance": {
+      "kind": "documented",
+      "source": "https://grafana.com/docs/grafana/latest/setup-grafana/installation/",
+      "checkedAt": "2026-10-07",
+      "note": "Evaluation floor only: 1 CPU core, 512 MB (decimal MB converted to GiB). Grafana server only; data sources, metric/log/trace stores, database and rendering require separate sizing. Small production guidance starts at 2 cores / 2–4 GB; no single workload-independent recommended threshold recorded. Disk and image architectures remain unknown."
+    }
+  },
   score: 91,
   links: {
     source: "https://github.com/grafana/grafana",

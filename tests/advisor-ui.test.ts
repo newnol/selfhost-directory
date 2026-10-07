@@ -10,6 +10,7 @@ test("advisor bilingual pages expose hardware, catalog filters and optional cons
     const html = renderToStaticMarkup(
       await AdvisorPage({ params: Promise.resolve({ locale }) }),
     );
+    assert.match(html, locale === "en" ? /reranking preview/ : /xếp lại thứ tự thử nghiệm/);
     for (const name of [
       "cpu",
       "ramGiB",
@@ -45,5 +46,5 @@ test("real Next API adapter provides fallback", async () => {
     }),
   );
   assert.equal(r.status, 200);
-  assert.equal((await r.json()).choices[0].slug, "immich");
+  assert.deepEqual((await r.json()).choices, []);
 });

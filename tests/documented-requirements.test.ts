@@ -1,0 +1,20 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { getProject } from "../data/projects";
+import { compatibility } from "../lib/compatibility";
+test("official partial evidence enables real checks without invented disk or Nextcloud host sizing", () => {
+  const immich = getProject("immich")!;
+  assert.equal(immich.structuredRequirements?.provenance.kind, "documented");
+  assert.equal(immich.structuredRequirements?.minimum?.cpu, 2);
+  assert.ok(immich.structuredRequirements?.minimum?.ramGiB);
+  assert.equal(immich.structuredRequirements?.minimum?.diskGiB, undefined);
+  assert.equal(compatibility(immich, {cpu: 1, ramGiB: 2, diskGiB: 100, architecture: "amd64"}).status, "below-minimum");
+  const nextcloud = getProject("nextcloud")!.structuredRequirements;
+  assert.equal(nextcloud?.provenance.kind, "documented");
+  assert.match(nextcloud!.provenance.note, /per process/);
+  assert.equal(nextcloud?.minimum?.ramGiB, undefined);
+  assert.equal(nextcloud?.architectures, undefined);
+  assert.deepEqual(getProject("vaultwarden")!.structuredRequirements?.architectures, ["amd64", "arm64"]);
+  assert.equal(getProject("vaultwarden")!.structuredRequirements?.minimum, undefined);
+  assert.equal(getProject("grafana")!.structuredRequirements?.minimum?.cpu, 1);
+});

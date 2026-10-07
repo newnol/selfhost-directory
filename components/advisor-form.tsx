@@ -5,6 +5,7 @@ import type { Locale } from "@/lib/i18n";
 import type { advise } from "@/lib/advisor";
 import { planningCopy } from "@/lib/planning-copy";
 import { HardwareFields, hardwareFromForm } from "./hardware-fields";
+import { AdvisorChoice } from "./advisor-choice";
 type Option = { slug: string; title: string };
 export function AdvisorForm({
   locale,
@@ -94,14 +95,7 @@ export function AdvisorForm({
             {result.choices.length === 0 && <p>{t.none}</p>}
             <ul>
               {result.choices.map((p) => (
-                <li key={p.slug}>
-                  <Link href={`/${locale}/projects/${p.slug}`}>{p.name}</Link>
-                  <p>{p.summary}</p>
-                  <p>{p.caveat}</p>
-                  <a href={p.docs} target="_blank" rel="noreferrer">
-                    Docs
-                  </a>
-                </li>
+                <AdvisorChoice key={p.slug} choice={p} locale={locale} />
               ))}
             </ul>
             {result.choices.length >= 2 && (

@@ -68,6 +68,20 @@ async function main() {
           p.compatibility.status === "unknown",
       ),
     );
+    assert.equal(data.choices[0].slug, "uptime-kuma");
+    assert.ok(data.choices.every((p: { tradeoff: string; compatibility: { checks: unknown[] } }) => p.tradeoff && p.compatibility.checks.length === 4));
+    const immich = await fetch(base + "/en/projects/immich");
+    const html = await immich.text();
+    assert.ok(html.includes('data-resource="ramGiB"') && html.includes("2026-10-07"));
+    const partial = await fetch(base + "/api/advisor", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({...input, useCase: "google-photos", host: {...input.host, cpu: 4, ramGiB: 8}}),
+    });
+    const evidence = (await partial.json()).choices[0];
+    assert.equal(evidence.compatibility.status, "unknown");
+    assert.equal(evidence.compatibility.checks[0].status, "recommended");
+    assert.equal(evidence.compatibility.checks[2].status, "unknown");
+    assert.equal(evidence.compatibility.provenance.kind, "documented");
     const bad = await fetch(base + "/api/advisor", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

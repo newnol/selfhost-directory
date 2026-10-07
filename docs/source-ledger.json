@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://docs.immich.app/install/requirements",
+      "title": "",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": 2,
+      "url": "https://docs.nextcloud.com/server/stable/admin_manual/installation/system_requirements.html",
+      "title": "",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": 3,
+      "url": "https://github.com/louislam/uptime-kuma",
+      "title": "",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": 4,
+      "url": "https://github.com/dani-garcia/vaultwarden/wiki/Which-container-image-to-use",
+      "title": "",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": 5,
+      "url": "https://grafana.com/docs/grafana/latest/setup-grafana/installation",
+      "title": "",
+      "accessed": "2026-10-07"
+    }
+  ]
+}

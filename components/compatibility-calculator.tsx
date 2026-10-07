@@ -5,6 +5,7 @@ import type { Locale } from "@/lib/i18n";
 import { compatibility } from "@/lib/compatibility";
 import { planningCopy } from "@/lib/planning-copy";
 import { HardwareFields, hardwareFromForm } from "./hardware-fields";
+import { ResourceChecks } from "./resource-checks";
 export function CompatibilityCalculator({
   requirements,
   locale,
@@ -13,7 +14,8 @@ export function CompatibilityCalculator({
   locale: Locale;
 }) {
   const t = planningCopy[locale];
-  const [result, setResult] = useState<string>("");
+  const [result, setResult] = useState<ReturnType<typeof compatibility> | null>(null);
+  const [error, setError] = useState(false);
   return (
     <section className="planning-panel">
       <h2>{t.calculator}</h2>
@@ -26,29 +28,19 @@ export function CompatibilityCalculator({
               { structuredRequirements: requirements },
               hardwareFromForm(new FormData(e.currentTarget)),
             );
-            setResult(
-              t[r.status] +
-                (r.provenance?.kind === "estimate" ? " " + t.estimate : ""),
-            );
+            setResult(r);
+            setError(false);
           } catch {
-            setResult(t.invalid);
+            setResult(null);
+            setError(true);
           }
         }}
       >
         <HardwareFields locale={locale} />
         <button type="submit">{t.check}</button>
       </form>
-      <p role="status">{result}</p>
-      {requirements && (
-        <p>
-          {requirements.provenance.note}{" "}
-          {requirements.provenance.kind === "documented" && (
-            <a href={requirements.provenance.source}>
-              {requirements.provenance.checkedAt}
-            </a>
-          )}
-        </p>
-      )}
+      <p role="status">{error ? t.invalid : result ? t[result.status] : ""}</p>
+      <ResourceChecks requirements={requirements} result={result} locale={locale} />
     </section>
   );
 }

@@ -40,5 +40,16 @@ export function compatibility(
     )
       ? "recommended"
       : "minimum";
-  return { status, missing, provenance: r?.provenance };
+  const checks = [
+    ...keys.map((resource) => {
+      const minimum = r?.minimum?.[resource], recommended = r?.recommended?.[resource];
+      const status: CompatibilityStatus = minimum === undefined ? "unknown"
+        : host[resource] < minimum ? "below-minimum"
+        : recommended !== undefined && host[resource] >= recommended ? "recommended" : "minimum";
+      return { resource, available: host[resource], minimum, recommended, status };
+    }),
+    { resource: "architecture" as const, available: host.architecture, supported: r?.architectures,
+      status: !r?.architectures ? "unknown" as const : r.architectures.includes(host.architecture) ? "minimum" as const : "architecture-mismatch" as const },
+  ];
+  return { status, missing, checks, provenance: r?.provenance };
 }

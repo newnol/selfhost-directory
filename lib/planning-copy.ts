@@ -1,5 +1,12 @@
 export const planningCopy = {
   en: {
+    editorial: "Catalog editorial notes (not AI-generated or measured)",
+    recordedMinimum: "Recorded minimum",
+    recordedRecommended: "Recorded recommended",
+    noEvidence: "Unknown (not recorded)",
+    available: "Available",
+    source: "Upstream evidence",
+    checkedAt: "Checked",
     calculator: "Hardware compatibility",
     check: "Check compatibility",
     unknown:
@@ -29,7 +36,7 @@ export const planningCopy = {
     deploy: "Deployment",
     send: "Find projects",
     claude:
-      "Allow optional Claude ranking (sends selected catalog facts and hardware, no secrets).",
+      "Allow optional Claude reranking preview — ordering only, not AI explanations (sends selected catalog facts and hardware, no secrets).",
     none: "No catalog choices match the filters.",
     cpu: "Available CPU cores",
     ramGiB: "Available RAM (GiB)",
@@ -37,6 +44,13 @@ export const planningCopy = {
     architecture: "Architecture",
   },
   vi: {
+    editorial: "Ghi chú biên tập catalog (không do AI tạo hay đo kiểm)",
+    recordedMinimum: "Tối thiểu đã ghi",
+    recordedRecommended: "Khuyến nghị đã ghi",
+    noEvidence: "Chưa rõ (chưa ghi nhận)",
+    available: "Còn trống",
+    source: "Nguồn chính thức",
+    checkedAt: "Kiểm tra ngày",
     calculator: "Kiểm tra tương thích phần cứng",
     check: "Kiểm tra",
     unknown:
@@ -66,7 +80,7 @@ export const planningCopy = {
     deploy: "Triển khai",
     send: "Tìm dự án",
     claude:
-      "Cho phép Claude xếp thứ tự (gửi dữ liệu catalog và phần cứng, không gửi secrets).",
+      "Cho phép Claude xếp lại thứ tự thử nghiệm — chỉ đổi thứ tự, không tạo giải thích AI (gửi dữ liệu catalog và phần cứng, không gửi secrets).",
     none: "Không có dự án phù hợp bộ lọc.",
     cpu: "CPU còn trống (core)",
     ramGiB: "RAM còn trống (GiB)",

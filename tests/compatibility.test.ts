@@ -78,4 +78,17 @@ test("rejects non-finite, coerced, negative, excessive and invalid architecture 
 });
 const host = { cpu: 2, ramGiB: 4, diskGiB: 20, architecture: "amd64" };
 test("legacy resource strings cannot imply hardware compatibility", () =>
-  assert.equal(compatibility(projects[0], host).status, "unknown"));
+  assert.equal(compatibility({}, host).status, "unknown"));
+test("partial evidence returns each threshold and check without promoting unknown to compatible", () => {
+  const result = compatibility({ structuredRequirements: {
+    ...fixture.structuredRequirements,
+    minimum: { cpu: 1 }, recommended: { cpu: 4 }, architectures: undefined,
+  } }, host);
+  assert.equal(result.status, "unknown");
+  assert.deepEqual(result.checks, [
+    { resource: "cpu", available: 2, minimum: 1, recommended: 4, status: "minimum" },
+    { resource: "ramGiB", available: 4, minimum: undefined, recommended: undefined, status: "unknown" },
+    { resource: "diskGiB", available: 20, minimum: undefined, recommended: undefined, status: "unknown" },
+    { resource: "architecture", available: "amd64", supported: undefined, status: "unknown" },
+  ]);
+});

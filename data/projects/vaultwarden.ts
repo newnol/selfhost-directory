@@ -12,6 +12,18 @@ const project: Project = {
   license: "AGPL-3.0",
   deploy: "Docker",
   requirements: "1 CPU, 512 MB RAM",
+  structuredRequirements: {
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "provenance": {
+      "kind": "documented",
+      "source": "https://github.com/dani-garcia/vaultwarden/wiki/Which-container-image-to-use",
+      "checkedAt": "2026-10-07",
+      "note": "Project-maintained wiki documents multi-arch images and reports working x86_64 and arm64 installations. This records only the two architectures supported by this calculator; it is not an exhaustive image list or deployment guarantee. No numeric CPU, RAM or disk minimum in this source."
+    }
+  },
   score: 90,
   links: {
     source: "https://github.com/dani-garcia/vaultwarden",

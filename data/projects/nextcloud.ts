@@ -12,6 +12,14 @@ const project: Project = {
   license: "AGPL-3.0",
   deploy: "Docker Compose",
   requirements: "2 CPU, 2 GB RAM",
+  structuredRequirements: {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://docs.nextcloud.com/server/stable/admin_manual/installation/system_requirements.html",
+      "checkedAt": "2026-10-07",
+      "note": "Nextcloud 35 stable manual: 128MB minimum / 512MB recommended RAM per process; updater needs 256MB. These are NOT total host or Compose stack requirements, so host RAM thresholds remain unknown. Users, apps and activity change sizing; database memory is additional. 64-bit CPU/OS/PHP is recommended, not an amd64/arm64 image support declaration; CPU, disk and image architectures remain unknown."
+    }
+  },
   score: 86,
   links: {
     source: "https://github.com/nextcloud/server",

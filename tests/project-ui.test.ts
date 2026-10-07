@@ -13,6 +13,9 @@ test("project decision UI has calculator and honest deployment warnings in both 
       }),
     );
     assert.match(html, /name="cpu"/);
+    assert.match(html, /data-resource="cpu"/);
+    assert.match(html, /data-resource="diskGiB"/);
+    assert.match(html, /Recorded minimum|Tối thiểu đã ghi/);
     assert.match(
       html,
       locale === "en"
