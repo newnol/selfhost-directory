@@ -1,0 +1,117 @@
+import type { Project } from "../types";
+
+const project: Project = {
+  slug: "plane",
+  name: "Plane",
+  iconUrl:
+    "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/plane.svg",
+  categorySlug: "productivity",
+  category: "Project Management",
+  tags: ["linear", "jira", "issues"],
+  stack: ["TypeScript", "Python", "PostgreSQL", "Redis"],
+  license: "AGPL-3.0",
+  deploy: "Docker Compose",
+  requirements: "2 CPU, 4 GB RAM",
+  score: 82,
+  links: {
+    source: "https://github.com/makeplane/plane",
+    docs: "https://docs.plane.so",
+  },
+  summary: {
+    vi: "Quản lý issue, sprint và roadmap, phù hợp thay Linear/Jira cho team nhỏ.",
+    en: "Issue, sprint, and roadmap management, suitable as a Linear or Jira alternative for small teams.",
+  },
+  notes: {
+    vi: "Nhiều service hơn các app nhỏ, nên kiểm tra tài nguyên VPS và backup database định kỳ.",
+    en: "It runs more services than small apps, so check VPS resources and schedule database backups.",
+  },
+  deployGuide: {
+    vi: {
+      overview:
+        "Plane cần nhiều service hơn, nên dùng Docker Compose chính thức và VPS tối thiểu 4 GB RAM.",
+      steps: [
+        "Clone repo hoặc tải bundle self-hosted chính thức.",
+        "Cấu hình `.env` gồm domain, secret key, database, Redis và object storage nếu dùng.",
+        "Chạy migration/setup theo tài liệu trước khi mở cho user.",
+        "Đặt reverse proxy HTTPS cho web và API.",
+        "Tạo workspace, kiểm tra email/invite nếu bật tính năng mời thành viên.",
+      ],
+      backup:
+        "Backup PostgreSQL, Redis nếu có dữ liệu queue quan trọng, và object storage attachments.",
+    },
+    en: {
+      overview:
+        "Plane runs multiple services, so use the official Docker Compose setup and at least 4 GB RAM.",
+      steps: [
+        "Clone the repo or download the official self-hosted bundle.",
+        "Configure `.env` for domain, secrets, database, Redis, and object storage if used.",
+        "Run migrations/setup from the docs before inviting users.",
+        "Put HTTPS reverse proxy in front of the web and API services.",
+        "Create a workspace and verify email/invite flows if enabled.",
+      ],
+      backup:
+        "Back up PostgreSQL, Redis if queue state matters, and object storage attachments.",
+    },
+  },
+  deploySnippets: {
+    dockerCompose: `services:
+  plane:
+    image: makeplane/plane-frontend:stable
+    container_name: plane_frontend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: plane_postgres
+    environment:
+      POSTGRES_USER: plane
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
+      POSTGRES_DB: plane
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: plane_redis
+    restart: unless-stopped`,
+    setupScript: `#!/usr/bin/env bash
+set -euo pipefail
+
+sudo mkdir -p /opt/plane
+sudo chown "$USER":"$USER" /opt/plane
+cd /opt/plane
+
+cat > docker-compose.yml <<'COMPOSE'
+services:
+  plane:
+    image: makeplane/plane-frontend:stable
+    container_name: plane_frontend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: plane_postgres
+    environment:
+      POSTGRES_USER: plane
+      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
+      POSTGRES_DB: plane
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: plane_redis
+    restart: unless-stopped
+COMPOSE
+
+docker compose up -d
+echo "Plane starter stack is running on http://SERVER_IP:3000"`,
+  },
+};
+export default project;

@@ -29,6 +29,12 @@ export function SiteShell({ locale, children }: SiteShellProps) {
         <nav className="nav-links" aria-label="Main navigation">
           <Link href={`/${locale}#projects`}>{t.nav.projects}</Link>
           <Link href={`/${locale}#alternatives`}>{t.nav.alternatives}</Link>
+          <Link href={`/${locale}/compare`}>
+            {locale === "vi" ? "So sánh" : "Compare"}
+          </Link>
+          <Link href={`/${locale}/advisor`}>
+            {locale === "vi" ? "Tư vấn" : "Advisor"}
+          </Link>
           <Link href={`/${locale}/submit-project`}>{t.nav.submit}</Link>
           <Link className="locale-switch" href={`/${nextLocale}`}>
             {nextLocale.toUpperCase()}
@@ -65,13 +71,29 @@ export function SiteShell({ locale, children }: SiteShellProps) {
                 <Link href={`/${locale}#projects`}>{t.nav.projects}</Link>
               </li>
               <li>
-                <Link href={`/${locale}#alternatives`}>{t.nav.alternatives}</Link>
+                <Link href={`/${locale}#alternatives`}>
+                  {t.nav.alternatives}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/compare`}>
+                  {locale === "vi" ? "So sánh" : "Compare"}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/advisor`}>
+                  {locale === "vi" ? "Tư vấn" : "Advisor"}
+                </Link>
               </li>
               <li>
                 <Link href={`/${locale}/submit-project`}>{t.nav.submit}</Link>
               </li>
               <li>
-                <a href="https://github.com/selfhost-io/selfhost-directory" target="_blank" rel="noreferrer">
+                <a
+                  href="https://github.com/selfhost-io/selfhost-directory"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   GitHub
                 </a>
               </li>

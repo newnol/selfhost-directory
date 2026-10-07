@@ -1,3 +1,5 @@
+import { CompatibilityCalculator } from "@/components/compatibility-calculator";
+import { planningCopy } from "@/lib/planning-copy";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,12 +12,12 @@ import { projectBySlug } from "@/lib/projects";
 export function generateStaticParams() {
   return projects.flatMap((project) => [
     { locale: "vi", slug: project.slug },
-    { locale: "en", slug: project.slug }
+    { locale: "en", slug: project.slug },
   ]);
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
@@ -38,17 +40,17 @@ export async function generateMetadata({
       title,
       description,
       url: `https://selfhost.io.vn/${locale}/projects/${slug}`,
-      locale: locale === "vi" ? "vi_VN" : "en_US"
+      locale: locale === "vi" ? "vi_VN" : "en_US",
     },
     alternates: {
       canonical: `https://selfhost.io.vn/${locale}/projects/${slug}`,
-      languages: alternateLanguages
-    }
+      languages: alternateLanguages,
+    },
   };
 }
 
 export default async function ProjectPage({
-  params
+  params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
@@ -62,25 +64,25 @@ export default async function ProjectPage({
 
   const t = dictionary[locale].project;
 
-  const scoreClass =
-    project.score >= 85
-      ? "score-green"
-      : project.score >= 70
-        ? "score-amber"
-        : "score-red";
-
   return (
     <article className="detail-page">
       <div className="detail-hero">
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <Link href={`/${locale}`}>{locale === "vi" ? "Trang chủ" : "Home"}</Link>
+          <Link href={`/${locale}`}>
+            {locale === "vi" ? "Trang chủ" : "Home"}
+          </Link>
           <span className="breadcrumb-separator">/</span>
-          <Link href={`/${locale}/categories/${project.categorySlug}`}>{project.category}</Link>
+          <Link href={`/${locale}/categories/${project.categorySlug}`}>
+            {project.category}
+          </Link>
           <span className="breadcrumb-separator">/</span>
           <span>{project.name}</span>
         </nav>
         <ProjectIcon project={project} size="lg" />
-        <Link className="eyebrow-link" href={`/${locale}/categories/${project.categorySlug}`}>
+        <Link
+          className="eyebrow-link"
+          href={`/${locale}/categories/${project.categorySlug}`}
+        >
           {project.category}
         </Link>
         <h1>{project.name}</h1>
@@ -89,6 +91,10 @@ export default async function ProjectPage({
 
       <div className="detail-grid">
         <section className="detail-main">
+          <CompatibilityCalculator
+            locale={locale}
+            requirements={project.structuredRequirements}
+          />
           <h2>{locale === "vi" ? "Ghi chú review" : "Review notes"}</h2>
           <p>{project.notes[locale]}</p>
 
@@ -106,12 +112,8 @@ export default async function ProjectPage({
 
           <section className="copy-run-section">
             <div className="copy-run-heading">
-              <h2>{locale === "vi" ? "Copy để chạy trên server" : "Copy and run on your server"}</h2>
-              <p>
-                {locale === "vi"
-                  ? "Dùng từng block riêng: lưu compose trước, hoặc copy script bash để tạo file và chạy container."
-                  : "Use each block separately: save the compose file, or copy the bash script to create it and start the container."}
-              </p>
+              <h2>{planningCopy[locale].warning}</h2>
+              <p>{planningCopy[locale].secrets}</p>
             </div>
             <CopyCodeBlock
               code={project.deploySnippets.dockerCompose}
@@ -139,10 +141,6 @@ export default async function ProjectPage({
         <aside className="meta-panel">
           <dl>
             <div>
-              <dt>{t.score}</dt>
-              <dd><span className={`score ${scoreClass}`}>{project.score}/100</span></dd>
-            </div>
-            <div>
               <dt>{t.license}</dt>
               <dd>{project.license}</dd>
             </div>
@@ -152,7 +150,11 @@ export default async function ProjectPage({
             </div>
             <div>
               <dt>{t.requirements}</dt>
-              <dd>{project.requirements}</dd>
+              <dd>
+                {project.requirements}
+                <br />
+                {planningCopy[locale].estimate}
+              </dd>
             </div>
           </dl>
           <div className="resource-links">
