@@ -19,6 +19,16 @@ import p14 from "./projects/outline";
 import p15 from "./projects/vikunja";
 import p16 from "./projects/ollama";
 import p17 from "./projects/langfuse";
+import p18 from "./projects/file-browser";
+import p19 from "./projects/syncthing";
+import p20 from "./projects/paperless-ngx";
+import p21 from "./projects/stirling-pdf";
+import p22 from "./projects/memos";
+import p23 from "./projects/actual-budget";
+import p24 from "./projects/forgejo";
+import p25 from "./projects/gitea";
+import p26 from "./projects/beszel";
+import p27 from "./projects/searxng";
 
 import { categories } from "./categories";
 import { useCases } from "./use-cases";
@@ -42,6 +52,16 @@ export const projects = [
   p15,
   p16,
   p17,
+  p18,
+  p19,
+  p20,
+  p21,
+  p22,
+  p23,
+  p24,
+  p25,
+  p26,
+  p27,
 ];
 validateCatalog(projects, categories, useCases);
 export function getProject(slug: string) {

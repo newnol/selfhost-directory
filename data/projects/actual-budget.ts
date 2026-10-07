@@ -1,0 +1,67 @@
+import type { Project } from "../types";
+
+// Legacy score is a neutral compatibility placeholder, not a rating.
+const project: Project = {
+  "slug": "actual-budget",
+  "name": "Actual Budget",
+  "categorySlug": "productivity",
+  "category": "Personal Finance",
+  "tags": [
+    "budget",
+    "finance",
+    "local-first"
+  ],
+  "stack": [
+    "TypeScript",
+    "Node.js"
+  ],
+  "license": "MIT",
+  "deploy": "Docker",
+  "summary": {
+    "vi": "Ứng dụng quản lý tài chính cá nhân theo hướng local-first, hỗ trợ lập ngân sách và đồng bộ dữ liệu qua máy chủ của bạn.",
+    "en": "A local-first personal finance application with budgeting and data synchronization through your own server."
+  },
+  "notes": {
+    "vi": "Các chức năng lập ngân sách dùng được không cần máy chủ; máy chủ bổ sung đồng bộ và truy cập web. Đồng bộ ngân hàng là tùy chọn và phụ thuộc dịch vụ, khu vực cùng cấu hình riêng.",
+    "en": "Budgeting works without a server; a server adds synchronization and web access. Bank synchronization is optional and depends on providers, region and separate configuration."
+  },
+  "iconUrl": "https://avatars.githubusercontent.com/u/37879538?v=4",
+  "requirements": "CPU/RAM/disk not verified; size for your workload. / CPU/RAM/đĩa chưa xác minh; chọn theo khối lượng sử dụng.",
+  "structuredRequirements": {
+    "provenance": {
+      "kind": "estimate",
+      "note": {"en": "Resource values are unknown, not measured or verified. Review official installation docs and test your workload.", "vi": "Chưa có số liệu tài nguyên được đo hoặc xác minh. Đọc tài liệu cài đặt chính thức và thử với nhu cầu thực tế; các mức CPU, RAM, ổ đĩa và kiến trúc vẫn chưa rõ."}
+    }
+  },
+  "score": 0,
+  "links": {
+    "source": "https://github.com/actualbudget/actual",
+    "docs": "https://actualbudget.org/docs/install/docker"
+  },
+  "deployGuide": {
+    "vi": {
+      "overview": "Làm theo tài liệu chính thức; mục này không phải hướng dẫn triển khai đã kiểm thử.",
+      "steps": [
+        "Làm theo hướng dẫn Docker chính thức và chọn bản phát hành máy chủ phù hợp.",
+        "Cấu hình vùng lưu trữ dữ liệu bền vững và HTTPS theo tài liệu trước khi truy cập từ xa.",
+        "Tạo ngân sách thử, kiểm tra đồng bộ và xuất dữ liệu; chỉ bật kết nối ngân hàng nếu cần."
+      ],
+      "backup": "Sao lưu dữ liệu máy chủ và xuất tệp ngân sách; giữ khóa mã hóa an toàn nếu bật mã hóa và thử nhập lại bản sao lưu."
+    },
+    "en": {
+      "overview": "Follow upstream documentation; this catalog is not a tested deployment recipe.",
+      "steps": [
+        "Follow official Docker instructions and select an appropriate server release.",
+        "Configure persistent data storage and HTTPS as documented before remote access.",
+        "Create a test budget, check synchronization and export data; enable bank connections only if needed."
+      ],
+      "backup": "Back up server data and export budget files; retain encryption credentials securely if encryption is enabled and test importing backups."
+    }
+  },
+  "deploySnippets": {
+    "dockerCompose": "# Unverified: documentation reference only; no executable deployment is supplied.\n# Chưa kiểm thử: chỉ tham chiếu tài liệu; không cung cấp lệnh triển khai.\n# Official instructions: https://actualbudget.org/docs/install/docker",
+    "setupScript": "# Unverified: documentation reference only; no executable deployment is supplied.\n# Chưa kiểm thử: chỉ tham chiếu tài liệu; không cung cấp lệnh triển khai.\n# Official instructions: https://actualbudget.org/docs/install/docker"
+  }
+};
+
+export default project;

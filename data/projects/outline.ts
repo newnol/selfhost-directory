@@ -91,56 +91,7 @@ const project: Project = {
     image: redis:7-alpine
     container_name: outline_redis
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/outline
-sudo chown "$USER":"$USER" /opt/outline
-cd /opt/outline
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  outline:
-    image: outlinewiki/outline:latest
-    container_name: outline
-    environment:
-      DATABASE_URL: "postgres://outline:CHANGEME_db_password@postgres:5432/outline" # CHANGE THIS
-      REDIS_URL: "redis://redis:6379"
-      URL: "https://docs.example.com"
-      SECRET_KEY: "change-me-generate-with-openssl-rand-hex-32" # CHANGE THIS
-      UTILS_SECRET: "change-me-generate-with-openssl-rand-hex-32" # CHANGE THIS
-      OIDC_CLIENT_ID: "outline"
-      OIDC_CLIENT_SECRET: "your-oidc-secret"
-      OIDC_AUTH_URI: "https://auth.example.com/authorize"
-      OIDC_TOKEN_URI: "https://auth.example.com/token"
-      OIDC_USERINFO_URI: "https://auth.example.com/userinfo"
-      OIDC_DISPLAY_NAME: "SSO Login"
-    ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
-      - redis
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: outline_postgres
-    environment:
-      POSTGRES_USER: outline
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: outline
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  redis:
-    image: redis:7-alpine
-    container_name: outline_redis
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Outline is running on http://SERVER_IP:3000"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.getoutline.com",
   },
 };
 export default project;

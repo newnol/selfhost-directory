@@ -16,7 +16,7 @@ const resources = z
 export const requirementsSchema = z
   .object({
     provenance: z.discriminatedUnion("kind", [
-      z.object({ kind: z.literal("estimate"), note: text }).strict(),
+      z.object({ kind: z.literal("estimate"), note: z.union([text, bilingual]) }).strict(),
       z
         .object({
           kind: z.literal("documented"),
@@ -30,7 +30,7 @@ export const requirementsSchema = z
                 !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === v
               );
             }),
-          note: text,
+          note: z.union([text, bilingual]),
         })
         .strict(),
     ]),
@@ -62,6 +62,7 @@ export const projectSchema = z.object({
   license: text,
   deploy: z.enum(["Docker", "Docker Compose", "Helm", "Binary"]),
   requirements: text,
+  lifecycle: z.enum(["active", "archived"]).optional(),
   score: z.number().finite(),
   structuredRequirements: requirementsSchema.optional(),
   links: z.object({ source: url, docs: url, demo: url.optional() }),

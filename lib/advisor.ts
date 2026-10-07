@@ -31,6 +31,7 @@ export function advise(raw: unknown) {
   const choices = projects
     .filter(
       (p) =>
+        p.lifecycle !== "archived" &&
         (!allowed || allowed.includes(p.slug)) &&
         (!input.category || p.categorySlug === input.category) &&
         (!input.deploy || p.deploy === input.deploy),

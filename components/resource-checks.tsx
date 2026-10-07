@@ -20,6 +20,6 @@ export function ResourceChecks({ requirements, result, locale }: {
         </dd>
       </div>;
     })}</dl>
-    {provenance ? <p>{provenance.kind === "estimate" ? t.estimate : t.source}: {provenance.note} {provenance.kind === "documented" && <a href={provenance.source}>{t.checkedAt}: {provenance.checkedAt}</a>}</p> : <p>{t.noEvidence}</p>}
+    {provenance ? <p>{provenance.kind === "estimate" ? t.estimate : t.source}: {typeof provenance.note === "string" ? provenance.note : provenance.note[locale]} {provenance.kind === "documented" && <a href={provenance.source}>{t.checkedAt}: {provenance.checkedAt}</a>}</p> : <p>{t.noEvidence}</p>}
   </div>;
 }

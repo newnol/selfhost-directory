@@ -11,13 +11,13 @@ const project: Project = {
   stack: ["Node.js", "SQLite", "Docker"],
   license: "MIT",
   deploy: "Docker",
-  requirements: "1 CPU, 512 MB RAM",
+  requirements: "CPU / RAM / disk sizing not specified in the checked README",
   structuredRequirements: {
     "provenance": {
       "kind": "documented",
       "source": "https://github.com/louislam/uptime-kuma",
       "checkedAt": "2026-10-07",
-      "note": "Official README requires local directory/volume storage: NFS is not supported. Non-Docker instructions specify Node >=20.4. No numeric CPU, RAM or disk sizing, or Docker architecture matrix stated here; all hardware fields remain unknown."
+      "note": {"en": "Official README requires local directory/volume storage: NFS is not supported. Non-Docker instructions specify Node >=20.4. No numeric CPU, RAM or disk sizing, or Docker architecture matrix stated here; all hardware fields remain unknown.", "vi": "Lưu dữ liệu trên thư mục hoặc volume cục bộ; Uptime Kuma không hỗ trợ NFS. README được kiểm tra không nêu mức CPU, RAM hay dung lượng tối thiểu. Số monitor và tần suất kiểm tra sẽ ảnh hưởng tải; hãy sao lưu volume dữ liệu và kiểm tra phiên bản trước khi nâng cấp."}
     }
   },
   score: 95,
@@ -31,8 +31,8 @@ const project: Project = {
     en: "Monitor uptime, latency, and status pages for websites, APIs, and VPS services.",
   },
   notes: {
-    vi: "Rất nhẹ, dễ cài, hợp làm project self-host đầu tiên. Nhớ backup file SQLite hoặc volume Docker.",
-    en: "Lightweight and beginner-friendly. Back up the SQLite database or Docker volume regularly.",
+    vi: "Lưu dữ liệu trên thư mục hoặc volume cục bộ; Uptime Kuma không hỗ trợ NFS. README được kiểm tra không nêu mức CPU, RAM hay dung lượng tối thiểu. Số monitor và tần suất kiểm tra sẽ ảnh hưởng tải; hãy sao lưu volume dữ liệu và kiểm tra phiên bản trước khi nâng cấp.",
+    en: "Use a local data directory or volume; Uptime Kuma does not support NFS. The checked README provides no CPU, RAM or disk minimum. Monitor count and polling frequency affect load; back up the data volume and review version-specific instructions before upgrading.",
   },
   deployGuide: {
     vi: {
@@ -71,27 +71,7 @@ const project: Project = {
     ports:
       - "3001:3001"
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/uptime-kuma
-sudo chown "$USER":"$USER" /opt/uptime-kuma
-cd /opt/uptime-kuma
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  uptime-kuma:
-    image: louislam/uptime-kuma:1
-    container_name: uptime-kuma
-    volumes:
-      - ./data:/app/data
-    ports:
-      - "3001:3001"
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Uptime Kuma is running on http://SERVER_IP:3001"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://github.com/louislam/uptime-kuma/wiki",
   },
 };
 export default project;

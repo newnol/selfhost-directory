@@ -80,43 +80,7 @@ const project: Project = {
     volumes:
       - ./postgres:/var/lib/postgresql/data
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/langfuse
-sudo chown "$USER":"$USER" /opt/langfuse
-cd /opt/langfuse
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  langfuse:
-    image: langfuse/langfuse:latest
-    container_name: langfuse
-    environment:
-      DATABASE_URL: "postgresql://langfuse:CHANGEME_db_password@postgres:5432/langfuse" # CHANGE THIS
-      NEXTAUTH_URL: "http://SERVER_IP:3000"
-      NEXTAUTH_SECRET: "change-me-generate-with-openssl-rand-base64-32" # CHANGE THIS
-      SALT: "change-me-generate-with-openssl-rand-base64-32" # CHANGE THIS
-    ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: langfuse_postgres
-    environment:
-      POSTGRES_USER: langfuse
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: langfuse
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Langfuse is running on http://SERVER_IP:3000"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://langfuse.com/docs",
   },
 };
 export default project;

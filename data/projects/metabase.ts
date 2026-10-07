@@ -82,45 +82,7 @@ const project: Project = {
     volumes:
       - ./postgres:/var/lib/postgresql/data
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/metabase
-sudo chown "$USER":"$USER" /opt/metabase
-cd /opt/metabase
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  metabase:
-    image: metabase/metabase:latest
-    container_name: metabase
-    environment:
-      MB_DB_TYPE: postgres
-      MB_DB_HOST: postgres
-      MB_DB_PORT: "5432"
-      MB_DB_DBNAME: metabase
-      MB_DB_USER: metabase
-      MB_DB_PASS: CHANGEME_db_password # CHANGE THIS
-    ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: metabase_postgres
-    environment:
-      POSTGRES_USER: metabase
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: metabase
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Metabase is running on http://SERVER_IP:3000"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://www.metabase.com/docs/latest/",
   },
 };
 export default project;

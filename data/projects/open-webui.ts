@@ -11,7 +11,19 @@ const project: Project = {
   stack: ["Python", "Svelte", "SQLite/PostgreSQL", "Docker"],
   license: "BSD-3-Clause",
   deploy: "Docker",
-  requirements: "2 CPU, 2 GB RAM without local model",
+  requirements: "amd64 / arm64 documented; model backend sized separately",
+  structuredRequirements: {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://docs.openwebui.com/getting-started/quick-start/",
+      "checkedAt": "2026-10-07",
+      "note": {"en": "Official quick start documents Linux x86_64 and ARM64 support (mapped to amd64/arm64), not a verified image manifest. No universal numeric host CPU/RAM/disk floor is recorded from this page. Standard image bundles speech-to-text and embedding models; slim externalizes optional features. Model backend capacity and image download sizes are not whole-host thresholds.", "vi": "Open WebUI hỗ trợ Linux x86_64 và ARM64, nhưng CPU, RAM và ổ đĩa còn phụ thuộc số người dùng và tính năng bật lên. Tính riêng backend model, embeddings và nhận dạng giọng nói; image tiêu chuẩn có kèm model phụ trợ. Kích thước tải image không phải dung lượng ổ đĩa tối thiểu cho máy."}
+    },
+    "architectures": [
+      "amd64",
+      "arm64"
+    ]
+  },
   score: 88,
   links: {
     source: "https://github.com/open-webui/open-webui",
@@ -22,8 +34,8 @@ const project: Project = {
     en: "A self-hosted AI chat interface for Ollama and multiple LLM providers.",
   },
   notes: {
-    vi: "Nếu chạy model local, tài nguyên phụ thuộc vào model/GPU. Nếu chỉ gọi API ngoài thì VPS nhỏ vẫn ổn.",
-    en: "Local models depend on model size and GPU. For external APIs, a small VPS is usually enough.",
+    vi: "Open WebUI hỗ trợ Linux x86_64 và ARM64, nhưng CPU, RAM và ổ đĩa còn phụ thuộc số người dùng và tính năng bật lên. Tính riêng backend model, embeddings và nhận dạng giọng nói; image tiêu chuẩn có kèm model phụ trợ. Kích thước tải image không phải dung lượng ổ đĩa tối thiểu cho máy.",
+    en: "Open WebUI documents Linux x86_64 and ARM64 support, but CPU, RAM and disk needs depend on users and enabled features. Size model backends, embeddings and speech recognition separately; the standard image bundles auxiliary models. Image download size is not a host disk minimum.",
   },
   deployGuide: {
     vi: {
@@ -65,29 +77,7 @@ const project: Project = {
     environment:
       WEBUI_AUTH: "true"
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/open-webui
-sudo chown "$USER":"$USER" /opt/open-webui
-cd /opt/open-webui
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:main
-    container_name: open-webui
-    volumes:
-      - ./data:/app/backend/data
-    ports:
-      - "3000:8080"
-    environment:
-      WEBUI_AUTH: "true"
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Open WebUI is running on http://SERVER_IP:3000"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.openwebui.com",
   },
 };
 export default project;

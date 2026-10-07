@@ -11,7 +11,15 @@ const project: Project = {
   stack: ["C#", "Docker"],
   license: "GPL-2.0",
   deploy: "Docker",
-  requirements: "2 CPU, 2 GB RAM",
+  requirements: "Hardware / storage depend on media and transcoding; host thresholds unknown",
+  structuredRequirements: {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://jellyfin.org/docs/general/administration/hardware-selection/",
+      "checkedAt": "2026-10-07",
+      "note": {"en": "Hardware-selection recommendations are not universal minima. RAM and CPU examples are tied to integrated/dedicated GPU scenarios and are not promoted to host thresholds. The shared 100GB SSD recommendation covers OS, Jellyfin files and transcoding cache; media library and concurrent-transcode needs still vary. Numeric host thresholds and image architectures remain unknown.", "vi": "Phân biệt phát trực tiếp với chuyển mã trước khi chọn máy. Các cấu hình RAM trong hướng dẫn gắn với GPU cụ thể, nên không coi là mức tối thiểu chung. Mốc SSD 100 GB dành cho hệ điều hành, tệp Jellyfin và cache chuyển mã, chưa thay thế kế hoạch dung lượng thư viện media; kiểm tra codec và GPU của bạn."}
+    }
+  },
   score: 89,
   links: {
     source: "https://github.com/jellyfin/jellyfin",
@@ -23,8 +31,8 @@ const project: Project = {
     en: "A free and open-source media server for streaming movies, music, and photos as a Plex alternative.",
   },
   notes: {
-    vi: "Hỗ trợ hardware transcoding với GPU. Nên mount thư mục media riêng và cấu hình thư viện trước khi mời người dùng.",
-    en: "Supports hardware transcoding with GPU. Mount media directories separately and configure libraries before inviting users.",
+    vi: "Phân biệt phát trực tiếp với chuyển mã trước khi chọn máy. Các cấu hình RAM trong hướng dẫn gắn với GPU cụ thể, nên không coi là mức tối thiểu chung. Mốc SSD 100 GB dành cho hệ điều hành, tệp Jellyfin và cache chuyển mã, chưa thay thế kế hoạch dung lượng thư viện media; kiểm tra codec và GPU của bạn.",
+    en: "Distinguish direct play from transcoding before choosing hardware. RAM guidance is tied to specific GPU configurations, not a universal minimum. The 100 GB SSD recommendation covers the OS, Jellyfin files and transcoding cache; it does not replace media-library capacity planning. Check your codecs and GPU.",
   },
   deployGuide: {
     vi: {
@@ -68,31 +76,7 @@ const project: Project = {
     environment:
       JELLYFIN_PublishedServerUrl: "http://SERVER_IP:8096"
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/jellyfin
-sudo chown "$USER":"$USER" /opt/jellyfin
-cd /opt/jellyfin
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  jellyfin:
-    image: jellyfin/jellyfin:latest
-    container_name: jellyfin
-    volumes:
-      - ./config:/config
-      - ./cache:/cache
-      - /path/to/media:/media:ro
-    ports:
-      - "8096:8096"
-    environment:
-      JELLYFIN_PublishedServerUrl: "http://SERVER_IP:8096"
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Jellyfin is running on http://SERVER_IP:8096"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://jellyfin.org/docs/",
   },
 };
 export default project;

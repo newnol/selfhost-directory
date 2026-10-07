@@ -11,13 +11,13 @@ const project: Project = {
   stack: ["PHP", "PostgreSQL", "Docker"],
   license: "AGPL-3.0",
   deploy: "Docker Compose",
-  requirements: "2 CPU, 2 GB RAM",
+  requirements: "Host sizing unknown; upstream RAM figures are per process",
   structuredRequirements: {
     "provenance": {
       "kind": "documented",
       "source": "https://docs.nextcloud.com/server/stable/admin_manual/installation/system_requirements.html",
       "checkedAt": "2026-10-07",
-      "note": "Nextcloud 35 stable manual: 128MB minimum / 512MB recommended RAM per process; updater needs 256MB. These are NOT total host or Compose stack requirements, so host RAM thresholds remain unknown. Users, apps and activity change sizing; database memory is additional. 64-bit CPU/OS/PHP is recommended, not an amd64/arm64 image support declaration; CPU, disk and image architectures remain unknown."
+      "note": {"en": "Nextcloud 35 stable manual: 128MB minimum / 512MB recommended RAM per process; updater needs 256MB. These are NOT total host or Compose stack requirements, so host RAM thresholds remain unknown. Users, apps and activity change sizing; database memory is additional. 64-bit CPU/OS/PHP is recommended, not an amd64/arm64 image support declaration; CPU, disk and image architectures remain unknown.", "vi": "Tài liệu nêu 128 MB RAM tối thiểu và 512 MB khuyến nghị cho mỗi tiến trình, không phải cho cả máy. Phải tính thêm database, số người dùng, ứng dụng và hoạt động đồng bộ. Dùng cron và Redis khi phù hợp, rồi đo tải thực tế trước khi chọn cấu hình."}
     }
   },
   score: 86,
@@ -31,8 +31,8 @@ const project: Project = {
     en: "A self-hosted file sync and share platform, replacing Google Drive and Dropbox with extensive plugin support.",
   },
   notes: {
-    vi: "Cấu hình PHP và database cần đúng. Sử dụng PostgreSQL cho production, nên đặt cron job và Redis để tăng hiệu năng.",
-    en: "PHP and database configuration must be correct. Use PostgreSQL for production, set up cron jobs and Redis for better performance.",
+    vi: "Tài liệu nêu 128 MB RAM tối thiểu và 512 MB khuyến nghị cho mỗi tiến trình, không phải cho cả máy. Phải tính thêm database, số người dùng, ứng dụng và hoạt động đồng bộ. Dùng cron và Redis khi phù hợp, rồi đo tải thực tế trước khi chọn cấu hình.",
+    en: "The manual specifies 128 MB minimum and 512 MB recommended RAM per process, not for the entire host. Size the database, users, apps and sync activity separately. Configure cron and Redis where appropriate, then measure your workload before choosing host capacity.",
   },
   deployGuide: {
     vi: {
@@ -98,53 +98,7 @@ const project: Project = {
     image: redis:7-alpine
     container_name: nextcloud_redis
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/nextcloud
-sudo chown "$USER":"$USER" /opt/nextcloud
-cd /opt/nextcloud
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  nextcloud:
-    image: nextcloud:stable
-    container_name: nextcloud
-    volumes:
-      - ./html:/var/www/html
-      - ./data:/var/www/html/data
-    environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_DB: nextcloud
-      POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      REDIS_HOST: redis
-    ports:
-      - "8080:80"
-    depends_on:
-      - postgres
-      - redis
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: nextcloud_postgres
-    environment:
-      POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: nextcloud
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  redis:
-    image: redis:7-alpine
-    container_name: nextcloud_redis
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Nextcloud is running on http://SERVER_IP:8080"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.nextcloud.com",
   },
 };
 export default project;

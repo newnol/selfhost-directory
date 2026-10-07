@@ -11,7 +11,7 @@ const project: Project = {
   stack: ["TypeScript", "PostgreSQL", "Redis", "Docker"],
   license: "AGPL-3.0",
   deploy: "Docker Compose",
-  requirements: "2 CPU, 4 GB RAM, SSD storage",
+  requirements: "2 cores / 6 GiB minimum; storage depends on library size",
   structuredRequirements: {
     "minimum": {
       "cpu": 2,
@@ -29,7 +29,7 @@ const project: Project = {
       "kind": "documented",
       "source": "https://docs.immich.app/install/requirements/",
       "checkedAt": "2026-10-07",
-      "note": "Upstream: 2 cores / 6GB minimum, 4 cores / 8GB recommended. GB conservatively rounded up to whole GiB, not a measured workload. Standard stack with machine learning; 4GB only with ML disabled. v3 amd64 ML requires x86-64-v2 (not checked). Local SSD for Postgres, never a network share; library overhead 10–20%. Disk depends on library size and remains unknown."
+      "note": {"en": "Upstream: 2 cores / 6GB minimum, 4 cores / 8GB recommended. GB conservatively rounded up to whole GiB, not a measured workload. Standard stack with machine learning; 4GB only with ML disabled. v3 amd64 ML requires x86-64-v2 (not checked). Local SSD for Postgres, never a network share; library overhead 10–20%. Disk depends on library size and remains unknown.", "vi": "Nguồn chính thức: tối thiểu 2 lõi / 6 GB, khuyến nghị 4 lõi / 8 GB. GB được làm tròn lên GiB, không phải phép đo tải. Mức 4 GB chỉ khi tắt học máy. Học máy amd64 từ v3 cần x86-64-v2 (chưa kiểm tra). PostgreSQL cần SSD cục bộ, không dùng ổ mạng; thư viện cần thêm 10–20%. Dung lượng đĩa phụ thuộc thư viện và vẫn chưa rõ."}
     }
   },
   score: 92,
@@ -43,8 +43,8 @@ const project: Project = {
     en: "A self-hosted photo and video backup app, suitable as a Google Photos alternative.",
   },
   notes: {
-    vi: "Nên chạy bằng Docker Compose chính thức, chuẩn bị dung lượng lưu trữ và chiến lược backup trước khi import ảnh lớn.",
-    en: "Use the official Docker Compose setup and plan storage plus backups before importing a large photo library.",
+    vi: "Dùng Docker Compose chính thức. Mức thông thường là 2 lõi CPU và 6 GB RAM; mức 4 GB chỉ áp dụng khi tắt học máy. Cần chừa dung lượng cho ảnh, video chuyển mã và bản sao lưu. Đặt PostgreSQL trên SSD cục bộ, không dùng ổ mạng; từ v3, container học máy amd64 còn cần x86-64-v2.",
+    en: "Use the official Compose stack. The standard minimum is 2 CPU cores and 6 GB RAM; the 4 GB option requires disabling machine learning. Before a large import, plan storage plus backups for your library and transcoded videos. Keep PostgreSQL on local SSD, not network storage; from v3, amd64 machine learning also requires x86-64-v2.",
   },
   deployGuide: {
     vi: {
@@ -111,54 +111,7 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/data
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/immich
-sudo chown "$USER":"$USER" /opt/immich
-cd /opt/immich
-
-cat > docker-compose.yml <<'COMPOSE'
-name: immich
-services:
-  immich-server:
-    image: ghcr.io/immich-app/immich-server:release
-    container_name: immich_server
-    volumes:
-      - ./library:/usr/src/app/upload
-      - /etc/localtime:/etc/localtime:ro
-    environment:
-      DB_HOSTNAME: database
-      DB_USERNAME: postgres
-      DB_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      DB_DATABASE_NAME: immich
-      REDIS_HOSTNAME: redis
-    ports:
-      - "2283:2283"
-    depends_on:
-      - redis
-      - database
-    restart: unless-stopped
-
-  redis:
-    image: docker.io/redis:7-alpine
-    container_name: immich_redis
-    restart: unless-stopped
-
-  database:
-    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0
-    container_name: immich_postgres
-    environment:
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_USER: postgres
-      POSTGRES_DB: immich
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Immich is running on http://SERVER_IP:2283"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://immich.app/docs/overview/introduction",
   },
 };
 export default project;

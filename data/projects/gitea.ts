@@ -1,0 +1,66 @@
+import type { Project } from "../types";
+
+// Legacy score is a neutral compatibility placeholder, not a rating.
+const project: Project = {
+  "slug": "gitea",
+  "name": "Gitea",
+  "categorySlug": "productivity",
+  "category": "Git Hosting",
+  "tags": [
+    "git",
+    "repositories",
+    "code-review"
+  ],
+  "stack": [
+    "Go"
+  ],
+  "license": "MIT",
+  "deploy": "Docker Compose",
+  "summary": {
+    "vi": "Dịch vụ phát triển phần mềm tự lưu trữ, kết hợp kho Git, rà soát mã, quản lý vấn đề và cộng tác nhóm.",
+    "en": "A self-hosted software development service combining Git repositories, code review, issue tracking and team collaboration."
+  },
+  "notes": {
+    "vi": "Hướng dẫn Docker có lựa chọn SQLite và cơ sở dữ liệu ngoài. Dữ liệu phải lưu ngoài container; runner CI và tác vụ build cần tài nguyên riêng, không được coi là đã tính trong cấu hình máy chủ.",
+    "en": "Docker instructions cover SQLite and external database options. Persist data outside the container; CI runners and build jobs require separate resources not included in server sizing."
+  },
+  "iconUrl": "https://avatars.githubusercontent.com/u/12724356?v=4",
+  "requirements": "CPU/RAM/disk not verified; size for your workload. / CPU/RAM/đĩa chưa xác minh; chọn theo khối lượng sử dụng.",
+  "structuredRequirements": {
+    "provenance": {
+      "kind": "estimate",
+      "note": {"en": "Resource values are unknown, not measured or verified. Review official installation docs and test your workload.", "vi": "Chưa có số liệu tài nguyên được đo hoặc xác minh. Đọc tài liệu cài đặt chính thức và thử với nhu cầu thực tế; các mức CPU, RAM, ổ đĩa và kiến trúc vẫn chưa rõ."}
+    }
+  },
+  "score": 0,
+  "links": {
+    "source": "https://github.com/go-gitea/gitea",
+    "docs": "https://docs.gitea.com/installation/install-with-docker"
+  },
+  "deployGuide": {
+    "vi": {
+      "overview": "Làm theo tài liệu chính thức; mục này không phải hướng dẫn triển khai đã kiểm thử.",
+      "steps": [
+        "Lấy mẫu Compose từ tài liệu chính thức và chọn phiên bản container phù hợp.",
+        "Cấu hình lưu trữ bền vững, UID/GID và cơ sở dữ liệu trước khi khởi động.",
+        "Hoàn tất trình cài đặt trên web, cấu hình URL/SSH và kiểm tra bằng kho Git thử."
+      ],
+      "backup": "Sao lưu cơ sở dữ liệu, kho Git, tệp đính kèm và app.ini, gồm khóa bí mật; kiểm tra phục hồi theo hướng dẫn chính thức."
+    },
+    "en": {
+      "overview": "Follow upstream documentation; this catalog is not a tested deployment recipe.",
+      "steps": [
+        "Obtain the Compose example from official docs and select an appropriate container release.",
+        "Configure persistent storage, UID/GID and the database before startup.",
+        "Complete the web installer, configure URL/SSH settings and check a test Git repository."
+      ],
+      "backup": "Back up the database, Git repositories, attachments and app.ini, including its secret keys; test restoration following upstream guidance."
+    }
+  },
+  "deploySnippets": {
+    "dockerCompose": "# Unverified: documentation reference only; no executable deployment is supplied.\n# Chưa kiểm thử: chỉ tham chiếu tài liệu; không cung cấp lệnh triển khai.\n# Official instructions: https://docs.gitea.com/installation/install-with-docker",
+    "setupScript": "# Unverified: documentation reference only; no executable deployment is supplied.\n# Chưa kiểm thử: chỉ tham chiếu tài liệu; không cung cấp lệnh triển khai.\n# Official instructions: https://docs.gitea.com/installation/install-with-docker"
+  }
+};
+
+export default project;

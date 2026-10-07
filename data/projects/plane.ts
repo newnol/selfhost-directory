@@ -77,41 +77,7 @@ const project: Project = {
     image: redis:7-alpine
     container_name: plane_redis
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/plane
-sudo chown "$USER":"$USER" /opt/plane
-cd /opt/plane
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  plane:
-    image: makeplane/plane-frontend:stable
-    container_name: plane_frontend
-    ports:
-      - "3000:3000"
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: plane_postgres
-    environment:
-      POSTGRES_USER: plane
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: plane
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  redis:
-    image: redis:7-alpine
-    container_name: plane_redis
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Plane starter stack is running on http://SERVER_IP:3000"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.plane.so",
   },
 };
 export default project;

@@ -14,6 +14,7 @@ export type Project = {
   structuredRequirements?: import("zod").infer<
     typeof import("../lib/catalog-validation").requirementsSchema
   >;
+  lifecycle?: "active" | "archived";
   score: number;
   links: {
     source: string;

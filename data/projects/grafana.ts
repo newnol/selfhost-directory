@@ -11,17 +11,16 @@ const project: Project = {
   stack: ["Go", "TypeScript", "Docker"],
   license: "AGPL-3.0",
   deploy: "Docker",
-  requirements: "1 CPU, 1 GB RAM",
+  requirements: "1 CPU core evaluation floor; whole-host RAM and disk unknown",
   structuredRequirements: {
     "minimum": {
-      "cpu": 1,
-      "ramGiB": 0.476837158203125
+      "cpu": 1
     },
     "provenance": {
       "kind": "documented",
       "source": "https://grafana.com/docs/grafana/latest/setup-grafana/installation/",
       "checkedAt": "2026-10-07",
-      "note": "Evaluation floor only: 1 CPU core, 512 MB (decimal MB converted to GiB). Grafana server only; data sources, metric/log/trace stores, database and rendering require separate sizing. Small production guidance starts at 2 cores / 2–4 GB; no single workload-independent recommended threshold recorded. Disk and image architectures remain unknown."
+      "note": {"en": "Evaluation floor only: 1 CPU core, 512 MB RAM for the Grafana server process. This is not a whole-host RAM threshold, so structured host RAM remains unknown. Grafana server only; data sources, metric/log/trace stores, database and rendering require separate sizing. Small production guidance starts at 2 cores / 2–4 GB; no single workload-independent recommended threshold recorded. Disk and image architectures remain unknown.", "vi": "Mức 1 lõi CPU và 512 MB RAM trong tài liệu chỉ là mốc khởi đầu cho Grafana, không phải cấu hình đủ cho cả hệ giám sát. Tính riêng Prometheus, Loki, database và dịch vụ render ảnh; tải dashboard và alert có thể làm nhu cầu tăng nhiều. Dung lượng ổ đĩa cần dựa trên cách triển khai thực tế."}
     }
   },
   score: 91,
@@ -35,8 +34,8 @@ const project: Project = {
     en: "A leading dashboard and observability platform connecting multiple data sources for metrics, logs, and traces.",
   },
   notes: {
-    vi: "Grafana chỉ là lớp hiển thị, cần kết hợp với Prometheus, Loki hoặc InfluxDB để có dữ liệu. Nên cấu hình authentication và giới hạn quyền.",
-    en: "Grafana is only the visualization layer. Pair it with Prometheus, Loki, or InfluxDB for data. Configure authentication and permissions carefully.",
+    vi: "Mức 1 lõi CPU và 512 MB RAM trong tài liệu chỉ là mốc khởi đầu cho Grafana, không phải cấu hình đủ cho cả hệ giám sát. Tính riêng Prometheus, Loki, database và dịch vụ render ảnh; tải dashboard và alert có thể làm nhu cầu tăng nhiều. Dung lượng ổ đĩa cần dựa trên cách triển khai thực tế.",
+    en: "The documented 1 CPU core and 512 MB RAM are a starting point for Grafana, not a complete monitoring-host budget. Size Prometheus, Loki, databases and image rendering separately; dashboard and alert workloads can need much more. Choose disk capacity for the actual deployment.",
   },
   deployGuide: {
     vi: {
@@ -78,29 +77,7 @@ const project: Project = {
     environment:
       GF_SECURITY_ADMIN_PASSWORD: "CHANGEME_admin_password" # CHANGE THIS
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/grafana
-sudo chown "$USER":"$USER" /opt/grafana
-cd /opt/grafana
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  grafana:
-    image: grafana/grafana-oss:latest
-    container_name: grafana
-    volumes:
-      - ./data:/var/lib/grafana
-    ports:
-      - "3000:3000"
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: "CHANGEME_admin_password" # CHANGE THIS
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Grafana is running on http://SERVER_IP:3000"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://grafana.com/docs/grafana/latest/",
   },
 };
 export default project;

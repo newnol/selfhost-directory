@@ -86,6 +86,7 @@ export default async function ProjectPage({
           {project.category}
         </Link>
         <h1>{project.name}</h1>
+        {project.lifecycle === "archived" && <p role="alert" data-lifecycle="archived">{locale === "vi" ? "Dự án đã lưu trữ: không còn bản vá bảo mật. Không khuyến nghị triển khai mới." : "Archived: no further security fixes. Not recommended for new deployments."}</p>}
         <p>{project.summary[locale]}</p>
       </div>
 

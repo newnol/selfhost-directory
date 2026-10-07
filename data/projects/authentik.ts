@@ -104,68 +104,7 @@ const project: Project = {
     image: redis:7-alpine
     container_name: authentik_redis
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/authentik
-sudo chown "$USER":"$USER" /opt/authentik
-cd /opt/authentik
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  authentik-server:
-    image: ghcr.io/goauthentik/server:latest
-    container_name: authentik_server
-    command: server
-    environment:
-      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string" # CHANGE THIS
-      AUTHENTIK_REDIS__HOST: redis
-      AUTHENTIK_POSTGRESQL__HOST: postgres
-      AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: CHANGEME_db_password # CHANGE THIS
-      AUTHENTIK_POSTGRESQL__NAME: authentik
-    ports:
-      - "9000:9000"
-    depends_on:
-      - postgres
-      - redis
-    restart: unless-stopped
-
-  authentik-worker:
-    image: ghcr.io/goauthentik/server:latest
-    container_name: authentik_worker
-    command: worker
-    environment:
-      AUTHENTIK_SECRET_KEY: "change-me-to-a-long-random-string" # CHANGE THIS
-      AUTHENTIK_REDIS__HOST: redis
-      AUTHENTIK_POSTGRESQL__HOST: postgres
-      AUTHENTIK_POSTGRESQL__USER: authentik
-      AUTHENTIK_POSTGRESQL__PASSWORD: CHANGEME_db_password # CHANGE THIS
-      AUTHENTIK_POSTGRESQL__NAME: authentik
-    depends_on:
-      - postgres
-      - redis
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: authentik_postgres
-    environment:
-      POSTGRES_USER: authentik
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: authentik
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  redis:
-    image: redis:7-alpine
-    container_name: authentik_redis
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Authentik is running on http://SERVER_IP:9000"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.goauthentik.io",
   },
 };
 export default project;

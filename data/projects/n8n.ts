@@ -85,48 +85,7 @@ const project: Project = {
     volumes:
       - ./postgres:/var/lib/postgresql/data
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/n8n
-sudo chown "$USER":"$USER" /opt/n8n
-cd /opt/n8n
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: n8n
-    environment:
-      DB_TYPE: postgresdb
-      DB_POSTGRESDB_HOST: postgres
-      DB_POSTGRESDB_DATABASE: n8n
-      DB_POSTGRESDB_USER: n8n
-      DB_POSTGRESDB_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      N8N_HOST: "n8n.example.com"
-      WEBHOOK_URL: "https://n8n.example.com/"
-    volumes:
-      - ./data:/home/node/.n8n
-    ports:
-      - "5678:5678"
-    depends_on:
-      - postgres
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: n8n_postgres
-    environment:
-      POSTGRES_USER: n8n
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: n8n
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "n8n is running on http://SERVER_IP:5678"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.n8n.io",
   },
 };
 export default project;

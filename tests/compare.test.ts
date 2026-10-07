@@ -13,6 +13,8 @@ test("compare query renders 2-3 known distinct projects, with warnings and bilin
     assert.match(html, /Immich/);
     assert.match(html, /Jellyfin/);
     assert.match(html, /<table/);
+    assert.match(html, /data-resource="cpu"/);
+    assert.doesNotMatch(html, locale === "vi" ? /Upstream: 2 cores/ : /&quot;minimum&quot;/);
     assert.match(html, /name="projects"/);
     assert.doesNotMatch(html, /92\/100/);
   }

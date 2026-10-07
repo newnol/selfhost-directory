@@ -1,0 +1,66 @@
+import type { Project } from "../types";
+
+// Legacy score is a neutral compatibility placeholder, not a rating.
+const project: Project = {
+  "slug": "forgejo",
+  "name": "Forgejo",
+  "categorySlug": "productivity",
+  "category": "Git Hosting",
+  "tags": [
+    "git",
+    "repositories",
+    "collaboration"
+  ],
+  "stack": [
+    "Go"
+  ],
+  "license": "GPL-3.0-or-later (v9+; earlier versions MIT)",
+  "deploy": "Docker Compose",
+  "summary": {
+    "vi": "Nền tảng tự lưu trữ kho Git và cộng tác phát triển phần mềm, làm lựa chọn thay thế GitHub do bạn quản lý.",
+    "en": "A self-hosted Git forge for software collaboration, offering a GitHub alternative under your control."
+  },
+  "notes": {
+    "vi": "Có bản container thường và rootless với đường dẫn dữ liệu khác nhau. Việc nâng cấp phiên bản lớn cần thao tác và kiểm tra thủ công theo tài liệu; tài nguyên cho runner CI phải tính riêng.",
+    "en": "Standard and rootless container images use different data paths. Major upgrades require manual steps and verification according to upstream docs; budget CI runner resources separately."
+  },
+  "iconUrl": "https://codeberg.org/forgejo/forgejo/raw/branch/forgejo/assets/logo.svg",
+  "requirements": "CPU/RAM/disk not verified; size for your workload. / CPU/RAM/đĩa chưa xác minh; chọn theo khối lượng sử dụng.",
+  "structuredRequirements": {
+    "provenance": {
+      "kind": "estimate",
+      "note": {"en": "Resource values are unknown, not measured or verified. Review official installation docs and test your workload.", "vi": "Chưa có số liệu tài nguyên được đo hoặc xác minh. Đọc tài liệu cài đặt chính thức và thử với nhu cầu thực tế; các mức CPU, RAM, ổ đĩa và kiến trúc vẫn chưa rõ."}
+    }
+  },
+  "score": 0,
+  "links": {
+    "source": "https://codeberg.org/forgejo/forgejo",
+    "docs": "https://forgejo.org/docs/latest/admin/installation/docker/"
+  },
+  "deployGuide": {
+    "vi": {
+      "overview": "Làm theo tài liệu chính thức; mục này không phải hướng dẫn triển khai đã kiểm thử.",
+      "steps": [
+        "Chọn phiên bản Forgejo và đọc hướng dẫn container tương ứng, gồm lựa chọn rootless.",
+        "Cấu hình cơ sở dữ liệu, thư mục bền vững, quyền sở hữu và địa chỉ công khai theo tài liệu.",
+        "Hoàn tất thiết lập web, hạn chế đăng ký nếu cần và kiểm tra clone/push bằng kho thử."
+      ],
+      "backup": "Sao lưu nhất quán cơ sở dữ liệu, kho Git, tệp đính kèm và cấu hình; đối chiếu hướng dẫn khôi phục trước khi nâng cấp."
+    },
+    "en": {
+      "overview": "Follow upstream documentation; this catalog is not a tested deployment recipe.",
+      "steps": [
+        "Select a Forgejo release and read its container instructions, including the rootless option.",
+        "Configure the database, persistent storage, ownership and public URL as documented.",
+        "Complete web setup, restrict registration if needed and test clone/push using a test repository."
+      ],
+      "backup": "Back up the database, Git repositories, attachments and configuration consistently; review restoration guidance before upgrades."
+    }
+  },
+  "deploySnippets": {
+    "dockerCompose": "# Unverified: documentation reference only; no executable deployment is supplied.\n# Chưa kiểm thử: chỉ tham chiếu tài liệu; không cung cấp lệnh triển khai.\n# Official instructions: https://forgejo.org/docs/latest/admin/installation/docker/",
+    "setupScript": "# Unverified: documentation reference only; no executable deployment is supplied.\n# Chưa kiểm thử: chỉ tham chiếu tài liệu; không cung cấp lệnh triển khai.\n# Official instructions: https://forgejo.org/docs/latest/admin/installation/docker/"
+  }
+};
+
+export default project;

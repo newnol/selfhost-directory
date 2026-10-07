@@ -11,7 +11,15 @@ const project: Project = {
   stack: ["C", "Python", "Docker"],
   license: "GPL-3.0",
   deploy: "Docker",
-  requirements: "1 CPU, 512 MB RAM",
+  requirements: "Workload-dependent agent footprint; host sizing unknown",
+  structuredRequirements: {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://learn.netdata.cloud/docs/netdata-agent/resource-utilization",
+      "checkedAt": "2026-10-07",
+      "note": {"en": "Official agent resource-utilization guide reports CPU percentages and agent RAM footprints, not whole-host minima. Around 4 GiB is the configurable default metrics-plus-metadata disk footprint, not a host disk minimum. Metric count, sampling, ML, database tiers and retention change usage. CPU, host RAM, total disk and image architectures remain unknown.", "vi": "Tài liệu công bố mức tiêu thụ của agent, không phải RAM tối thiểu cho cả máy. Số metrics, chu kỳ lấy mẫu, học máy và thời gian lưu dữ liệu đều ảnh hưởng tài nguyên. Mức khoảng 4 GiB trên ổ đĩa là footprint mặc định có thể cấu hình, không phải ngưỡng dung lượng cố định; giới hạn quyền truy cập dashboard."}
+    }
+  },
   score: 87,
   links: {
     source: "https://github.com/netdata/netdata",
@@ -23,8 +31,8 @@ const project: Project = {
     en: "Real-time server performance monitoring with thousands of metrics, quick and lightweight to install.",
   },
   notes: {
-    vi: "Tự động phát hiện dịch vụ và thu thập metrics. Không cần cấu hình nhiều, nhưng nên giới hạn truy cập dashboard nếu public.",
-    en: "Auto-discovers services and collects metrics. Minimal configuration needed, but restrict dashboard access if public.",
+    vi: "Tài liệu công bố mức tiêu thụ của agent, không phải RAM tối thiểu cho cả máy. Số metrics, chu kỳ lấy mẫu, học máy và thời gian lưu dữ liệu đều ảnh hưởng tài nguyên. Mức khoảng 4 GiB trên ổ đĩa là footprint mặc định có thể cấu hình, không phải ngưỡng dung lượng cố định; giới hạn quyền truy cập dashboard.",
+    en: "The documentation describes the agent footprint, not minimum RAM for the whole host. Metric count, sampling frequency, machine learning and retention all affect resource use. The roughly 4 GiB disk footprint is a configurable default, not a fixed disk minimum; restrict dashboard access.",
   },
   deployGuide: {
     vi: {
@@ -75,38 +83,7 @@ const project: Project = {
     ports:
       - "19999:19999"
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/netdata
-sudo chown "$USER":"$USER" /opt/netdata
-cd /opt/netdata
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  netdata:
-    image: netdata/netdata:stable
-    container_name: netdata
-    hostname: netdata-server
-    cap_add:
-      - SYS_PTRACE
-      - SYS_ADMIN
-    security_opt:
-      - apparmor:unconfined
-    volumes:
-      - ./config:/etc/netdata
-      - ./lib:/var/lib/netdata
-      - ./cache:/var/cache/netdata
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    ports:
-      - "19999:19999"
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Netdata is running on http://SERVER_IP:19999"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://learn.netdata.cloud",
   },
 };
 export default project;

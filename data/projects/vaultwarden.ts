@@ -11,7 +11,7 @@ const project: Project = {
   stack: ["Rust", "SQLite", "Docker"],
   license: "AGPL-3.0",
   deploy: "Docker",
-  requirements: "1 CPU, 512 MB RAM",
+  requirements: "amd64 / arm64 reported; CPU / RAM / disk sizing unknown",
   structuredRequirements: {
     "architectures": [
       "amd64",
@@ -21,7 +21,7 @@ const project: Project = {
       "kind": "documented",
       "source": "https://github.com/dani-garcia/vaultwarden/wiki/Which-container-image-to-use",
       "checkedAt": "2026-10-07",
-      "note": "Project-maintained wiki documents multi-arch images and reports working x86_64 and arm64 installations. This records only the two architectures supported by this calculator; it is not an exhaustive image list or deployment guarantee. No numeric CPU, RAM or disk minimum in this source."
+      "note": {"en": "Project-maintained wiki documents multi-arch images and reports working x86_64 and arm64 installations. This records only the two architectures supported by this calculator; it is not an exhaustive image list or deployment guarantee. No numeric CPU, RAM or disk minimum in this source.", "vi": "Wiki dự án ghi nhận máy x86_64 và arm64 chạy được, nhưng đây không phải cam kết cho mọi tag image hoặc mọi máy. Chưa có ngưỡng CPU, RAM hay ổ đĩa trong nguồn này. Dùng HTTPS, tắt đăng ký công khai nếu không cần và sao lưu database cùng tệp đính kèm."}
     }
   },
   score: 90,
@@ -34,8 +34,8 @@ const project: Project = {
     en: "A lightweight Bitwarden-compatible server for personal use and small teams.",
   },
   notes: {
-    vi: "Nên bật HTTPS, cấu hình domain rõ ràng, backup database, và cân nhắc tắt đăng ký công khai.",
-    en: "Run behind HTTPS, configure the domain carefully, back up the database, and consider disabling open signups.",
+    vi: "Wiki dự án ghi nhận máy x86_64 và arm64 chạy được, nhưng đây không phải cam kết cho mọi tag image hoặc mọi máy. Chưa có ngưỡng CPU, RAM hay ổ đĩa trong nguồn này. Dùng HTTPS, tắt đăng ký công khai nếu không cần và sao lưu database cùng tệp đính kèm.",
+    en: "The project wiki reports working x86_64 and arm64 installations, not a guarantee for every image tag or host. This source provides no CPU, RAM or disk thresholds. Use HTTPS, disable open signups when unnecessary, and back up the database and attachments.",
   },
   deployGuide: {
     vi: {
@@ -78,30 +78,7 @@ const project: Project = {
     ports:
       - "8080:80"
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/vaultwarden
-sudo chown "$USER":"$USER" /opt/vaultwarden
-cd /opt/vaultwarden
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  vaultwarden:
-    image: vaultwarden/server:latest
-    container_name: vaultwarden
-    environment:
-      DOMAIN: "https://vault.example.com"
-      SIGNUPS_ALLOWED: "false"
-    volumes:
-      - ./data:/data
-    ports:
-      - "8080:80"
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Vaultwarden is running on http://SERVER_IP:8080"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://github.com/dani-garcia/vaultwarden/wiki",
   },
 };
 export default project;

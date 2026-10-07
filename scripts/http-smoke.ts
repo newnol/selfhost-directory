@@ -6,8 +6,8 @@ async function main() {
     base = `http://127.0.0.1:${port}`;
   const child = spawn(
     process.execPath,
-    ["node_modules/next/dist/bin/next", "start", "-p", port],
-    { stdio: "inherit" },
+    ["node_modules/next/dist/bin/next", "start", "--hostname", "0.0.0.0", "-p", port],
+    { stdio: "inherit", env: { ...process.env, ADVISOR_ALLOWED_ORIGINS: base, ADVISOR_CLAUDE_ENABLED: "false" } },
   );
   try {
     let ready = false;
@@ -55,7 +55,7 @@ async function main() {
     };
     const response = await fetch(base + "/api/advisor", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Origin: base },
       body: JSON.stringify(input),
     });
     assert.equal(response.status, 200);
@@ -84,7 +84,7 @@ async function main() {
     assert.equal(evidence.compatibility.provenance.kind, "documented");
     const bad = await fetch(base + "/api/advisor", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Origin: base },
       body: '{"locale":"invalid"}',
     });
     assert.equal(bad.status, 400);

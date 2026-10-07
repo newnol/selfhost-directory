@@ -67,30 +67,7 @@ const project: Project = {
     environment:
       VIKUNJA_SERVICE_PUBLICURL: "http://SERVER_IP:3456"
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/vikunja
-sudo chown "$USER":"$USER" /opt/vikunja
-cd /opt/vikunja
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  vikunja:
-    image: vikunja/vikunja:latest
-    container_name: vikunja
-    volumes:
-      - ./files:/app/vikunja/files
-      - ./db:/app/vikunja/db
-    ports:
-      - "3456:3456"
-    environment:
-      VIKUNJA_SERVICE_PUBLICURL: "http://SERVER_IP:3456"
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Vikunja is running on http://SERVER_IP:3456"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://vikunja.io/docs/",
   },
 };
 export default project;

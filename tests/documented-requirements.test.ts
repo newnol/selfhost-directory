@@ -11,7 +11,7 @@ test("official partial evidence enables real checks without invented disk or Nex
   assert.equal(compatibility(immich, {cpu: 1, ramGiB: 2, diskGiB: 100, architecture: "amd64"}).status, "below-minimum");
   const nextcloud = getProject("nextcloud")!.structuredRequirements;
   assert.equal(nextcloud?.provenance.kind, "documented");
-  assert.match(nextcloud!.provenance.note, /per process/);
+  assert.match((nextcloud!.provenance.note as {en: string}).en, /per process/);
   assert.equal(nextcloud?.minimum?.ramGiB, undefined);
   assert.equal(nextcloud?.architectures, undefined);
   assert.deepEqual(getProject("vaultwarden")!.structuredRequirements?.architectures, ["amd64", "arm64"]);

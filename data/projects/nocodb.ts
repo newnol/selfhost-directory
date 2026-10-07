@@ -79,42 +79,7 @@ const project: Project = {
     volumes:
       - ./postgres:/var/lib/postgresql/data
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/nocodb
-sudo chown "$USER":"$USER" /opt/nocodb
-cd /opt/nocodb
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  nocodb:
-    image: nocodb/nocodb:latest
-    container_name: nocodb
-    environment:
-      NC_DB: "pg://postgres:5432?u=nocodb&p=CHANGEME_db_password&d=nocodb" # CHANGE THIS
-    volumes:
-      - ./data:/usr/app/data
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:16-alpine
-    container_name: nocodb_postgres
-    environment:
-      POSTGRES_USER: nocodb
-      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS
-      POSTGRES_DB: nocodb
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "NocoDB is running on http://SERVER_IP:8080"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.nocodb.com",
   },
 };
 export default project;

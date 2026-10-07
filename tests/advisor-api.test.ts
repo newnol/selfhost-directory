@@ -37,6 +37,20 @@ test("API defaults to deterministic without credentials and rejects malformed, o
     413,
   );
 });
+test("explicit public origin allows wildcard bind without trusting forwarded headers", async () => {
+  const env = { ADVISOR_ALLOWED_ORIGINS: "http://127.0.0.1:4312" };
+  const handler = createAdvisorHandler({ env });
+  const make = (origin: string) => new Request("http://0.0.0.0:4312/api/advisor", {
+    method: "POST", headers: { "content-type": "application/json", origin,
+      "x-forwarded-host": "evil.example", "x-forwarded-proto": "https" }, body: JSON.stringify(input),
+  });
+  assert.equal((await handler(make("http://127.0.0.1:4312"))).status, 200);
+  for (const origin of ["https://evil.example", "null", "http://127.0.0.1:4312.evil.example", "http://0.0.0.0:4312"]) {
+    assert.equal((await handler(make(origin))).status, 403);
+  }
+  assert.equal((await createAdvisorHandler({ env: {} })(make("https://evil.example"))).status, 403);
+  assert.equal((await createAdvisorHandler({ env: { ADVISOR_ALLOWED_ORIGINS: "*" } })(make("http://127.0.0.1:4312"))).status, 403);
+});
 const enabled = {
   ADVISOR_CLAUDE_ENABLED: "true",
   ADVISOR_ALLOW_PROCESS_LOCAL_LIMITS: "true",

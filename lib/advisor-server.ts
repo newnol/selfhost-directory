@@ -57,10 +57,17 @@ export function createAdvisorHandler(options: Options = {}) {
         headers: { "Cache-Control": "no-store", ...extra },
       });
     if (request.method !== "POST") return reply({ error: "method" }, 405);
-    if (
-      request.headers.get("origin") &&
-      request.headers.get("origin") !== new URL(request.url).origin
-    )
+    const env = options.env ?? process.env;
+    const origin = request.headers.get("origin");
+    // Explicit public origins override internal bind URL; proxy headers are never trusted.
+    const configured = env.ADVISOR_ALLOWED_ORIGINS;
+    const allowedOrigins = configured === undefined
+      ? [new URL(request.url).origin]
+      : configured.split(",").map(v => v.trim()).filter(v => {
+          try { const u = new URL(v); return ["http:", "https:"].includes(u.protocol) && u.origin === v; }
+          catch { return false; }
+        });
+    if (origin && !allowedOrigins.includes(origin))
       return reply({ error: "origin" }, 403);
     if (
       !request.headers
@@ -82,7 +89,6 @@ export function createAdvisorHandler(options: Options = {}) {
         JSON.parse(await limitedText(request.body, 8192)),
       );
       const result = advise(input);
-      const env = options.env ?? process.env;
       if (
         input.useClaude &&
         result.choices.length > 1 &&

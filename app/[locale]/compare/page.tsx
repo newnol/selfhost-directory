@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ResourceChecks } from "@/components/resource-checks";
 import { projects as catalog } from "@/data/projects";
 import { isLocale } from "@/lib/i18n";
 import { planningCopy } from "@/lib/planning-copy";
@@ -70,9 +71,7 @@ export default async function ComparePage({
                 [
                   t.calculator,
                   ...selected.map((p) =>
-                    p!.structuredRequirements
-                      ? JSON.stringify(p!.structuredRequirements)
-                      : t.unknown,
+                    <ResourceChecks key={p!.slug} requirements={p!.structuredRequirements} locale={locale} />,
                   ),
                 ],
                 [

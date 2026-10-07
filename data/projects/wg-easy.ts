@@ -73,38 +73,7 @@ const project: Project = {
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv4.ip_forward=1
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/wg-easy
-sudo chown "$USER":"$USER" /opt/wg-easy
-cd /opt/wg-easy
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  wg-easy:
-    image: ghcr.io/wg-easy/wg-easy:latest
-    container_name: wg-easy
-    environment:
-      WG_HOST: "YOUR_SERVER_IP"
-      PASSWORD_HASH: "$$2y$$10$$your_bcrypt_hash_here"
-      WG_DEFAULT_DNS: "1.1.1.1"
-    volumes:
-      - ./config:/etc/wireguard
-    ports:
-      - "51820:51820/udp"
-      - "51821:51821/tcp"
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
-      - net.ipv4.ip_forward=1
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "WG-Easy is running on http://SERVER_IP:51821"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://github.com/wg-easy/wg-easy/wiki",
   },
 };
 export default project;

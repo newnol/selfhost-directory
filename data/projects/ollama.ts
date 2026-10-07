@@ -11,7 +11,19 @@ const project: Project = {
   stack: ["Go", "Docker"],
   license: "MIT",
   deploy: "Docker",
-  requirements: "2 CPU, 4 GB RAM (depends on model)",
+  requirements: "amd64 / arm64 Linux packages; model-dependent host sizing unknown",
+  structuredRequirements: {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://docs.ollama.com/linux",
+      "checkedAt": "2026-10-07",
+      "note": {"en": "Official Linux guide provides amd64 and ARM64 packages (binary platform evidence, not Docker manifest verification). Host CPU, RAM and disk thresholds remain unknown. Official FAQ https://docs.ollama.com/faq describes model placement across system RAM and GPU memory; context, concurrency and model choice affect sizing. No model-specific memory claim is treated as a universal host minimum.", "vi": "Không có một mức RAM cố định áp dụng cho mọi model 7B. Nhu cầu còn phụ thuộc lượng tử hóa, độ dài ngữ cảnh, số request đồng thời và phần model nằm trong RAM hay VRAM. Chọn model trước, theo dõi bằng `ollama ps` rồi đo tải; dung lượng ổ đĩa phụ thuộc các model đã tải."}
+    },
+    "architectures": [
+      "amd64",
+      "arm64"
+    ]
+  },
   score: 90,
   links: {
     source: "https://github.com/ollama/ollama",
@@ -22,8 +34,8 @@ const project: Project = {
     en: "Run LLM models locally on your own machine or server, supporting models like Llama, Mistral, and Gemma.",
   },
   notes: {
-    vi: "Tài nguyên phụ thuộc vào kích thước model. Model 7B cần tối thiểu 8 GB RAM. GPU giúp tăng tốc đáng kể.",
-    en: "Resource requirements depend on model size. 7B models need at least 8 GB RAM. GPU significantly improves speed.",
+    vi: "Không có một mức RAM cố định áp dụng cho mọi model 7B. Nhu cầu còn phụ thuộc lượng tử hóa, độ dài ngữ cảnh, số request đồng thời và phần model nằm trong RAM hay VRAM. Chọn model trước, theo dõi bằng `ollama ps` rồi đo tải; dung lượng ổ đĩa phụ thuộc các model đã tải.",
+    en: "There is no single RAM minimum for every 7B model. Quantization, context length, concurrent requests and CPU/GPU placement all affect memory needs. Choose the model first, inspect placement with `ollama ps`, and measure your workload; disk use depends on downloaded models.",
   },
   deployGuide: {
     vi: {
@@ -62,28 +74,7 @@ const project: Project = {
     ports:
       - "11434:11434"
     restart: unless-stopped`,
-    setupScript: `#!/usr/bin/env bash
-set -euo pipefail
-
-sudo mkdir -p /opt/ollama
-sudo chown "$USER":"$USER" /opt/ollama
-cd /opt/ollama
-
-cat > docker-compose.yml <<'COMPOSE'
-services:
-  ollama:
-    image: ollama/ollama:latest
-    container_name: ollama
-    volumes:
-      - ./models:/root/.ollama
-    ports:
-      - "11434:11434"
-    restart: unless-stopped
-COMPOSE
-
-docker compose up -d
-echo "Ollama is running on http://SERVER_IP:11434"
-echo "Pull a model with: docker exec ollama ollama pull llama3.2"`,
+    setupScript: "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://ollama.com/library",
   },
 };
 export default project;
