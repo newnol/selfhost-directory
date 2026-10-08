@@ -105,6 +105,7 @@ export default async function ProjectPage({
           <h2 id="review">{locale === "vi" ? "Ghi chú review" : "Review notes"}</h2>
           <p>{project.notes[locale]}</p>
 
+          <div id="deployment">
           {project.slug !== "uptime-kuma" && <>
           <h2>{locale === "vi" ? "Hướng dẫn deploy" : "Deployment guide"}</h2>
           <p>{project.deployGuide[locale].overview}</p>
@@ -119,7 +120,7 @@ export default async function ProjectPage({
           </div>
           </>}
 
-          <div id="deployment"><InstallPanel slug={project.slug} docsUrl={project.links.docs} locale={locale} /></div>
+          <InstallPanel slug={project.slug} docsUrl={project.links.docs} locale={locale} />
           {project.slug !== "uptime-kuma" && <section className="copy-run-section">
             <div className="copy-run-heading">
               <h2>{planningCopy[locale].warning}</h2>
@@ -140,6 +141,7 @@ export default async function ProjectPage({
               copiedLabel={locale === "vi" ? "Đã copy" : "Copied"}
             />
           </section>}
+          </div>
 
           <h2>{t.stack}</h2>
           <div className="tag-row">

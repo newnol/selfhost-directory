@@ -32,6 +32,16 @@ test("project detail has localized jump links to requirements, review and deploy
   assert.match(html, locale === "vi" ? /Nội dung dự án/ : /On this page/);
  }
 });
+test("deployment jump starts before guide and backup in both locales", async () => {
+ for (const locale of ["vi", "en"] as const) {
+  const html = renderToStaticMarkup(await ProjectPage({params:Promise.resolve({locale,slug:"immich"})}));
+  const anchor = html.indexOf('id="deployment"');
+  const guide = html.indexOf(locale === "vi" ? "Hướng dẫn deploy" : "Deployment guide");
+  assert.ok(anchor > 0 && anchor < guide);
+  assert.ok(guide < html.indexOf('class="backup-note"'));
+ }
+});
+
 import { CopyCodeBlock } from "../components/copy-code-block";
 import { SubmitProjectForm } from "../components/submit-project-form";
 

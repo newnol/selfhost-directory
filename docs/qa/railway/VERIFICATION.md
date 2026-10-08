@@ -42,6 +42,20 @@ Interaction coverage: search result/empty/reset, category/deployment, max-three 
 
 Initial axe findings (keyboard-unreachable code scroll areas and exposed unlabeled bot trap) were fixed and retested. A locale-wide loading boundary introduced streamed 200 responses for missing markdown; it was removed and exact 404 smoke passed. Vision analysis repeatedly returned HTTP 400, so no visual approval is claimed; screenshots and real DOM/browser checks are available for the independent reviewer. No push, PR, merge, deployment or remote changes.
 
+## Independent review fixes (local follow-up)
+
+- Fixed locale links to render the query before interaction and synchronize the actual href with browser query/hash after hydration, Next client navigation, native hash changes and back/forward. No click-time href mutation remains. `useSyncExternalStore` uses a server snapshot; `useSearchParams` is isolated behind Suspense for static routes.
+- Moved `#deployment` to encompass the complete deployment guide, backup, installer and code section; Uptime Kuma still starts at its installer.
+- RED verified: the new Chromium regression failed with actual `/vi/compare` versus expected `/vi/compare?projects=immich,jellyfin#main-content`; the new deployment unit regression failed before the anchor fix. Final GREEN results:
+  - `corepack pnpm typecheck`: pass.
+  - `corepack pnpm test`: **80 pass, 0 fail**.
+  - `corepack pnpm build`: pass, **107/107** static pages generated.
+  - `QA_BASE=http://127.0.0.1:4348 PLAYWRIGHT_MODULE=/home/newnol/.hermes/cache/scratch/browser-qa-runtime/node_modules/playwright node scripts/locale-link-browser-qa.cjs`: pass against a fresh local production server. JavaScript-disabled SSR includes the compare query; hydrated href includes the exact query/hash before interaction; real middle-click opens a new tab preserving selection/hash; normal click preserves selection/hash; Next client pathname navigation, query-only push/replaceState, native hashchange and browser back update the same shell link; Immich/Uptime Kuma deployment jumps cover the complete section. Zero page errors (including hydration errors).
+  - `git diff --check`: pass.
+- Regression paths: `tests/railway-ui.test.ts`, `scripts/locale-link-browser-qa.cjs`. Browser output: `docs/qa/railway/locale-link-results.log`.
+- Limits: fragments are not sent to the server, so initial SSR cannot include a hash; it is added by the hydration snapshot without an interaction. Copied-link behavior is checked by reading the real href, not using OS clipboard/context-menu UI. Actual clipboard success/failure and broader keyboard/visual QA were not newly exercised. Earlier visual provider HTTP 400 remains unresolved; **no visual approval is claimed**. The prior full UI/axe matrix was not rerun for this focused fix. No external submissions, installs, push, PR, merge or deployment occurred.
+- Tool environment issue: the first background server did not inherit the Node/corepack PATH; restarting with the explicit scratch Node bin PATH resolved it. Browser anchor smoke was corrected to use the existing `.installer-panel` class and wait for smooth scroll completion; no unrelated production changes.
+
 ## Reproduce browser matrix
 
 Install Playwright and `@axe-core/playwright` into a separate scratch QA runtime, start the production build locally, then:

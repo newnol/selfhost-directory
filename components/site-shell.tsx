@@ -1,11 +1,32 @@
 "use client";
-import { useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { Suspense, useRef, useState, useSyncExternalStore } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { localeHref } from "@/lib/navigation";
 import Link from "next/link";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { categories } from "@/data/projects";
 import { dictionary, otherLocale, type Locale } from "@/lib/i18n";
+
+function subscribeToLocation(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener("hashchange", onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
+
+function LocaleSwitch({ pathname, locale }: { pathname: string | null; locale: Locale }) {
+  // Next's hooks trigger renders for client pathname/search navigation; native
+  // events also cover fragment navigation and browser back/forward.
+  const searchParams = useSearchParams();
+  const suffix = useSyncExternalStore(
+    subscribeToLocation,
+    () => window.location.search + window.location.hash,
+    () => searchParams?.size ? `?${searchParams.toString()}` : "",
+  );
+  return <a className="locale-switch" href={localeHref(pathname, locale) + suffix}>{locale.toUpperCase()}</a>;
+}
 
 type SiteShellProps = {
   locale: Locale;
@@ -45,9 +66,9 @@ export function SiteShell({ locale, children }: SiteShellProps) {
             {locale === "vi" ? "Tư vấn" : "Advisor"}
           </Link>
           <Link aria-current={pathname === `/${locale}/submit-project` ? "page" : undefined} href={`/${locale}/submit-project`}> {t.nav.submit}</Link>
-          <a className="locale-switch" href={localeHref(pathname, nextLocale)} onClick={e => { e.currentTarget.href = localeHref(pathname, nextLocale, window.location.search.slice(1)) + window.location.hash; }}>
-            {nextLocale.toUpperCase()}
-          </a>
+          <Suspense fallback={<a className="locale-switch" href={localeHref(pathname, nextLocale)}>{nextLocale.toUpperCase()}</a>}>
+            <LocaleSwitch pathname={pathname} locale={nextLocale} />
+          </Suspense>
         </nav>
       </header>
       <main id="main-content" tabIndex={-1}>{children}</main>
