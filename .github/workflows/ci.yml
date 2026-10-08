@@ -16,5 +16,9 @@ jobs:
       - run: pnpm validate:catalog
       - run: pnpm typecheck
       - run: pnpm test
+        env:
+          # The runner context is available in steps, not job-level env.
+          TMPDIR: ${{ runner.temp }}
       - run: pnpm build
       - run: pnpm exec tsx scripts/http-smoke.ts
+      - run: pnpm test:deployment-docs

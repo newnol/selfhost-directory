@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ProjectCard } from "@/components/project-card";
 import { SearchFilter } from "@/components/search-filter";
 import { projects, useCases } from "@/data/projects";
 import { dictionary, isLocale, locales, type Locale } from "@/lib/i18n";
-import { categoryProjectCounts, projectsByCategory } from "@/lib/projects";
+import { categoryProjectCounts } from "@/lib/projects";
 
 export async function generateMetadata({
   params
@@ -89,32 +88,27 @@ export default async function LocaleHome({
       />
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">{t.hero.eyebrow}</p>
+
           <h1>{t.hero.title}</h1>
           <p>{t.hero.copy}</p>
           <div className="hero-actions">
             <Link className="button primary" href="#projects">
               {t.hero.primary}
             </Link>
-            <Link className="button secondary" href={`/${locale}/submit-project`}>
-              {t.hero.secondary}
+            <Link className="button secondary" href={`/${locale}/advisor`}>
+              {locale === "vi" ? "Tìm theo máy chủ" : "Find a fit for your server"}
             </Link>
           </div>
         </div>
-        <div className="hero-panel" aria-label="Directory snapshot">
-          <div>
-            <span>{projects.length}</span>
-            <p>{locale === "vi" ? "project đã curate" : "curated projects"}</p>
+        <nav className="topology" aria-label={locale === "vi" ? "Danh mục phần mềm" : "Software categories"}>
+          <div className="topology-core"><span>SELFHOST / INDEX</span><strong>{locale === "vi" ? "Bản đồ thư mục" : "Catalog map"}</strong><small>{projects.length} {locale === "vi" ? "dự án trong thư mục" : "cataloged projects"}</small></div>
+          <div className="topology-nodes">
+            {categories.map((category, index) => <Link className="topology-node" key={category.slug} href={`/${locale}/categories/${category.slug}`}>
+              <span className="topology-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <strong>{category.title[locale]}</strong><small>{category.count} {locale === "vi" ? "dự án" : "projects"}</small>
+            </Link>)}
           </div>
-          <div>
-            <span>2</span>
-            <p>{locale === "vi" ? "ngôn ngữ" : "languages"}</p>
-          </div>
-          <div>
-            <span>API</span>
-            <p>{locale === "vi" ? "submission serverless" : "serverless submissions"}</p>
-          </div>
-        </div>
+        </nav>
       </section>
 
       <SearchFilter
@@ -133,60 +127,10 @@ export default async function LocaleHome({
         placeholder={locale === "vi" ? "Tìm kiếm project theo tên hoặc tag..." : "Search projects by name or tag..."}
       />
 
-      <section className="section" id="projects">
-        <div className="section-heading">
-          <p className="eyebrow">Categories</p>
-          <h2>{locale === "vi" ? "Duyệt theo danh mục" : "Browse by category"}</h2>
-          <p>
-            {locale === "vi"
-              ? "Mỗi danh mục gom các project cùng nhu cầu để website dễ mở rộng khi số lượng project tăng lên."
-              : "Each category groups projects by job-to-be-done so the directory can scale cleanly."}
-          </p>
-        </div>
-        <div className="category-grid">
-          {categories.map((category) => (
-            <Link className="category-card" key={category.slug} href={`/${locale}/categories/${category.slug}`}>
-              <span className="category-icon">{category.icon}</span>
-              <h3>{category.title[locale]}</h3>
-              <p>{category.description[locale]}</p>
-              <span className="category-count">{category.count} projects</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="section-heading">
-          <p className="eyebrow">Directory</p>
-          <h2>{t.sections.featured}</h2>
-        </div>
-        <div className="category-sections">
-          {categories
-            .filter((category) => category.count > 0)
-            .map((category) => (
-              <section className="category-section" key={category.slug}>
-                <div className="category-section-heading">
-                  <div>
-                    <p className="eyebrow">{category.count} projects</p>
-                    <h3>{category.title[locale]}</h3>
-                  </div>
-                  <Link className="text-link" href={`/${locale}/categories/${category.slug}`}>
-                    {locale === "vi" ? "Xem tất cả" : "View all"}
-                  </Link>
-                </div>
-                <div className="project-grid">
-                  {projectsByCategory(category.slug).map((project) => (
-                    <ProjectCard key={project.slug} locale={locale} project={project} />
-                  ))}
-                </div>
-              </section>
-            ))}
-        </div>
-      </section>
 
       <section className="section" id="alternatives">
         <div className="section-heading">
-          <p className="eyebrow">Use cases</p>
+
           <h2>{t.sections.useCases}</h2>
         </div>
         <div className="use-case-grid">
@@ -194,6 +138,7 @@ export default async function LocaleHome({
             <Link className="use-case" key={useCase.slug} href={`/${locale}/alternatives/${useCase.slug}`}>
               <h3>{useCase.title[locale]}</h3>
               <p>{useCase.description[locale]}</p>
+              <span className="text-link">{locale === "vi" ? "Khám phá lựa chọn" : "Explore alternatives"}</span>
             </Link>
           ))}
         </div>
@@ -201,7 +146,7 @@ export default async function LocaleHome({
 
       <section className="submit-band">
         <div>
-          <p className="eyebrow">Review queue</p>
+
           <h2>{t.sections.submit}</h2>
           <p>
             {locale === "vi"

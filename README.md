@@ -31,6 +31,18 @@ Original requirements strings are **unverified editorial estimates**, not parsed
 
 Existing Compose/bash examples are unverified and may be incomplete/outdated. Replace placeholder secrets, pin versions, review privileged access/ports, HTTPS and backups, and consult upstream docs. These are preserved examples, not generated or tested deployments.
 
+### Versioned installer pilot (separate from updating this directory)
+
+Uptime Kuma alone has an **experimental, not deployment-verified** hosted Bash pilot. Intended production-domain routes (available after deploying this revision):
+
+- `https://selfhost.io.vn/install/uptime-kuma/v1/install.sh`
+- `https://selfhost.io.vn/install/uptime-kuma/v1/SHA256SUMS`
+- `https://selfhost.io.vn/install/uptime-kuma/v1/metadata.json`
+
+Download, compare SHA256, inspect, then run `bash install.sh --check`; only an explicit `--apply` starts containers. Never pipe downloads to a shell. Existing local Docker/Compose v2 is required; no sudo, runtime installation, firewall changes or overwrite of existing directories/data. Image 2.5.5 is also pinned by OCI digest; binds only `127.0.0.1:3001`. Immediately bootstrap the administrator before any proxy/exposure. Linux amd64/arm64 is eligible but only stub-tested; macOS is preflight-only (Docker Desktop untested; apply refused), Windows has WSL2 guidance only, no native/PowerShell installer. Authentik and other installers are deferred.
+
+`installers/uptime-kuma/v1/` contains the version-controlled bytes. Once published, freeze **all v1 artifacts**: changes, fixes or new images require v2/new URL, never mutate a cached immutable version. Artifact SHA256 is tested against the file and metadata; checksums on the same origin are integrity checks, not independent signatures. This route installs Kuma, not selfhost.io.vn; normal site build/deploy updates are separate. See [installer policy and evidence](docs/installers.md).
+
 ## Optional Claude (server only, disabled by default)
 
 This is a **reranking preview**, not a full AI advisor or generated explanation service. No API key is needed for deterministic fallback. Claude can **only reorder the already filtered max-three choices**: provider text, resource claims, links, commands and additional projects are never shown. User must opt in on the form. Server must set all of:

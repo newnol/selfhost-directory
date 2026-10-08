@@ -1,3 +1,5 @@
+"use client";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { categories } from "@/data/projects";
@@ -9,11 +11,14 @@ type SiteShellProps = {
 };
 
 export function SiteShell({ locale, children }: SiteShellProps) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
   const t = dictionary[locale];
   const nextLocale = otherLocale(locale);
 
   return (
     <div className="site-shell">
+      <a className="skip-link" href="#main-content">{locale === "vi" ? "Đến nội dung chính" : "Skip to content"}</a>
       <header className="site-header">
         <Link className="brand" href={`/${locale}`}>
           <span className="brand-mark" aria-hidden="true">
@@ -26,7 +31,8 @@ export function SiteShell({ locale, children }: SiteShellProps) {
           </span>
           <span>{t.brand}</span>
         </Link>
-        <nav className="nav-links" aria-label="Main navigation">
+        <button ref={menuButton} type="button" className="menu-toggle" aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>{locale === "vi" ? (menuOpen ? "Đóng menu" : "Mở menu") : (menuOpen ? "Close menu" : "Open menu")}</button>
+        <nav id="mobile-navigation" className={`nav-links${menuOpen ? " is-open" : ""}`} aria-label={locale === "vi" ? "Điều hướng chính" : "Main navigation"} onClick={() => setMenuOpen(false)} onKeyDown={e => { if (e.key === "Escape") { setMenuOpen(false); menuButton.current?.focus(); } }}>
           <Link href={`/${locale}#projects`}>{t.nav.projects}</Link>
           <Link href={`/${locale}#alternatives`}>{t.nav.alternatives}</Link>
           <Link href={`/${locale}/compare`}>
@@ -41,7 +47,7 @@ export function SiteShell({ locale, children }: SiteShellProps) {
           </Link>
         </nav>
       </header>
-      <main>{children}</main>
+      <main id="main-content" tabIndex={-1}>{children}</main>
       <footer className="site-footer">
         <div className="footer-brand">
           <strong>selfhost.io.vn</strong>
