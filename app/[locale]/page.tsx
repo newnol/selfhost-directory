@@ -88,47 +88,27 @@ export default async function LocaleHome({
       />
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">{t.hero.eyebrow}</p>
+
           <h1>{t.hero.title}</h1>
           <p>{t.hero.copy}</p>
           <div className="hero-actions">
             <Link className="button primary" href="#projects">
               {t.hero.primary}
             </Link>
-            <Link className="button secondary" href={`/${locale}/submit-project`}>
-              {t.hero.secondary}
+            <Link className="button secondary" href={`/${locale}/advisor`}>
+              {locale === "vi" ? "Tìm theo máy chủ" : "Find a fit for your server"}
             </Link>
           </div>
         </div>
-        <aside className="hero-guide" aria-label={locale === "vi" ? "Bắt đầu" : "Getting started"}>
-          <p className="eyebrow">{locale === "vi" ? "Từ khám phá đến triển khai" : "From discovery to deployment"}</p>
-          <Link href="#projects"><span>01</span><div><strong>{locale === "vi" ? "Khám phá thư mục" : "Explore the directory"}</strong><p>{projects.length} {locale === "vi" ? "dự án · 6 danh mục" : "projects · 6 categories"}</p></div><span aria-hidden="true">↗</span></Link>
-          <Link href={`/${locale}/compare`}><span>02</span><div><strong>{locale === "vi" ? "So sánh các lựa chọn" : "Compare your shortlist"}</strong><p>{locale === "vi" ? "Yêu cầu, giấy phép và triển khai" : "Requirements, licenses & deployment"}</p></div><span aria-hidden="true">↗</span></Link>
-          <Link href={`/${locale}/advisor`}><span>03</span><div><strong>{locale === "vi" ? "Kiểm tra máy chủ" : "Find a fit for your server"}</strong><p>{locale === "vi" ? "Gợi ý theo tài nguyên của bạn" : "Recommendations for your hardware"}</p></div><span aria-hidden="true">↗</span></Link>
-        </aside>
-      </section>
-
-
-      <section className="section" id="categories">
-        <div className="section-heading">
-          <p className="eyebrow">Categories</p>
-          <h2>{locale === "vi" ? "Duyệt theo danh mục" : "Browse by category"}</h2>
-          <p>
-            {locale === "vi"
-              ? "Bắt đầu từ nhu cầu của bạn. Khám phá công cụ theo danh mục."
-              : "Start with what you want to do. Explore tools by category."}
-          </p>
-        </div>
-        <div className="category-grid">
-          {categories.map((category) => (
-            <Link className="category-card" key={category.slug} href={`/${locale}/categories/${category.slug}`}>
-              <span className="category-index" aria-hidden="true">{String(categories.indexOf(category) + 1).padStart(2, "0")}</span>
-              <h3>{category.title[locale]}</h3>
-              <p>{category.description[locale]}</p>
-              <span className="category-count">{category.count} projects</span>
-            </Link>
-          ))}
-        </div>
+        <nav className="topology" aria-label={locale === "vi" ? "Danh mục phần mềm" : "Software categories"}>
+          <div className="topology-core"><span>SELFHOST / INDEX</span><strong>{locale === "vi" ? "Bản đồ thư mục" : "Catalog map"}</strong><small>{projects.length} {locale === "vi" ? "dự án trong thư mục" : "cataloged projects"}</small></div>
+          <div className="topology-nodes">
+            {categories.map((category, index) => <Link className="topology-node" key={category.slug} href={`/${locale}/categories/${category.slug}`}>
+              <span className="topology-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <strong>{category.title[locale]}</strong><small>{category.count} {locale === "vi" ? "dự án" : "projects"}</small>
+            </Link>)}
+          </div>
+        </nav>
       </section>
 
       <SearchFilter
@@ -150,7 +130,7 @@ export default async function LocaleHome({
 
       <section className="section" id="alternatives">
         <div className="section-heading">
-          <p className="eyebrow">Use cases</p>
+
           <h2>{t.sections.useCases}</h2>
         </div>
         <div className="use-case-grid">
@@ -158,6 +138,7 @@ export default async function LocaleHome({
             <Link className="use-case" key={useCase.slug} href={`/${locale}/alternatives/${useCase.slug}`}>
               <h3>{useCase.title[locale]}</h3>
               <p>{useCase.description[locale]}</p>
+              <span className="text-link">{locale === "vi" ? "Khám phá lựa chọn" : "Explore alternatives"}</span>
             </Link>
           ))}
         </div>
@@ -165,7 +146,7 @@ export default async function LocaleHome({
 
       <section className="submit-band">
         <div>
-          <p className="eyebrow">Review queue</p>
+
           <h2>{t.sections.submit}</h2>
           <p>
             {locale === "vi"

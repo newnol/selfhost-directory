@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
 import { categories } from "@/data/categories";
 import { ProjectCard } from "@/components/project-card";
@@ -16,9 +17,11 @@ type SearchFilterProps = { locale: Locale; projects: ProjectCardData[]; placehol
 export function SearchFilter({ locale, projects, placeholder }: SearchFilterProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
+  const [deploy, setDeploy] = useState("");
+  const [selected, setSelected] = useState<string[]>([]);
   const vi = locale === "vi";
   const q = query.trim().toLocaleLowerCase();
-  const filtered = projects.filter(project => (!category || project.categorySlug === category) &&
+  const filtered = projects.filter(project => (!category || project.categorySlug === category) && (!deploy || project.deploy === deploy) &&
     (!q || [project.name, project.summary[locale], ...project.tags].some(value => value.toLocaleLowerCase().includes(q))));
   return (
     <section className="search-filter section" id="projects" aria-labelledby="catalog-title">
@@ -40,10 +43,12 @@ export function SearchFilter({ locale, projects, placeholder }: SearchFilterProp
             {categories.map(item => <option key={item.slug} value={item.slug}>{item.title[locale]}</option>)}
           </select>
         </label>
-        <button className="button secondary" type="button" disabled={!query && !category} onClick={() => { setQuery(""); setCategory(""); }}>{vi ? "Đặt lại" : "Reset filters"}</button>
+        <label>{vi ? "Triển khai" : "Deployment"}<select name="deploy" value={deploy} onChange={e => setDeploy(e.target.value)}><option value="">{vi ? "Tất cả cách triển khai" : "All deployments"}</option>{["Docker", "Docker Compose", "Helm", "Binary"].map(value => <option key={value}>{value}</option>)}</select></label>
+        <button className="button secondary" type="button" disabled={!query && !category && !deploy} onClick={() => { setQuery(""); setCategory(""); setDeploy(""); }}>{vi ? "Đặt lại" : "Reset filters"}</button>
       </div>
       <p className="search-results-heading" role="status">{filtered.length} {vi ? "dự án" : "projects"}</p>
-      {filtered.length ? <div className="project-grid">{filtered.map(project => <ProjectCard key={project.slug} locale={locale} project={project} />)}</div> :
+      <div className="catalog-compare" aria-label={vi ? "Chọn dự án để so sánh" : "Compare selection"}><p role="status">{selected.length}/3 {vi ? "đã chọn để so sánh" : "selected to compare"}</p>{selected.map(id => <button type="button" className="compare-chip" key={id} onClick={() => setSelected(selected.filter(item => item !== id))} aria-label={`${vi ? "Bỏ chọn" : "Remove"} ${projects.find(p => p.slug === id)!.name}`}>{projects.find(p => p.slug === id)!.name} ×</button>)}{selected.length >= 2 ? <Link className="button primary" href={`/${locale}/compare?projects=${selected.join(",")}`}>{vi ? "So sánh" : "Compare selected"}</Link> : <span>{vi ? "Chọn 2–3 dự án" : "Choose 2–3 projects"}</span>}</div>
+      {filtered.length ? <div className="project-grid">{filtered.map(project => <div className="catalog-item" key={project.slug}><ProjectCard locale={locale} project={project} /><label className="card-compare"><input name="compare-project" type="checkbox" checked={selected.includes(project.slug)} disabled={selected.length === 3 && !selected.includes(project.slug)} onChange={() => setSelected(current => current.includes(project.slug) ? current.filter(id => id !== project.slug) : current.length < 3 ? [...current, project.slug] : current)} />{vi ? "So sánh" : "Compare"} {project.name}</label></div>)}</div> :
         <div className="empty-state"><h3>{vi ? "Không tìm thấy dự án" : "No projects found"}</h3><p>{vi ? "Thử từ khóa khác hoặc đặt lại bộ lọc." : "Try another keyword or reset your filters."}</p></div>}
     </section>
   );

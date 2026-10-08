@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ComparePicker } from "@/components/compare-picker";
 import { ResourceChecks } from "@/components/resource-checks";
 import { projects as catalog } from "@/data/projects";
 import { isLocale } from "@/lib/i18n";
@@ -30,20 +31,7 @@ export default async function ComparePage({
     <article className="detail-page">
       <h1>{t.compare}</h1>
       <p>{t.choose}</p>
-      <form method="get" className="planning-panel">
-        <label>
-          {t.compare}
-          <select name="projects" multiple size={6} defaultValue={ids} aria-describedby="compare-help">
-            {catalog.map((p) => (
-              <option key={p.slug} value={p.slug}>
-                {p.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <p id="compare-help">{locale === "vi" ? "Chọn 2–3 dự án. Trên máy tính, giữ Ctrl hoặc ⌘ để chọn nhiều mục; dùng Shift + phím mũi tên bằng bàn phím." : "Choose 2–3 projects. On desktop, hold Ctrl or ⌘ to select multiple; use Shift + arrow keys with a keyboard."}</p>
-        <button type="submit">{t.compare}</button>
-      </form>
+      <ComparePicker locale={locale} projects={catalog.map(p => ({slug:p.slug,name:p.name,category:p.category}))} initial={ids} />
       {valid ? (
         <div className="compare-scroll" tabIndex={0} role="region" aria-label={t.compare}>
           <table>

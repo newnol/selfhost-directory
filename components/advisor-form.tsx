@@ -23,6 +23,7 @@ export function AdvisorForm({
   return (
     <section className="planning-panel advisor-panel">
       <form
+        onInvalid={e => { const details = (e.target as HTMLElement).closest("details"); if (details) details.open = true; }}
         onSubmit={async (e) => {
           e.preventDefault();
           const form = new FormData(e.currentTarget);
@@ -51,7 +52,8 @@ export function AdvisorForm({
           }
         }}
       >
-        <HardwareFields locale={locale} />
+        <details className="advisor-step" open>
+          <summary>01 · {locale === "vi" ? "Nhu cầu" : "Your needs"}</summary>
         {[
           { name: "useCase", title: t.need, options: useCases },
           { name: "category", title: t.category, options: categories },
@@ -68,6 +70,14 @@ export function AdvisorForm({
             </select>
           </label>
         ))}
+        </details>
+        <details className="advisor-step" open>
+          <summary>02 · {locale === "vi" ? "Máy chủ" : "Your server"}</summary>
+          <p>{locale === "vi" ? "Nhập tài nguyên còn trống, không phải tổng cấu hình." : "Use available resources, not your server’s total capacity."}</p>
+          <HardwareFields locale={locale} />
+        </details>
+        <details className="advisor-step">
+          <summary>03 · {locale === "vi" ? "Triển khai" : "Deployment"}</summary>
         <label>
           {t.deploy}
           <select name="deploy">
@@ -81,15 +91,18 @@ export function AdvisorForm({
           <input name="useClaude" type="checkbox" />
           {t.claude}
         </label>
+        </details>
         <button type="submit" disabled={busy}>
           {busy ? t.loading : t.send}
         </button>
       </form>
-      <div aria-live="polite">
+      <div aria-live="polite" aria-busy={busy}>
+        {busy && <p role="status">{t.loading}</p>}
         {!result && !busy && !error && <div className="advisor-empty"><p className="eyebrow">{locale === "vi" ? "Bước tiếp theo" : "Up next"}</p><h2>{locale === "vi" ? "Danh sách gợi ý bắt đầu tại đây" : "Your shortlist starts here"}</h2><p>{locale === "vi" ? "Nhập tài nguyên máy chủ và nhu cầu để nhận gợi ý từ thư mục. Các yêu cầu chưa rõ sẽ được ghi rõ, không coi là tương thích." : "Tell us about your server and needs to get catalog-backed suggestions. Unknown requirements stay unknown—not a promise of compatibility."}</p></div>}
         {error && <p role="alert">{t.error}</p>}
         {result && (
           <>
+            <h2>{locale === "vi" ? "Gợi ý từ thư mục" : "Your catalog shortlist"}</h2>
             <p>
               {result.mode}: {result.caveat}
             </p>
