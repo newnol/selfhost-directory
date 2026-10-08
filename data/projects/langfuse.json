@@ -1,0 +1,62 @@
+{
+  "slug": "langfuse",
+  "name": "Langfuse",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/langfuse.svg",
+  "categorySlug": "ai",
+  "category": "LLM Observability",
+  "tags": [
+    "llm",
+    "observability",
+    "tracing"
+  ],
+  "stack": [
+    "TypeScript",
+    "PostgreSQL",
+    "Docker"
+  ],
+  "license": "MIT",
+  "deploy": "Docker Compose",
+  "requirements": "2 CPU, 2 GB RAM",
+  "score": 80,
+  "links": {
+    "source": "https://github.com/langfuse/langfuse",
+    "docs": "https://langfuse.com/docs",
+    "demo": "https://cloud.langfuse.com"
+  },
+  "summary": {
+    "vi": "Công cụ observability cho LLM, theo dõi traces, chi phí và chất lượng của ứng dụng AI.",
+    "en": "An LLM observability tool for tracing, cost tracking, and quality monitoring of AI applications."
+  },
+  "notes": {
+    "vi": "Nên chạy cùng PostgreSQL riêng. Tích hợp bằng SDK vào ứng dụng AI để gửi traces.",
+    "en": "Run with a dedicated PostgreSQL instance. Integrate via SDK into AI applications to send traces."
+  },
+  "deployGuide": {
+    "vi": {
+      "overview": "Chạy bằng Docker Compose với PostgreSQL. Tích hợp SDK vào ứng dụng để bắt đầu thu thập traces.",
+      "steps": [
+        "Tạo file docker-compose với Langfuse và PostgreSQL.",
+        "Cấu hình biến môi trường: database, secret key và domain.",
+        "Chạy Docker Compose và truy cập web UI.",
+        "Tạo project và lấy API keys.",
+        "Tích hợp Langfuse SDK vào ứng dụng AI để gửi traces."
+      ],
+      "backup": "Backup database PostgreSQL chứa toàn bộ traces và project settings."
+    },
+    "en": {
+      "overview": "Run with Docker Compose using PostgreSQL. Integrate the SDK into applications to collect traces.",
+      "steps": [
+        "Create docker-compose file with Langfuse and PostgreSQL.",
+        "Configure environment variables: database, secret key, and domain.",
+        "Run Docker Compose and access the web UI.",
+        "Create a project and obtain API keys.",
+        "Integrate Langfuse SDK into AI applications to send traces."
+      ],
+      "backup": "Back up the PostgreSQL database containing all traces and project settings."
+    }
+  },
+  "deploySnippets": {
+    "dockerCompose": "services:\n  langfuse:\n    image: langfuse/langfuse:latest\n    container_name: langfuse\n    environment:\n      DATABASE_URL: \"postgresql://langfuse:CHANGEME_db_password@postgres:5432/langfuse\" # CHANGE THIS\n      NEXTAUTH_URL: \"http://SERVER_IP:3000\"\n      NEXTAUTH_SECRET: \"change-me-generate-with-openssl-rand-base64-32\" # CHANGE THIS\n      SALT: \"change-me-generate-with-openssl-rand-base64-32\" # CHANGE THIS\n    ports:\n      - \"3000:3000\"\n    depends_on:\n      - postgres\n    restart: unless-stopped\n\n  postgres:\n    image: postgres:16-alpine\n    container_name: langfuse_postgres\n    environment:\n      POSTGRES_USER: langfuse\n      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS\n      POSTGRES_DB: langfuse\n    volumes:\n      - ./postgres:/var/lib/postgresql/data\n    restart: unless-stopped",
+    "setupScript": "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://langfuse.com/docs"
+  }
+}

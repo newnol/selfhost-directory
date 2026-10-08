@@ -1,0 +1,73 @@
+{
+  "slug": "nextcloud",
+  "name": "Nextcloud",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nextcloud.svg",
+  "categorySlug": "media",
+  "category": "File Sync & Share",
+  "tags": [
+    "google-drive",
+    "dropbox",
+    "files"
+  ],
+  "stack": [
+    "PHP",
+    "PostgreSQL",
+    "Docker"
+  ],
+  "license": "AGPL-3.0",
+  "deploy": "Docker Compose",
+  "requirements": "Host sizing unknown; upstream RAM figures are per process",
+  "structuredRequirements": {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://docs.nextcloud.com/server/stable/admin_manual/installation/system_requirements.html",
+      "checkedAt": "2026-10-07",
+      "note": {
+        "en": "Nextcloud 35 stable manual: 128MB minimum / 512MB recommended RAM per process; updater needs 256MB. These are NOT total host or Compose stack requirements, so host RAM thresholds remain unknown. Users, apps and activity change sizing; database memory is additional. 64-bit CPU/OS/PHP is recommended, not an amd64/arm64 image support declaration; CPU, disk and image architectures remain unknown.",
+        "vi": "Tài liệu nêu 128 MB RAM tối thiểu và 512 MB khuyến nghị cho mỗi tiến trình, không phải cho cả máy. Phải tính thêm database, số người dùng, ứng dụng và hoạt động đồng bộ. Dùng cron và Redis khi phù hợp, rồi đo tải thực tế trước khi chọn cấu hình."
+      }
+    }
+  },
+  "score": 86,
+  "links": {
+    "source": "https://github.com/nextcloud/server",
+    "docs": "https://docs.nextcloud.com",
+    "demo": "https://try.nextcloud.com"
+  },
+  "summary": {
+    "vi": "Nền tảng đồng bộ và chia sẻ file tự host, thay thế Google Drive và Dropbox với nhiều plugin mở rộng.",
+    "en": "A self-hosted file sync and share platform, replacing Google Drive and Dropbox with extensive plugin support."
+  },
+  "notes": {
+    "vi": "Tài liệu nêu 128 MB RAM tối thiểu và 512 MB khuyến nghị cho mỗi tiến trình, không phải cho cả máy. Phải tính thêm database, số người dùng, ứng dụng và hoạt động đồng bộ. Dùng cron và Redis khi phù hợp, rồi đo tải thực tế trước khi chọn cấu hình.",
+    "en": "The manual specifies 128 MB minimum and 512 MB recommended RAM per process, not for the entire host. Size the database, users, apps and sync activity separately. Configure cron and Redis where appropriate, then measure your workload before choosing host capacity."
+  },
+  "deployGuide": {
+    "vi": {
+      "overview": "Chạy bằng Docker Compose với PostgreSQL và Redis. Cần cấu hình domain và trusted_domains đúng.",
+      "steps": [
+        "Tạo thư mục dữ liệu và cấu hình cho Nextcloud.",
+        "Chạy Docker Compose với Nextcloud, PostgreSQL và Redis.",
+        "Truy cập web UI, tạo tài khoản admin và cấu hình trusted_domains.",
+        "Cài đặt cron job (system cron hoặc webcron) để xử lý background tasks.",
+        "Đặt reverse proxy HTTPS và cấu hình overwrite.cli.url."
+      ],
+      "backup": "Backup thư mục data, database PostgreSQL và file config.php. Nên test restore định kỳ."
+    },
+    "en": {
+      "overview": "Run with Docker Compose using PostgreSQL and Redis. Domain and trusted_domains must be configured correctly.",
+      "steps": [
+        "Create data and config directories for Nextcloud.",
+        "Run Docker Compose with Nextcloud, PostgreSQL, and Redis.",
+        "Access the web UI, create an admin account, and configure trusted_domains.",
+        "Set up cron jobs (system cron or webcron) for background tasks.",
+        "Put HTTPS reverse proxy in front and configure overwrite.cli.url."
+      ],
+      "backup": "Back up the data directory, PostgreSQL database, and config.php. Test restores regularly."
+    }
+  },
+  "deploySnippets": {
+    "dockerCompose": "services:\n  nextcloud:\n    image: nextcloud:stable\n    container_name: nextcloud\n    volumes:\n      - ./html:/var/www/html\n      - ./data:/var/www/html/data\n    environment:\n      POSTGRES_HOST: postgres\n      POSTGRES_DB: nextcloud\n      POSTGRES_USER: nextcloud\n      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS\n      REDIS_HOST: redis\n    ports:\n      - \"8080:80\"\n    depends_on:\n      - postgres\n      - redis\n    restart: unless-stopped\n\n  postgres:\n    image: postgres:16-alpine\n    container_name: nextcloud_postgres\n    environment:\n      POSTGRES_USER: nextcloud\n      POSTGRES_PASSWORD: CHANGEME_db_password # CHANGE THIS\n      POSTGRES_DB: nextcloud\n    volumes:\n      - ./postgres:/var/lib/postgresql/data\n    restart: unless-stopped\n\n  redis:\n    image: redis:7-alpine\n    container_name: nextcloud_redis\n    restart: unless-stopped",
+    "setupScript": "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://docs.nextcloud.com"
+  }
+}

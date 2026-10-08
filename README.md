@@ -20,7 +20,7 @@ Browse `/vi` or `/en`. Existing category, project, SaaS-alternative and submissi
 
 ## Planning MVP
 
-- Catalog: 18 project modules in [data/projects](data/projects), [categories](data/categories.ts), [use cases](data/use-cases.ts). `data/projects.ts` preserves public exports and validates the catalog at runtime. CI also validates it explicitly.
+- Catalog: 28 project modules in [data/projects](data/projects), [categories](data/categories.ts), [use cases](data/use-cases.ts). Project metadata lives in per-project JSON data files rather than repeated TypeScript object code. Typed boundary modules parse every project with the runtime schema; `data/projects.ts` preserves public exports and validates cross-catalog references at runtime. CI also validates it explicitly.
 - Project pages: hardware calculator (CPU cores, **available** RAM/disk in GiB, amd64/arm64). Results: below minimum, minimum, recommended, unknown or architecture mismatch. Meeting a threshold is not a guarantee. Unknown fields never mean compatible; no headroom, GPU, storage growth or combined-stack calculation is implied.
 - Compare: `/en/compare?projects=immich,jellyfin` (also `/vi/compare`), 2–3 distinct catalog slugs; selector supports repeated `projects` parameters.
 - Advisor: `/en/advisor`, `/vi/advisor`, `POST /api/advisor`. Structured catalog/use-case/deployment filters, curated use-case ordering (catalog order without a use case), at most three choices, with localized editorial tradeoffs, per-resource checks and source provenance. No free-form chat, stack builder, scanner, troubleshooter, cost planner or executable Compose generation.

@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "google-photos",
+    "title": {
+      "vi": "Thay thế Google Photos",
+      "en": "Google Photos alternatives"
+    },
+    "description": {
+      "vi": "Lưu ảnh, video và thư viện gia đình trên hạ tầng của bạn.",
+      "en": "Keep photos, videos, and family libraries on infrastructure you control."
+    },
+    "projectSlugs": [
+      "immich"
+    ]
+  },
+  {
+    "slug": "google-drive",
+    "title": {
+      "vi": "Thay thế Google Drive",
+      "en": "Google Drive alternatives"
+    },
+    "description": {
+      "vi": "Lưu trữ, đồng bộ và chia sẻ file trên server riêng thay vì dùng cloud bên thứ ba.",
+      "en": "Store, sync, and share files on your own server instead of third-party cloud storage."
+    },
+    "projectSlugs": [
+      "nextcloud"
+    ]
+  },
+  {
+    "slug": "plex",
+    "title": {
+      "vi": "Thay thế Plex",
+      "en": "Plex alternatives"
+    },
+    "description": {
+      "vi": "Stream phim, nhạc và media cá nhân mà không phụ thuộc dịch vụ trả phí.",
+      "en": "Stream movies, music, and personal media without relying on paid services."
+    },
+    "projectSlugs": [
+      "jellyfin"
+    ]
+  },
+  {
+    "slug": "airtable",
+    "title": {
+      "vi": "Thay thế Airtable",
+      "en": "Airtable alternatives"
+    },
+    "description": {
+      "vi": "Quản lý dữ liệu dạng bảng cho vận hành, CRM nhỏ hoặc internal tools.",
+      "en": "Manage tabular data for operations, lightweight CRM, and internal tools."
+    },
+    "projectSlugs": [
+      "nocodb"
+    ]
+  },
+  {
+    "slug": "zapier",
+    "title": {
+      "vi": "Thay thế Zapier",
+      "en": "Zapier alternatives"
+    },
+    "description": {
+      "vi": "Tự động hóa workflow, kết nối các dịch vụ mà không cần trả phí theo số lượng task.",
+      "en": "Automate workflows and connect services without paying per task execution."
+    },
+    "projectSlugs": [
+      "n8n"
+    ]
+  },
+  {
+    "slug": "notion",
+    "title": {
+      "vi": "Thay thế Notion",
+      "en": "Notion alternatives"
+    },
+    "description": {
+      "vi": "Wiki, tài liệu và cơ sở kiến thức cho team, lưu trữ trên hạ tầng riêng.",
+      "en": "Team wikis, docs, and knowledge bases hosted on your own infrastructure."
+    },
+    "projectSlugs": [
+      "outline"
+    ]
+  },
+  {
+    "slug": "linear-jira",
+    "title": {
+      "vi": "Thay thế Linear/Jira",
+      "en": "Linear/Jira alternatives"
+    },
+    "description": {
+      "vi": "Quản lý issue, sprint và roadmap mà vẫn giữ dữ liệu trong hệ thống riêng.",
+      "en": "Manage issues, sprints, and roadmaps while keeping data on your own stack."
+    },
+    "projectSlugs": [
+      "plane",
+      "vikunja"
+    ]
+  },
+  {
+    "slug": "vps-monitoring",
+    "title": {
+      "vi": "Monitor VPS và website",
+      "en": "VPS and website monitoring"
+    },
+    "description": {
+      "vi": "Theo dõi uptime, cảnh báo downtime và công bố status page.",
+      "en": "Track uptime, alert on downtime, and publish status pages."
+    },
+    "projectSlugs": [
+      "uptime-kuma",
+      "grafana",
+      "netdata"
+    ]
+  },
+  {
+    "slug": "chatgpt",
+    "title": {
+      "vi": "Thay thế ChatGPT",
+      "en": "ChatGPT alternatives"
+    },
+    "description": {
+      "vi": "Chạy AI chat và LLM trên server riêng, bảo mật dữ liệu và không giới hạn sử dụng.",
+      "en": "Run AI chat and LLMs on your own server for data privacy and unlimited usage."
+    },
+    "projectSlugs": [
+      "open-webui",
+      "ollama"
+    ]
+  }
+]

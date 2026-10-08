@@ -1,0 +1,75 @@
+{
+  "slug": "ollama",
+  "name": "Ollama",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/ollama.svg",
+  "categorySlug": "ai",
+  "category": "Local LLM",
+  "tags": [
+    "llm",
+    "ai",
+    "local"
+  ],
+  "stack": [
+    "Go",
+    "Docker"
+  ],
+  "license": "MIT",
+  "deploy": "Docker",
+  "requirements": "amd64 / arm64 Linux packages; model-dependent host sizing unknown",
+  "structuredRequirements": {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://docs.ollama.com/linux",
+      "checkedAt": "2026-10-07",
+      "note": {
+        "en": "Official Linux guide provides amd64 and ARM64 packages (binary platform evidence, not Docker manifest verification). Host CPU, RAM and disk thresholds remain unknown. Official FAQ https://docs.ollama.com/faq describes model placement across system RAM and GPU memory; context, concurrency and model choice affect sizing. No model-specific memory claim is treated as a universal host minimum.",
+        "vi": "Không có một mức RAM cố định áp dụng cho mọi model 7B. Nhu cầu còn phụ thuộc lượng tử hóa, độ dài ngữ cảnh, số request đồng thời và phần model nằm trong RAM hay VRAM. Chọn model trước, theo dõi bằng `ollama ps` rồi đo tải; dung lượng ổ đĩa phụ thuộc các model đã tải."
+      }
+    },
+    "architectures": [
+      "amd64",
+      "arm64"
+    ]
+  },
+  "score": 90,
+  "links": {
+    "source": "https://github.com/ollama/ollama",
+    "docs": "https://ollama.com/library"
+  },
+  "summary": {
+    "vi": "Chạy các mô hình LLM trên máy local hoặc server riêng, hỗ trợ nhiều model như Llama, Mistral, Gemma.",
+    "en": "Run LLM models locally on your own machine or server, supporting models like Llama, Mistral, and Gemma."
+  },
+  "notes": {
+    "vi": "Không có một mức RAM cố định áp dụng cho mọi model 7B. Nhu cầu còn phụ thuộc lượng tử hóa, độ dài ngữ cảnh, số request đồng thời và phần model nằm trong RAM hay VRAM. Chọn model trước, theo dõi bằng `ollama ps` rồi đo tải; dung lượng ổ đĩa phụ thuộc các model đã tải.",
+    "en": "There is no single RAM minimum for every 7B model. Quantization, context length, concurrent requests and CPU/GPU placement all affect memory needs. Choose the model first, inspect placement with `ollama ps`, and measure your workload; disk use depends on downloaded models."
+  },
+  "deployGuide": {
+    "vi": {
+      "overview": "Chạy một container Docker đơn giản. Tải model sau khi khởi động.",
+      "steps": [
+        "Chạy container Ollama với volume lưu trữ models.",
+        "Tải model đầu tiên bằng lệnh `ollama pull llama3.2`.",
+        "Test bằng `ollama run llama3.2` hoặc gọi API tại port 11434.",
+        "Kết hợp với Open WebUI để có giao diện chat.",
+        "Cấu hình GPU passthrough nếu có NVIDIA GPU."
+      ],
+      "backup": "Models có thể tải lại. Backup thư mục cấu hình nếu có custom Modelfiles."
+    },
+    "en": {
+      "overview": "Run a simple Docker container. Pull models after startup.",
+      "steps": [
+        "Run the Ollama container with a volume for model storage.",
+        "Pull the first model with `ollama pull llama3.2`.",
+        "Test with `ollama run llama3.2` or call the API at port 11434.",
+        "Pair with Open WebUI for a chat interface.",
+        "Configure GPU passthrough if an NVIDIA GPU is available."
+      ],
+      "backup": "Models can be re-downloaded. Back up the config directory if you have custom Modelfiles."
+    }
+  },
+  "deploySnippets": {
+    "dockerCompose": "services:\n  ollama:\n    image: ollama/ollama:latest\n    container_name: ollama\n    volumes:\n      - ./models:/root/.ollama\n    ports:\n      - \"11434:11434\"\n    restart: unless-stopped",
+    "setupScript": "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://ollama.com/library"
+  }
+}

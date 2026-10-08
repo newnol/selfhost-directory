@@ -32,7 +32,7 @@ import p27 from "./projects/searxng";
 
 import { categories } from "./categories";
 import { useCases } from "./use-cases";
-import { validateCatalog } from "../lib/catalog-validation";
+import { loadCatalog } from "../lib/catalog-loading";
 export const projects = [
   p0,
   p1,
@@ -63,7 +63,7 @@ export const projects = [
   p26,
   p27,
 ];
-validateCatalog(projects, categories, useCases);
+loadCatalog(projects, categories, useCases);
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
