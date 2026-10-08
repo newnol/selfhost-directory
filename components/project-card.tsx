@@ -19,7 +19,6 @@ export function ProjectCard({ locale, project }: ProjectCardProps) {
             <h3>{project.name}</h3>
           </div>
         </div>
-        <span className="score">{project.score}</span>
       </div>
       <p>{project.summary[locale]}</p>
       <div className="tag-row">

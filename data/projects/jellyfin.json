@@ -1,0 +1,72 @@
+{
+  "slug": "jellyfin",
+  "name": "Jellyfin",
+  "iconUrl": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg",
+  "categorySlug": "media",
+  "category": "Media Server",
+  "tags": [
+    "plex",
+    "media",
+    "streaming"
+  ],
+  "stack": [
+    "C#",
+    "Docker"
+  ],
+  "license": "GPL-2.0",
+  "deploy": "Docker",
+  "requirements": "Hardware / storage depend on media and transcoding; host thresholds unknown",
+  "structuredRequirements": {
+    "provenance": {
+      "kind": "documented",
+      "source": "https://jellyfin.org/docs/general/administration/hardware-selection/",
+      "checkedAt": "2026-10-07",
+      "note": {
+        "en": "Hardware-selection recommendations are not universal minima. RAM and CPU examples are tied to integrated/dedicated GPU scenarios and are not promoted to host thresholds. The shared 100GB SSD recommendation covers OS, Jellyfin files and transcoding cache; media library and concurrent-transcode needs still vary. Numeric host thresholds and image architectures remain unknown.",
+        "vi": "Phân biệt phát trực tiếp với chuyển mã trước khi chọn máy. Các cấu hình RAM trong hướng dẫn gắn với GPU cụ thể, nên không coi là mức tối thiểu chung. Mốc SSD 100 GB dành cho hệ điều hành, tệp Jellyfin và cache chuyển mã, chưa thay thế kế hoạch dung lượng thư viện media; kiểm tra codec và GPU của bạn."
+      }
+    }
+  },
+  "score": 89,
+  "links": {
+    "source": "https://github.com/jellyfin/jellyfin",
+    "docs": "https://jellyfin.org/docs/",
+    "demo": "https://demo.jellyfin.org/web/"
+  },
+  "summary": {
+    "vi": "Media server mã nguồn mở, phát phim, nhạc và ảnh cá nhân thay cho Plex.",
+    "en": "A free and open-source media server for streaming movies, music, and photos as a Plex alternative."
+  },
+  "notes": {
+    "vi": "Phân biệt phát trực tiếp với chuyển mã trước khi chọn máy. Các cấu hình RAM trong hướng dẫn gắn với GPU cụ thể, nên không coi là mức tối thiểu chung. Mốc SSD 100 GB dành cho hệ điều hành, tệp Jellyfin và cache chuyển mã, chưa thay thế kế hoạch dung lượng thư viện media; kiểm tra codec và GPU của bạn.",
+    "en": "Distinguish direct play from transcoding before choosing hardware. RAM guidance is tied to specific GPU configurations, not a universal minimum. The 100 GB SSD recommendation covers the OS, Jellyfin files and transcoding cache; it does not replace media-library capacity planning. Check your codecs and GPU."
+  },
+  "deployGuide": {
+    "vi": {
+      "overview": "Chạy một container Docker duy nhất, mount thư mục media và cấu hình transcoding nếu cần.",
+      "steps": [
+        "Tạo thư mục lưu trữ media (phim, nhạc, ảnh) trên host.",
+        "Chạy container Jellyfin với volume mount cho media và config.",
+        "Mở web UI, tạo tài khoản admin và cấu hình thư viện media.",
+        "Bật hardware transcoding trong Settings nếu có GPU.",
+        "Đặt reverse proxy HTTPS nếu truy cập từ internet."
+      ],
+      "backup": "Backup thư mục config chứa database và metadata. Media files nên có backup riêng."
+    },
+    "en": {
+      "overview": "Run a single Docker container, mount media directories, and configure transcoding if needed.",
+      "steps": [
+        "Create media storage directories (movies, music, photos) on the host.",
+        "Run the Jellyfin container with volume mounts for media and config.",
+        "Open the web UI, create an admin account, and configure media libraries.",
+        "Enable hardware transcoding in Settings if a GPU is available.",
+        "Put an HTTPS reverse proxy in front for internet access."
+      ],
+      "backup": "Back up the config directory containing the database and metadata. Media files need separate backup."
+    }
+  },
+  "deploySnippets": {
+    "dockerCompose": "services:\n  jellyfin:\n    image: jellyfin/jellyfin:latest\n    container_name: jellyfin\n    volumes:\n      - ./config:/config\n      - ./cache:/cache\n      - /path/to/media:/media:ro\n    ports:\n      - \"8096:8096\"\n    environment:\n      JELLYFIN_PublishedServerUrl: \"http://SERVER_IP:8096\"\n    restart: unless-stopped",
+    "setupScript": "# No executable setup script; follow current official documentation.\n# Không có script cài đặt; xem tài liệu chính thức hiện hành.\n# https://jellyfin.org/docs/"
+  }
+}
