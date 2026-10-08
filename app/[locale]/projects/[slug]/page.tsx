@@ -91,15 +91,21 @@ export default async function ProjectPage({
         <p>{project.summary[locale]}</p>
       </div>
 
+      <nav className="detail-jump-links" aria-label={locale === "vi" ? "Nội dung dự án" : "On this page"}>
+        <a href="#requirements">{locale === "vi" ? "01 · Yêu cầu máy chủ" : "01 · Server requirements"}</a>
+        <a href="#review">{locale === "vi" ? "02 · Ghi chú" : "02 · Review notes"}</a>
+        <a href="#deployment">{locale === "vi" ? "03 · Triển khai" : "03 · Deployment"}</a>
+      </nav>
       <div className="detail-grid">
         <section className="detail-main">
-          <CompatibilityCalculator
+          <div id="requirements"><CompatibilityCalculator
             locale={locale}
             requirements={project.structuredRequirements}
-          />
-          <h2>{locale === "vi" ? "Ghi chú review" : "Review notes"}</h2>
+          /></div>
+          <h2 id="review">{locale === "vi" ? "Ghi chú review" : "Review notes"}</h2>
           <p>{project.notes[locale]}</p>
 
+          <div id="deployment">
           {project.slug !== "uptime-kuma" && <>
           <h2>{locale === "vi" ? "Hướng dẫn deploy" : "Deployment guide"}</h2>
           <p>{project.deployGuide[locale].overview}</p>
@@ -135,6 +141,7 @@ export default async function ProjectPage({
               copiedLabel={locale === "vi" ? "Đã copy" : "Copied"}
             />
           </section>}
+          </div>
 
           <h2>{t.stack}</h2>
           <div className="tag-row">

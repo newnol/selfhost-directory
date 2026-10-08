@@ -1,0 +1,10 @@
+
+> selfhost-directory@0.1.0 test:deployment-docs /home/newnol/orca/projects/selfhost-directory
+> tsx scripts/deployment-docs-smoke.ts
+
+▲ Next.js 16.2.6
+- Local:         http://127.0.0.1:37601
+- Network:       http://127.0.0.1:37601
+✓ Ready in 157ms
+Deployment docs smoke passed: 30 traces; 56 exact markdown bodies; index/full/308 alias; 10 404s; 3 exact downloads + HEAD, MIME, immutable/nosniff/attachment; SHA256 8e4c349924b3dfce76cc8a4bb2bda2009ef264e2a84aedceb7d70b735f378035
+Cleanup verified: port 37601 closed

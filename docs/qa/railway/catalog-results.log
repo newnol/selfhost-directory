@@ -1,0 +1,5 @@
+
+> selfhost-directory@0.1.0 validate:catalog /home/newnol/orca/projects/selfhost-directory
+> tsx scripts/validate-catalog.ts
+
+Catalog valid: 28 projects, 6 categories, 9 use cases

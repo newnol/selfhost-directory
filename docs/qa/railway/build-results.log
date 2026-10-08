@@ -1,0 +1,90 @@
+
+> selfhost-directory@0.1.0 build /home/newnol/orca/projects/selfhost-directory
+> next build
+
+▲ Next.js 16.2.6 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 8.2s
+  Running TypeScript ...
+  Finished TypeScript in 5.2s ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/107) ...
+  Generating static pages using 1 worker (26/107)
+  Generating static pages using 1 worker (53/107)
+  Generating static pages using 1 worker (80/107)
+✓ Generating static pages using 1 worker (107/107) in 1266ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ● /[locale]
+│ ├ /vi
+│ └ /en
+├ ● /[locale]/advisor
+│ ├ /vi/advisor
+│ └ /en/advisor
+├ ● /[locale]/alternatives/[slug]
+│ ├ /vi/alternatives/google-photos
+│ ├ /en/alternatives/google-photos
+│ ├ /vi/alternatives/google-drive
+│ └ [+15 more paths]
+├ ● /[locale]/categories/[slug]
+│ ├ /vi/categories/media
+│ ├ /en/categories/media
+│ ├ /vi/categories/monitoring
+│ └ [+9 more paths]
+├ ƒ /[locale]/compare
+├ ● /[locale]/projects/[slug]
+│ ├ /vi/projects/immich
+│ ├ /en/projects/immich
+│ ├ /vi/projects/uptime-kuma
+│ └ [+53 more paths]
+├ ƒ /[locale]/projects/actual-budget.md
+├ ƒ /[locale]/projects/authentik.md
+├ ƒ /[locale]/projects/beszel.md
+├ ƒ /[locale]/projects/file-browser.md
+├ ƒ /[locale]/projects/forgejo.md
+├ ƒ /[locale]/projects/gitea.md
+├ ƒ /[locale]/projects/grafana.md
+├ ƒ /[locale]/projects/immich.md
+├ ƒ /[locale]/projects/jellyfin.md
+├ ƒ /[locale]/projects/langfuse.md
+├ ƒ /[locale]/projects/memos.md
+├ ƒ /[locale]/projects/metabase.md
+├ ƒ /[locale]/projects/n8n.md
+├ ƒ /[locale]/projects/netdata.md
+├ ƒ /[locale]/projects/nextcloud.md
+├ ƒ /[locale]/projects/nocodb.md
+├ ƒ /[locale]/projects/ollama.md
+├ ƒ /[locale]/projects/open-webui.md
+├ ƒ /[locale]/projects/outline.md
+├ ƒ /[locale]/projects/paperless-ngx.md
+├ ƒ /[locale]/projects/plane.md
+├ ƒ /[locale]/projects/searxng.md
+├ ƒ /[locale]/projects/stirling-pdf.md
+├ ƒ /[locale]/projects/syncthing.md
+├ ƒ /[locale]/projects/uptime-kuma.md
+├ ƒ /[locale]/projects/vaultwarden.md
+├ ƒ /[locale]/projects/vikunja.md
+├ ƒ /[locale]/projects/wg-easy.md
+├ ● /[locale]/submit-project
+│ ├ /vi/submit-project
+│ └ /en/submit-project
+├ ƒ /api/advisor
+├ ƒ /api/submit-project
+├ ● /install/[slug]/[version]/[file]
+│ ├ /install/uptime-kuma/v1/install.sh
+│ ├ /install/uptime-kuma/v1/SHA256SUMS
+│ └ /install/uptime-kuma/v1/metadata.json
+├ ƒ /llm.txt
+├ ƒ /llms-full.txt
+├ ƒ /llms.txt
+├ ○ /robots.txt
+└ ○ /sitemap.xml
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand

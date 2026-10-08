@@ -1,9 +1,32 @@
 "use client";
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState, useSyncExternalStore } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { localeHref } from "@/lib/navigation";
 import Link from "next/link";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { categories } from "@/data/projects";
 import { dictionary, otherLocale, type Locale } from "@/lib/i18n";
+
+function subscribeToLocation(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener("hashchange", onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
+
+function LocaleSwitch({ pathname, locale }: { pathname: string | null; locale: Locale }) {
+  // Next's hooks trigger renders for client pathname/search navigation; native
+  // events also cover fragment navigation and browser back/forward.
+  const searchParams = useSearchParams();
+  const suffix = useSyncExternalStore(
+    subscribeToLocation,
+    () => window.location.search + window.location.hash,
+    () => searchParams?.size ? `?${searchParams.toString()}` : "",
+  );
+  return <a className="locale-switch" href={localeHref(pathname, locale) + suffix}>{locale.toUpperCase()}</a>;
+}
 
 type SiteShellProps = {
   locale: Locale;
@@ -15,9 +38,10 @@ export function SiteShell({ locale, children }: SiteShellProps) {
   const menuButton = useRef<HTMLButtonElement>(null);
   const t = dictionary[locale];
   const nextLocale = otherLocale(locale);
+  const pathname = usePathname();
 
   return (
-    <div className="site-shell">
+    <div className="site-shell" lang={locale}>
       <a className="skip-link" href="#main-content">{locale === "vi" ? "Đến nội dung chính" : "Skip to content"}</a>
       <header className="site-header">
         <Link className="brand" href={`/${locale}`}>
@@ -35,16 +59,16 @@ export function SiteShell({ locale, children }: SiteShellProps) {
         <nav id="mobile-navigation" className={`nav-links${menuOpen ? " is-open" : ""}`} aria-label={locale === "vi" ? "Điều hướng chính" : "Main navigation"} onClick={() => setMenuOpen(false)} onKeyDown={e => { if (e.key === "Escape") { setMenuOpen(false); menuButton.current?.focus(); } }}>
           <Link href={`/${locale}#projects`}>{t.nav.projects}</Link>
           <Link href={`/${locale}#alternatives`}>{t.nav.alternatives}</Link>
-          <Link href={`/${locale}/compare`}>
+          <Link aria-current={pathname === `/${locale}/compare` ? "page" : undefined} href={`/${locale}/compare`}>
             {locale === "vi" ? "So sánh" : "Compare"}
           </Link>
-          <Link href={`/${locale}/advisor`}>
+          <Link aria-current={pathname === `/${locale}/advisor` ? "page" : undefined} href={`/${locale}/advisor`}>
             {locale === "vi" ? "Tư vấn" : "Advisor"}
           </Link>
-          <Link href={`/${locale}/submit-project`}>{t.nav.submit}</Link>
-          <Link className="locale-switch" href={`/${nextLocale}`}>
-            {nextLocale.toUpperCase()}
-          </Link>
+          <Link aria-current={pathname === `/${locale}/submit-project` ? "page" : undefined} href={`/${locale}/submit-project`}> {t.nav.submit}</Link>
+          <Suspense fallback={<a className="locale-switch" href={localeHref(pathname, nextLocale)}>{nextLocale.toUpperCase()}</a>}>
+            <LocaleSwitch pathname={pathname} locale={nextLocale} />
+          </Suspense>
         </nav>
       </header>
       <main id="main-content" tabIndex={-1}>{children}</main>
@@ -53,13 +77,13 @@ export function SiteShell({ locale, children }: SiteShellProps) {
           <strong>selfhost.io.vn</strong>
           <p>
             {locale === "vi"
-              ? "Thu muc cac du an open source tu host, so sanh va huong dan deploy cho VPS va team nho."
+              ? "Thư mục phần mềm mã nguồn mở để tự host, so sánh và lập kế hoạch cho máy chủ của bạn."
               : "Open source software, reviewed for practical self-hosting."}
           </p>
         </div>
         <div className="footer-links">
           <div className="footer-links-group">
-            <h4>{locale === "vi" ? "Danh muc" : "Categories"}</h4>
+            <h4>{locale === "vi" ? "Danh mục" : "Categories"}</h4>
             <ul>
               {categories.slice(0, 5).map((category) => (
                 <li key={category.slug}>
@@ -71,7 +95,7 @@ export function SiteShell({ locale, children }: SiteShellProps) {
             </ul>
           </div>
           <div className="footer-links-group">
-            <h4>{locale === "vi" ? "Lien ket" : "Links"}</h4>
+            <h4>{locale === "vi" ? "Liên kết" : "Links"}</h4>
             <ul>
               <li>
                 <Link href={`/${locale}#projects`}>{t.nav.projects}</Link>
@@ -82,21 +106,21 @@ export function SiteShell({ locale, children }: SiteShellProps) {
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/compare`}>
+                <Link aria-current={pathname === `/${locale}/compare` ? "page" : undefined} href={`/${locale}/compare`}>
                   {locale === "vi" ? "So sánh" : "Compare"}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/advisor`}>
+                <Link aria-current={pathname === `/${locale}/advisor` ? "page" : undefined} href={`/${locale}/advisor`}>
                   {locale === "vi" ? "Tư vấn" : "Advisor"}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/submit-project`}>{t.nav.submit}</Link>
+                <Link aria-current={pathname === `/${locale}/submit-project` ? "page" : undefined} href={`/${locale}/submit-project`}> {t.nav.submit}</Link>
               </li>
               <li>
                 <a
-                  href="https://github.com/selfhost-io/selfhost-directory"
+                  href="https://github.com/newnol/selfhost-directory"
                   target="_blank"
                   rel="noreferrer"
                 >

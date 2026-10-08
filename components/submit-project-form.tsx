@@ -38,7 +38,7 @@ export function SubmitProjectForm({ locale }: { locale: Locale }) {
 
   return (
     <form className="submit-form" onSubmit={handleSubmit}>
-      <input className="hidden-field" name="company" tabIndex={-1} autoComplete="off" />
+      <input className="hidden-field" aria-hidden="true" name="company" tabIndex={-1} autoComplete="off" />
       <label>
         <span>{t.projectName}</span>
         <input name="projectName" required minLength={2} autoComplete="off" placeholder="Immich" />

@@ -63,7 +63,7 @@ export default async function AlternativePage({
   return (
     <section className="detail-page">
       <div className="detail-hero">
-        <p className="eyebrow">Alternatives</p>
+        <p className="eyebrow">{locale === "vi" ? "Phần mềm thay thế" : "Alternatives"}</p>
         <h1>{useCase.title[locale]}</h1>
         <p>{useCase.description[locale]}</p>
       </div>

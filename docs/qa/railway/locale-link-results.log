@@ -1,0 +1,4 @@
+PASS: SSR link includes comparison query without JavaScript (hash is browser-only)
+PASS: pre-interaction/copied href, middle-click new tab, normal click retain comparison query/hash
+PASS: client pathname/query navigation, push/replaceState, hashchange, back update actual href
+PASS: deployment anchor covers complete section (Immich + Uptime Kuma); zero page errors

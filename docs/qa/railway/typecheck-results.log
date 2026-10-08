@@ -1,0 +1,3 @@
+
+> selfhost-directory@0.1.0 typecheck /home/newnol/orca/projects/selfhost-directory
+> tsc --noEmit

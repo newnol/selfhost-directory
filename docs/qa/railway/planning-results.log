@@ -1,0 +1,20 @@
+▲ Next.js 16.2.6
+- Local:         http://localhost:4344
+- Network:       http://0.0.0.0:4344
+✓ Ready in 147ms
+en advisor consent=false: HTTP 403
+en advisor consent=true: HTTP 403
+vi advisor consent=false: HTTP 403
+vi advisor consent=true: HTTP 403
+▲ Next.js 16.2.6
+- Local:         http://localhost:4344
+- Network:       http://0.0.0.0:4344
+✓ Ready in 140ms
+en advisor consent=false: HTTP 200
+en advisor consent=true: HTTP 200
+en: compare, localized provenance, partial calculator, archived warning passed
+vi advisor consent=false: HTTP 200
+vi advisor consent=true: HTTP 200
+vi: compare, localized provenance, partial calculator, archived warning passed
+Spoofed cross-origin HTTP request: 403
+Real Chromium production QA passed (unconfigured reproduction + explicit-origin fix).
