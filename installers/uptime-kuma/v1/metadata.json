@@ -1,0 +1,22 @@
+{
+  "slug": "uptime-kuma",
+  "version": "v1",
+  "status": "experimental-not-deployment-verified",
+  "sha256": "8e4c349924b3dfce76cc8a4bb2bda2009ef264e2a84aedceb7d70b735f378035",
+  "image": "louislam/uptime-kuma:2.5.5@sha256:c74379ac4509ce2d2c2633f509e67003ee2e45b6e995c5e43fc101f45a0e1fbe",
+  "checkedAt": "2026-10-08",
+  "releasePublishedAt": "2026-09-16T13:31:07Z",
+  "releaseCommit": "c98982ac60eccb74cdab1d04c30e18057895ce87",
+  "sources": [
+    "https://api.github.com/repos/louislam/uptime-kuma/releases/latest",
+    "https://github.com/louislam/uptime-kuma/releases/tag/2.5.5",
+    "https://raw.githubusercontent.com/louislam/uptime-kuma/2.5.5/compose.yaml",
+    "https://hub.docker.com/v2/repositories/louislam/uptime-kuma/tags/2.5.5"
+  ],
+  "platforms": {
+    "linux": "amd64/arm64 eligible; stub-tested only, not deployed",
+    "macos": "prerequisite preflight only; --apply refused; Docker Desktop untested",
+    "windows": "no native installer; Linux WSL2 guidance only, untested"
+  },
+  "validation": "bash syntax and isolated fake-Docker tests, no real Docker deployment"
+}
