@@ -1,3 +1,4 @@
+import { InstallPanel } from "@/components/install-panel";
 import { CompatibilityCalculator } from "@/components/compatibility-calculator";
 import { planningCopy } from "@/lib/planning-copy";
 import type { Metadata } from "next";
@@ -99,6 +100,7 @@ export default async function ProjectPage({
           <h2>{locale === "vi" ? "Ghi chú review" : "Review notes"}</h2>
           <p>{project.notes[locale]}</p>
 
+          {project.slug !== "uptime-kuma" && <>
           <h2>{locale === "vi" ? "Hướng dẫn deploy" : "Deployment guide"}</h2>
           <p>{project.deployGuide[locale].overview}</p>
           <ol className="deploy-steps">
@@ -110,8 +112,10 @@ export default async function ProjectPage({
             <strong>{locale === "vi" ? "Backup:" : "Backup:"}</strong>
             <span>{project.deployGuide[locale].backup}</span>
           </div>
+          </>}
 
-          <section className="copy-run-section">
+          <InstallPanel slug={project.slug} docsUrl={project.links.docs} locale={locale} />
+          {project.slug !== "uptime-kuma" && <section className="copy-run-section">
             <div className="copy-run-heading">
               <h2>{planningCopy[locale].warning}</h2>
               <p>{planningCopy[locale].secrets}</p>
@@ -130,7 +134,7 @@ export default async function ProjectPage({
               copyLabel={locale === "vi" ? "Copy" : "Copy"}
               copiedLabel={locale === "vi" ? "Đã copy" : "Copied"}
             />
-          </section>
+          </section>}
 
           <h2>{t.stack}</h2>
           <div className="tag-row">

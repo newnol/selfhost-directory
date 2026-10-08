@@ -267,3 +267,11 @@ button.compare-chip,.planning-panel button.compare-chip { display:inline-flex; g
 }
 @media(max-width:540px) { .topology { padding:18px; } .topology-nodes { gap:0 12px; } .hero h1 { font-size:2.7rem; } .catalog-controls,.compare-options { grid-template-columns:1fr; } .catalog-compare>span { margin-left:0; } .catalog-compare .button { width:100%; margin:0; } }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; animation:none!important; } }
+
+/* Versioned pilot installer only. */
+.installer-panel { margin-block:24px; padding:20px; border:1px solid var(--border); border-radius:8px; min-width:0; }
+.installer-panel .installer-links { display:flex; flex-wrap:wrap; gap:12px; }
+.installer-panel .installer-links a { min-height:44px; display:inline-flex; align-items:center; }
+.installer-panel .installer-digest { overflow-wrap:anywhere; }
+.installer-panel li { margin-block:8px; }
+.installer-panel [role="alert"] { border-left:3px solid var(--warning); padding-left:12px; }
