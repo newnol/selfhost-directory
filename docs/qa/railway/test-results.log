@@ -1,0 +1,488 @@
+
+> selfhost-directory@0.1.0 test /home/newnol/orca/projects/selfhost-directory
+> tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: API defaults to deterministic without credentials and rejects malformed, oversized and cross-origin requests
+ok 1 - API defaults to deterministic without credentials and rejects malformed, oversized and cross-origin requests
+  ---
+  duration_ms: 37.167587
+  type: 'test'
+  ...
+# Subtest: explicit public origin allows wildcard bind without trusting forwarded headers
+ok 2 - explicit public origin allows wildcard bind without trusting forwarded headers
+  ---
+  duration_ms: 3.916526
+  type: 'test'
+  ...
+# Subtest: Claude requires explicit opt-in and only validated permutations can affect catalog output
+ok 3 - Claude requires explicit opt-in and only validated permutations can affect catalog output
+  ---
+  duration_ms: 17.745629
+  type: 'test'
+  ...
+# Subtest: Claude network failure and aborted timeout return safe deterministic fallback
+ok 4 - Claude network failure and aborted timeout return safe deterministic fallback
+  ---
+  duration_ms: 12.453206
+  type: 'test'
+  ...
+# Subtest: global in-process limit rejects excess requests without trusting client IP headers
+ok 5 - global in-process limit rejects excess requests without trusting client IP headers
+  ---
+  duration_ms: 3.695544
+  type: 'test'
+  ...
+# Subtest: advisor choice shows editorial tradeoffs, resource checks and checked source
+ok 6 - advisor choice shows editorial tradeoffs, resource checks and checked source
+  ---
+  duration_ms: 11.420915
+  type: 'test'
+  ...
+# Subtest: advisor bilingual pages expose hardware, catalog filters and optional consent; nav links are discoverable
+ok 7 - advisor bilingual pages expose hardware, catalog filters and optional consent; nav links are discoverable
+  ---
+  duration_ms: 18.982334
+  type: 'test'
+  ...
+# Subtest: real Next API adapter provides fallback
+ok 8 - real Next API adapter provides fallback
+  ---
+  duration_ms: 22.185441
+  type: 'test'
+  ...
+# Subtest: advisor filters only existing catalog entries, returns max3 and preserves unknown caveats
+ok 9 - advisor filters only existing catalog entries, returns max3 and preserves unknown caveats
+  ---
+  duration_ms: 4.543764
+  type: 'test'
+  ...
+# Subtest: filesystem installer evidence is explicitly traced for every server route
+ok 10 - filesystem installer evidence is explicitly traced for every server route
+  ---
+  duration_ms: 1.410816
+  type: 'test'
+  ...
+# Subtest: file-browser is integrated with honest unknown resources and bilingual guidance
+ok 11 - file-browser is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 1.100613
+  type: 'test'
+  ...
+# Subtest: syncthing is integrated with honest unknown resources and bilingual guidance
+ok 12 - syncthing is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.199022
+  type: 'test'
+  ...
+# Subtest: paperless-ngx is integrated with honest unknown resources and bilingual guidance
+ok 13 - paperless-ngx is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.096781
+  type: 'test'
+  ...
+# Subtest: stirling-pdf is integrated with honest unknown resources and bilingual guidance
+ok 14 - stirling-pdf is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.078711
+  type: 'test'
+  ...
+# Subtest: memos is integrated with honest unknown resources and bilingual guidance
+ok 15 - memos is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.143891
+  type: 'test'
+  ...
+# Subtest: actual-budget is integrated with honest unknown resources and bilingual guidance
+ok 16 - actual-budget is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.094601
+  type: 'test'
+  ...
+# Subtest: forgejo is integrated with honest unknown resources and bilingual guidance
+ok 17 - forgejo is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.123272
+  type: 'test'
+  ...
+# Subtest: gitea is integrated with honest unknown resources and bilingual guidance
+ok 18 - gitea is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.078181
+  type: 'test'
+  ...
+# Subtest: beszel is integrated with honest unknown resources and bilingual guidance
+ok 19 - beszel is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.257153
+  type: 'test'
+  ...
+# Subtest: searxng is integrated with honest unknown resources and bilingual guidance
+ok 20 - searxng is integrated with honest unknown resources and bilingual guidance
+  ---
+  duration_ms: 0.367964
+  type: 'test'
+  ...
+# Subtest: archived File Browser is excluded even when it would be the first matching recommendation
+ok 21 - archived File Browser is excluded even when it would be the first matching recommendation
+  ---
+  duration_ms: 17.347774
+  type: 'test'
+  ...
+# Subtest: setup guidance never embeds a second executable Compose copy
+ok 22 - setup guidance never embeds a second executable Compose copy
+  ---
+  duration_ms: 0.242693
+  type: 'test'
+  ...
+# Subtest: license caveats preserve open-core and version scopes
+ok 23 - license caveats preserve open-core and version scopes
+  ---
+  duration_ms: 0.232733
+  type: 'test'
+  ...
+# Subtest: catalog loader accepts declarative data without losing project metadata
+ok 24 - catalog loader accepts declarative data without losing project metadata
+  ---
+  duration_ms: 6.477506
+  type: 'test'
+  ...
+# Subtest: catalog loader rejects an invalid deploy method before exposing data
+ok 25 - catalog loader rejects an invalid deploy method before exposing data
+  ---
+  duration_ms: 4.397491
+  type: 'test'
+  ...
+# Subtest: catalog has 28 individual project modules and preserves public exports
+ok 26 - catalog has 28 individual project modules and preserves public exports
+  ---
+  duration_ms: 1.097703
+  type: 'test'
+  ...
+# Subtest: compare query renders 2-3 known distinct projects, with warnings and bilingual selector
+ok 27 - compare query renders 2-3 known distinct projects, with warnings and bilingual selector
+  ---
+  duration_ms: 33.112589
+  type: 'test'
+  ...
+# Subtest: distinguishes below minimum, minimum and recommended at inclusive boundaries
+ok 28 - distinguishes below minimum, minimum and recommended at inclusive boundaries
+  ---
+  duration_ms: 5.90442
+  type: 'test'
+  ...
+# Subtest: rejects non-finite, coerced, negative, excessive and invalid architecture input
+ok 29 - rejects non-finite, coerced, negative, excessive and invalid architecture input
+  ---
+  duration_ms: 1.566459
+  type: 'test'
+  ...
+# Subtest: legacy resource strings cannot imply hardware compatibility
+ok 30 - legacy resource strings cannot imply hardware compatibility
+  ---
+  duration_ms: 0.147621
+  type: 'test'
+  ...
+# Subtest: partial evidence returns each threshold and check without promoting unknown to compatible
+ok 31 - partial evidence returns each threshold and check without promoting unknown to compatible
+  ---
+  duration_ms: 0.827369
+  type: 'test'
+  ...
+# Subtest: official partial evidence enables real checks without invented disk or Nextcloud host sizing
+ok 32 - official partial evidence enables real checks without invented disk or Nextcloud host sizing
+  ---
+  duration_ms: 2.066584
+  type: 'test'
+  ...
+# Subtest: versioned downloads are exact bytes with checksum and immutable metadata
+ok 33 - versioned downloads are exact bytes with checksum and immutable metadata
+  ---
+  duration_ms: 29.266155
+  type: 'test'
+  ...
+# Subtest: UI offers only Kuma pilot, inspect-before-run and explicit unsupported guidance
+ok 34 - UI offers only Kuma pilot, inspect-before-run and explicit unsupported guidance
+  ---
+  duration_ms: 18.786731
+  type: 'test'
+  ...
+# Subtest: pilot defaults to preflight only, with no filesystem writes or docker up
+ok 35 - pilot defaults to preflight only, with no filesystem writes or docker up
+  ---
+  duration_ms: 16.784567
+  type: 'test'
+  ...
+# Subtest: apply creates restrictive local configuration and rerun refuses without changing data
+ok 36 - apply creates restrictive local configuration and rerun refuses without changing data
+  ---
+  duration_ms: 29.399896
+  type: 'test'
+  ...
+# Subtest: fail closed: root
+ok 37 - fail closed: root
+  ---
+  duration_ms: 6.894821
+  type: 'test'
+  ...
+# Subtest: fail closed: unknown OS
+ok 38 - fail closed: unknown OS
+  ---
+  duration_ms: 7.937413
+  type: 'test'
+  ...
+# Subtest: fail closed: unsupported arch
+ok 39 - fail closed: unsupported arch
+  ---
+  duration_ms: 8.806573
+  type: 'test'
+  ...
+# Subtest: fail closed: daemon failure
+ok 40 - fail closed: daemon failure
+  ---
+  duration_ms: 10.597315
+  type: 'test'
+  ...
+# Subtest: fail closed: Windows containers
+ok 41 - fail closed: Windows containers
+  ---
+  duration_ms: 11.837789
+  type: 'test'
+  ...
+# Subtest: fail closed: Compose v1
+ok 42 - fail closed: Compose v1
+  ---
+  duration_ms: 14.197007
+  type: 'test'
+  ...
+# Subtest: fail closed: remote daemon
+ok 43 - fail closed: remote daemon
+  ---
+  duration_ms: 10.597175
+  type: 'test'
+  ...
+# Subtest: fail closed: Docker host override
+ok 44 - fail closed: Docker host override
+  ---
+  duration_ms: 11.111451
+  type: 'test'
+  ...
+# Subtest: fail closed: unknown argument
+ok 45 - fail closed: unknown argument
+  ---
+  duration_ms: 4.597184
+  type: 'test'
+  ...
+# Subtest: fail closed: missing directory
+ok 46 - fail closed: missing directory
+  ---
+  duration_ms: 4.774686
+  type: 'test'
+  ...
+# Subtest: fail closed: invalid path
+ok 47 - fail closed: invalid path
+  ---
+  duration_ms: 5.865818
+  type: 'test'
+  ...
+# Subtest: fail closed: dot traversal
+ok 48 - fail closed: dot traversal
+  ---
+  duration_ms: 4.737436
+  type: 'test'
+  ...
+# Subtest: fail closed: conflicting modes
+ok 49 - fail closed: conflicting modes
+  ---
+  duration_ms: 6.046601
+  type: 'test'
+  ...
+# Subtest: fail closed: macOS apply
+ok 50 - fail closed: macOS apply
+  ---
+  duration_ms: 7.578129
+  type: 'test'
+  ...
+# Subtest: dry-run and macOS check stay read-only
+ok 51 - dry-run and macOS check stay read-only
+  ---
+  duration_ms: 31.334888
+  type: 'test'
+  ...
+# Subtest: refuses existing symlinks without following or replacing them
+ok 52 - refuses existing symlinks without following or replacing them
+  ---
+  duration_ms: 8.729823
+  type: 'test'
+  ...
+# Subtest: bash syntax parses without executing
+ok 53 - bash syntax parses without executing
+  ---
+  duration_ms: 4.408732
+  type: 'test'
+  ...
+# Subtest: canonical index lists all 28 projects in both locales with public markdown URLs
+ok 54 - canonical index lists all 28 projects in both locales with public markdown URLs
+  ---
+  duration_ms: 1.197494
+  type: 'test'
+  ...
+# Subtest: localized documents preserve evidence, unknowns and deployment caveats without exporting snippets
+ok 55 - localized documents preserve evidence, unknowns and deployment caveats without exporting snippets
+  ---
+  duration_ms: 5.203911
+  type: 'test'
+  ...
+# Subtest: text routes have exact status and MIME; singular alias permanently redirects
+ok 56 - text routes have exact status and MIME; singular alias permanently redirects
+  ---
+  duration_ms: 21.772966
+  type: 'test'
+  ...
+# Subtest: localized markdown route responds with exact MIME and rejects invalid locale or slug
+ok 57 - localized markdown route responds with exact MIME and rejects invalid locale or slug
+  ---
+  duration_ms: 3.43006
+  type: 'test'
+  ...
+# Subtest: pilot installer is linked only when its artifact manifest exists, preserving verification limits
+ok 58 - pilot installer is linked only when its artifact manifest exists, preserving verification limits
+  ---
+  duration_ms: 1.091303
+  type: 'test'
+  ...
+# Subtest: corrupt optional installer metadata does not break public documents
+ok 59 - corrupt optional installer metadata does not break public documents
+  ---
+  duration_ms: 1.412726
+  type: 'test'
+  ...
+# Subtest: full catalog contains exactly 56 complete localized documents
+ok 60 - full catalog contains exactly 56 complete localized documents
+  ---
+  duration_ms: 4.043688
+  type: 'test'
+  ...
+# Subtest: topology links to every category with derived counts and catalog immediately after hero
+ok 61 - topology links to every category with derived counts and catalog immediately after hero
+  ---
+  duration_ms: 50.500414
+  type: 'test'
+  ...
+# Subtest: catalog renders deployment selector and readable compare checkboxes
+ok 62 - catalog renders deployment selector and readable compare checkboxes
+  ---
+  duration_ms: 15.773265
+  type: 'test'
+  ...
+# Subtest: compare picker replaces multi-select with searchable checkboxes, chips and a guarded submit
+ok 63 - compare picker replaces multi-select with searchable checkboxes, chips and a guarded submit
+  ---
+  duration_ms: 10.263971
+  type: 'test'
+  ...
+# Subtest: advisor exposes progressive native details with hardware in second group
+ok 64 - advisor exposes progressive native details with hardware in second group
+  ---
+  duration_ms: 2.237936
+  type: 'test'
+  ...
+# Subtest: navigation has mobile disclosure and translated accessible label
+ok 65 - navigation has mobile disclosure and translated accessible label
+  ---
+  duration_ms: 6.074372
+  type: 'test'
+  ...
+# Subtest: project decision UI has calculator and honest deployment warnings in both languages without scores
+ok 66 - project decision UI has calculator and honest deployment warnings in both languages without scores
+  ---
+  duration_ms: 20.974726
+  type: 'test'
+  ...
+# Subtest: language switching preserves detail route and comparison query
+ok 67 - language switching preserves detail route and comparison query
+  ---
+  duration_ms: 0.90208
+  type: 'test'
+  ...
+# Subtest: shell gives its content a localized language boundary
+ok 68 - shell gives its content a localized language boundary
+  ---
+  duration_ms: 14.080896
+  type: 'test'
+  ...
+# Subtest: project detail has localized jump links to requirements, review and deployment
+ok 69 - project detail has localized jump links to requirements, review and deployment
+  ---
+  duration_ms: 7.043433
+  type: 'test'
+  ...
+# Subtest: code scrolling is keyboard reachable and submission trap is not exposed to assistive technology
+ok 70 - code scrolling is keyboard reachable and submission trap is not exposed to assistive technology
+  ---
+  duration_ms: 1.559498
+  type: 'test'
+  ...
+# Subtest: catalog filters have an accessible collapsible group without hiding search
+ok 71 - catalog filters have an accessible collapsible group without hiding search
+  ---
+  duration_ms: 32.536623
+  type: 'test'
+  ...
+# Subtest: night canvas and locally hosted reference typography are deterministic
+ok 72 - night canvas and locally hosted reference typography are deterministic
+  ---
+  duration_ms: 0.574336
+  type: 'test'
+  ...
+# Subtest: advisor introduces the empty shortlist in both languages
+ok 73 - advisor introduces the empty shortlist in both languages
+  ---
+  duration_ms: 10.302581
+  type: 'test'
+  ...
+# Subtest: comparison is keyboard-scrollable and gives native multi-select instructions
+ok 74 - comparison is keyboard-scrollable and gives native multi-select instructions
+  ---
+  duration_ms: 7.58169
+  type: 'test'
+  ...
+# Subtest: catalog exposes a labeled search, category filter and live result count in both languages
+ok 75 - catalog exposes a labeled search, category filter and live result count in both languages
+  ---
+  duration_ms: 33.493324
+  type: 'test'
+  ...
+# Subtest: missing route gives a real catalog recovery link
+ok 76 - missing route gives a real catalog recovery link
+  ---
+  duration_ms: 8.211027
+  type: 'test'
+  ...
+# Subtest: route error exposes a retry action and never leaks server details
+ok 77 - route error exposes a retry action and never leaks server details
+  ---
+  duration_ms: 2.348017
+  type: 'test'
+  ...
+# Subtest: structured requirements demand provenance and valid values, dates and ordered thresholds
+ok 78 - structured requirements demand provenance and valid values, dates and ordered thresholds
+  ---
+  duration_ms: 2.836563
+  type: 'test'
+  ...
+# Subtest: runtime validation rejects duplicate identifiers, missing translations, unsafe URLs and dangling references
+ok 79 - runtime validation rejects duplicate identifiers, missing translations, unsafe URLs and dangling references
+  ---
+  duration_ms: 10.877778
+  type: 'test'
+  ...
+1..79
+# tests 79
+# suites 0
+# pass 79
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7970.25821

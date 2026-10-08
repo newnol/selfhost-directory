@@ -63,7 +63,7 @@ export default async function CategoryPage({
   return (
     <section className="detail-page">
       <div className="detail-hero">
-        <p className="eyebrow">Category</p>
+        <p className="eyebrow">{locale === "vi" ? "Danh mục" : "Category"}</p>
         <h1>{category.title[locale]}</h1>
         <p>{category.description[locale]}</p>
       </div>

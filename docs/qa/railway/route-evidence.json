@@ -1,0 +1,477 @@
+{
+  "base": "http://127.0.0.1:4343",
+  "results": [
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/categories/media",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/alternatives/google-photos",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/projects/immich",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/projects/uptime-kuma",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/projects/file-browser",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/compare",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/compare?projects=immich,jellyfin",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/compare?projects=immich,missing",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/advisor",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 360,
+      "route": "/submit-project",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/categories/media",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/alternatives/google-photos",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/projects/immich",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/projects/uptime-kuma",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/projects/file-browser",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/compare",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/compare?projects=immich,jellyfin",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/compare?projects=immich,missing",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/advisor",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "route": "/submit-project",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/categories/media",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/alternatives/google-photos",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/projects/immich",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/projects/uptime-kuma",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/projects/file-browser",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/compare",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/compare?projects=immich,jellyfin",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/compare?projects=immich,missing",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/advisor",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 768,
+      "route": "/submit-project",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/categories/media",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/alternatives/google-photos",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/projects/immich",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/projects/uptime-kuma",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/projects/file-browser",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/compare",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/compare?projects=immich,jellyfin",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/compare?projects=immich,missing",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/advisor",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "route": "/submit-project",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/categories/media",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/alternatives/google-photos",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/projects/immich",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/projects/uptime-kuma",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/projects/file-browser",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/compare",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/compare?projects=immich,jellyfin",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/compare?projects=immich,missing",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/advisor",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "vi",
+      "width": 1440,
+      "route": "/submit-project",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/categories/media",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/alternatives/google-photos",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/projects/immich",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/projects/uptime-kuma",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/projects/file-browser",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/compare",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/compare?projects=immich,jellyfin",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/compare?projects=immich,missing",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/advisor",
+      "status": 200,
+      "violations": []
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "route": "/submit-project",
+      "status": 200,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "interactions": [
+    "collapsible filters retain search",
+    "filter reset",
+    "comparison cap and persistent instructions",
+    "locale retains compare query",
+    "detail jump links",
+    "native submit validation",
+    "submission network error (aborted transport; no writes)"
+  ]
+}

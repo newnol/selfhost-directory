@@ -1,0 +1,5 @@
+▲ Next.js 16.2.6
+- Local:         http://localhost:3217
+- Network:       http://0.0.0.0:3217
+✓ Ready in 131ms
+HTTP smoke passed: 95 page requests; advisor fallback 200 (3 unknown choices); invalid input 400

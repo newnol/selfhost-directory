@@ -88,6 +88,7 @@ export default async function LocaleHome({
       />
       <section className="hero">
         <div className="hero-copy">
+          <p className="eyebrow">SELFHOST.IO.VN / {locale === "vi" ? "Tự host. Chủ động lựa chọn." : "Your software. Your infrastructure."}</p>
 
           <h1>{t.hero.title}</h1>
           <p>{t.hero.copy}</p>

@@ -34,7 +34,7 @@ export function CopyCodeBlock({ code, label, language, copiedLabel, copyLabel }:
           {copied ? copiedLabel : copyLabel}
         </button>
       </div>
-      <pre>
+      <pre tabIndex={0} aria-label={label}>
         <code>{code}</code>
       </pre>
     </div>
