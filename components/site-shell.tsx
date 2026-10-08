@@ -14,6 +14,7 @@ export function SiteShell({ locale, children }: SiteShellProps) {
 
   return (
     <div className="site-shell">
+      <a className="skip-link" href="#main-content">{locale === "vi" ? "Đến nội dung chính" : "Skip to content"}</a>
       <header className="site-header">
         <Link className="brand" href={`/${locale}`}>
           <span className="brand-mark" aria-hidden="true">
@@ -41,7 +42,7 @@ export function SiteShell({ locale, children }: SiteShellProps) {
           </Link>
         </nav>
       </header>
-      <main>{children}</main>
+      <main id="main-content" tabIndex={-1}>{children}</main>
       <footer className="site-footer">
         <div className="footer-brand">
           <strong>selfhost.io.vn</strong>

@@ -21,7 +21,7 @@ export function AdvisorForm({
   const [error, setError] = useState(false);
   const [busy, setBusy] = useState(false);
   return (
-    <section className="planning-panel">
+    <section className="planning-panel advisor-panel">
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -86,6 +86,7 @@ export function AdvisorForm({
         </button>
       </form>
       <div aria-live="polite">
+        {!result && !busy && !error && <div className="advisor-empty"><p className="eyebrow">{locale === "vi" ? "Bước tiếp theo" : "Up next"}</p><h2>{locale === "vi" ? "Danh sách gợi ý bắt đầu tại đây" : "Your shortlist starts here"}</h2><p>{locale === "vi" ? "Nhập tài nguyên máy chủ và nhu cầu để nhận gợi ý từ thư mục. Các yêu cầu chưa rõ sẽ được ghi rõ, không coi là tương thích." : "Tell us about your server and needs to get catalog-backed suggestions. Unknown requirements stay unknown—not a promise of compatibility."}</p></div>}
         {error && <p role="alert">{t.error}</p>}
         {result && (
           <>

@@ -27,7 +27,7 @@ export function ProjectCard({ locale, project }: ProjectCardProps) {
         ))}
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto" }}>
-        <Link className="text-link" href={`/${locale}/projects/${project.slug}`}>
+        <Link className="text-link" aria-label={`${locale === "vi" ? "Xem chi tiết" : "View details"}: ${project.name}`} href={`/${locale}/projects/${project.slug}`}>
           {locale === "vi" ? "Xem chi tiết" : "View details"}
         </Link>
         <span className="deploy-badge">{project.deploy}</span>

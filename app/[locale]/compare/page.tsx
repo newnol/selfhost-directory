@@ -33,7 +33,7 @@ export default async function ComparePage({
       <form method="get" className="planning-panel">
         <label>
           {t.compare}
-          <select name="projects" multiple size={6} defaultValue={ids}>
+          <select name="projects" multiple size={6} defaultValue={ids} aria-describedby="compare-help">
             {catalog.map((p) => (
               <option key={p.slug} value={p.slug}>
                 {p.name}
@@ -41,11 +41,13 @@ export default async function ComparePage({
             ))}
           </select>
         </label>
+        <p id="compare-help">{locale === "vi" ? "Chọn 2–3 dự án. Trên máy tính, giữ Ctrl hoặc ⌘ để chọn nhiều mục; dùng Shift + phím mũi tên bằng bàn phím." : "Choose 2–3 projects. On desktop, hold Ctrl or ⌘ to select multiple; use Shift + arrow keys with a keyboard."}</p>
         <button type="submit">{t.compare}</button>
       </form>
       {valid ? (
-        <div className="compare-scroll">
+        <div className="compare-scroll" tabIndex={0} role="region" aria-label={t.compare}>
           <table>
+            <caption>{locale === "vi" ? "So sánh yêu cầu và triển khai" : "Requirements and deployment, side by side"}</caption>
             <thead>
               <tr>
                 <th>{t.compare}</th>
